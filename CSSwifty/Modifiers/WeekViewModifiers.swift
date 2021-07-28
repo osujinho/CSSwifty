@@ -60,19 +60,27 @@ struct ProblemCardView: View {
     
     var body: some View {
         NavigationLink(destination: AnyView(_fromValue: problem.problemView)) {
-            VStack(spacing: 0) {
+            ZStack(alignment: .bottom) {
                 Image(problem.imageName)
+                    .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .cornerRadius(10)
-                    .frame(maxWidth: .infinity)
-                Text(problem.title)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
+                    .clipShape(Capsule())
+                    //.opacity(0.6)
+                HStack {
+                    Spacer()
+                    Text(problem.title)
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                    Spacer()
+                }
+                .background(Color.gray.opacity(0.7))
             }
-            .padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
-            .background(LinearGradient(gradient: Gradient(colors: problem.gradientColors), startPoint: .topLeading, endPoint: .bottomTrailing).cornerRadius(10))
+            .clipShape(Capsule())
+            .overlay(Capsule().stroke(Color.black, lineWidth: 2))
+            .shadow(color: .black, radius: 2)
+            
         }
     }
 }
