@@ -12,32 +12,16 @@ struct KeypadView: View {
     var keypadModel = KeypadViewModel()
     @Binding var amount: String
     
+    let hasdecimal: Bool
+    let maxDigits: Int
+    
     var body: some View {
         VStack(alignment: .center, spacing: 5) {
             ForEach(keypadModel.keypadRows) { keypadRow in
                 HStack(alignment: .top, spacing: 5){
                     ForEach(keypadRow.row) { key in
                         Button(action: {
-                            switch key.value {
-                            case _ where (key.value == "."):
-                                if amount.contains(".") {
-                                    return
-                                } else if amount.isEmpty {
-                                    amount.append("0.")
-                                } else {
-                                    amount.append(key.value)
-                                }
-                            case _ where (key.value == "Delete"):
-                                if amount.isEmpty {
-                                    return
-                                } else {
-                                    amount.removeLast()
-                                }
-                            default:
-                                if amount.count < 4 {
-                                    amount.append(key.value)
-                                }
-                            }
+                            keypadModel.keyBoardAction(key: key, hasDecimal: hasdecimal, maxDigits: maxDigits, amount: &amount)
                         }) {
                             switch key.value {
                             case _ where (key.value == "Delete"):

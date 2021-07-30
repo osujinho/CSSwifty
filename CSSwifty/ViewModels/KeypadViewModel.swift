@@ -45,4 +45,38 @@ class KeypadViewModel {
         
         return lineColor
     }
+    
+    func keyBoardAction(key: Key, hasDecimal: Bool, maxDigits: Int, amount: inout String) {
+        
+        switch key.value {
+        case _ where (key.value == "."):
+            if hasDecimal {
+                switch amount {
+                case _ where (amount.contains(".")):
+                    return
+                case _ where (amount.isEmpty):
+                    amount.append("0.")
+                default:
+                    amount.append(key.value)
+                }
+            } else {
+                switch amount {
+                case _ where (amount.isEmpty):
+                    return
+                default:
+                    amount = ""
+                }
+            }
+        case _ where (key.value == "Delete"):
+            if amount.isEmpty {
+                return
+            } else {
+                amount.removeLast()
+            }
+        default:
+            if amount.count < maxDigits {
+                amount.append(key.value)
+            }
+        }
+    }
 }
