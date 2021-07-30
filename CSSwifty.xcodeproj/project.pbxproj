@@ -34,6 +34,10 @@
 		B3A55DA126A74D96008A988D /* MarioLessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A55DA026A74D96008A988D /* MarioLessViewModel.swift */; };
 		B3A55DA526A8A5C7008A988D /* ProblemViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A55DA426A8A5C7008A988D /* ProblemViewModifiers.swift */; };
 		B3A55DA726A8B164008A988D /* MarioMoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A55DA626A8B164008A988D /* MarioMoreViewModel.swift */; };
+		B3A5A83126B470E700A59B25 /* KeypadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A83026B470E700A59B25 /* KeypadViewModel.swift */; };
+		B3A5A83326B4712200A59B25 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A83226B4712200A59B25 /* KeypadView.swift */; };
+		B3A5A83526B4719700A59B25 /* CashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A83426B4719700A59B25 /* CashViewModel.swift */; };
+		B3A5A83726B472D000A59B25 /* KeypadModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A83626B472D000A59B25 /* KeypadModifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +70,10 @@
 		B3A55DA026A74D96008A988D /* MarioLessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarioLessViewModel.swift; sourceTree = "<group>"; };
 		B3A55DA426A8A5C7008A988D /* ProblemViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemViewModifiers.swift; sourceTree = "<group>"; };
 		B3A55DA626A8B164008A988D /* MarioMoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarioMoreViewModel.swift; sourceTree = "<group>"; };
+		B3A5A83026B470E700A59B25 /* KeypadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadViewModel.swift; sourceTree = "<group>"; };
+		B3A5A83226B4712200A59B25 /* KeypadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
+		B3A5A83426B4719700A59B25 /* CashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashViewModel.swift; sourceTree = "<group>"; };
+		B3A5A83626B472D000A59B25 /* KeypadModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadModifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +209,8 @@
 				B371E952269CBEFD007E2302 /* WeekOneViewModel.swift */,
 				B3A55DA026A74D96008A988D /* MarioLessViewModel.swift */,
 				B3A55DA626A8B164008A988D /* MarioMoreViewModel.swift */,
+				B3A5A83026B470E700A59B25 /* KeypadViewModel.swift */,
+				B3A5A83426B4719700A59B25 /* CashViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -209,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				B3953F77268B651700946B55 /* ContentView.swift */,
+				B3A5A83226B4712200A59B25 /* KeypadView.swift */,
 				B3953F88268B66AE00946B55 /* Week Views */,
 			);
 			path = Views;
@@ -223,6 +234,7 @@
 				B371E950269CA7C8007E2302 /* WeekViewModifiers.swift */,
 				B373F24B26A72EC300EDCB19 /* Carousel.swift */,
 				B3A55DA426A8A5C7008A988D /* ProblemViewModifiers.swift */,
+				B3A5A83626B472D000A59B25 /* KeypadModifiers.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -319,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3A5A83726B472D000A59B25 /* KeypadModifiers.swift in Sources */,
 				B3953F78268B651700946B55 /* ContentView.swift in Sources */,
 				B371E9452694A1D8007E2302 /* Week4.swift in Sources */,
 				B3A55DA126A74D96008A988D /* MarioLessViewModel.swift in Sources */,
@@ -327,8 +340,11 @@
 				B371E961269CD6C2007E2302 /* MarioMore.swift in Sources */,
 				B371E94B2694A1FF007E2302 /* Week7.swift in Sources */,
 				B371E95F269CD6A3007E2302 /* MarioLess.swift in Sources */,
+				B3A5A83126B470E700A59B25 /* KeypadViewModel.swift in Sources */,
+				B3A5A83526B4719700A59B25 /* CashViewModel.swift in Sources */,
 				B373F24C26A72EC300EDCB19 /* Carousel.swift in Sources */,
 				B3953F76268B651700946B55 /* CSSwiftyApp.swift in Sources */,
+				B3A5A83326B4712200A59B25 /* KeypadView.swift in Sources */,
 				B3953F95268CE7F500946B55 /* CustomColors.swift in Sources */,
 				B3A55DA526A8A5C7008A988D /* ProblemViewModifiers.swift in Sources */,
 				B3953F97268CF33C00946B55 /* AppModel.swift in Sources */,

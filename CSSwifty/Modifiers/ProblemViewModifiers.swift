@@ -103,3 +103,75 @@ extension View {
         self.modifier(ContainerViewModifier(fontColor: fontColor, borderColor: borderColor))
     }
 }
+
+struct Coin: View {
+    let coinName: String
+    let coinAmount: Int
+    let borderColor: Color
+    
+    var body: some View {
+        HStack(alignment: .center) {
+            Text(coinName + ": ")
+            Spacer()
+            Text("\(coinAmount)")
+        }
+        .padding(.vertical, 5)
+        .padding(.horizontal, 10)
+        .foregroundColor(.white)
+        .overlay(RoundedRectangle(cornerRadius: 10)
+                    .stroke((borderColor), lineWidth: 1))
+        
+    }
+}
+
+struct Amount: View {
+    var amount: String
+    var calcChange: () -> ()
+    var clearAmount: () -> ()
+    
+    var body: some View {
+        HStack {
+            Text("Change Owed:")
+                .foregroundColor(.white)
+            Text(amount.isEmpty ? "0.00" : amount)
+                .onChange(of: amount) { _ in
+                    calcChange()
+                }
+                .foregroundColor(amount.isEmpty ? .gray : .white)
+            Spacer()
+            Button(action: {
+                clearAmount()
+            }) {
+                Image(systemName: "trash")
+                    .foregroundColor(amount.isEmpty ? .gray : .red)
+                    .opacity(amount.isEmpty ? 0.6 : 1.0)
+                    .padding(.horizontal, 10)
+            }.disabled(amount.isEmpty)
+        }
+    }
+}
+
+struct CoinStackModifier: ViewModifier {
+    var bgColor: Color
+    var borderColor: Color
+    
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(3)
+            .background(bgColor.cornerRadius(10).opacity(0.6))
+            .padding(2)
+            .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke((borderColor), lineWidth: 2.5))
+            .shadow(radius: 10)
+            .padding(.horizontal, 15)
+    }
+}
+
+extension View {
+    func coinStackModifier(bgColor: Color, lineColor: Color) -> some View {
+        self.modifier(CoinStackModifier(bgColor: bgColor, borderColor: lineColor))
+    }
+}
+
+
