@@ -22,17 +22,20 @@ class KeypadViewModel {
     var keypadRows = [
         KeypadRow(id: 0, row: [Key(id: 0, value: "1"), Key(id: 1, value: "2"), Key(id: 2, value: "3"), Key(id: 3, value: "4")]),
         KeypadRow(id: 1, row: [Key(id: 0, value: "5"), Key(id: 1, value: "6"), Key(id: 2, value: "7"), Key(id: 3, value: "8")]),
-        KeypadRow(id: 2, row: [Key(id: 0, value: "."), Key(id: 1, value: "9"), Key(id: 2, value: "0"), Key(id: 3, value: "Delete")])
+        KeypadRow(id: 2, row: [Key(id: 0, value: "Any"), Key(id: 1, value: "9"), Key(id: 2, value: "0"), Key(id: 3, value: "Delete")])
     ]
     
-    func opacityValue(amount: String, key: Key) -> Double {
+    func opacityValue(amount: String, key: Key, hasDecimal: Bool) -> Double {
         var opacityDouble = 0.0
         
-        if (amount.contains(".") && key.value == ".") {
+        switch amount {
+        case _ where (hasDecimal && amount.contains(".") && key.value == "Any"):
             opacityDouble = 0.6
-        } else if (amount.isEmpty && key.value == "Delete") {
+        case _ where (!hasDecimal && amount.isEmpty && key.value == "Any"):
             opacityDouble = 0.6
-        } else {
+        case _ where (amount.isEmpty && key.value == "Delete"):
+            opacityDouble = 0.6
+        default:
             opacityDouble = 1.0
         }
         return opacityDouble
@@ -46,10 +49,9 @@ class KeypadViewModel {
         return lineColor
     }
     
-    func keyBoardAction(key: Key, hasDecimal: Bool, maxDigits: Int, amount: inout String) {
-        
+    func keypadAction(key: Key, hasDecimal: Bool, maxDigits: Int, amount: inout String) {
         switch key.value {
-        case _ where (key.value == "."):
+        case _ where (key.value == "Any"):
             if hasDecimal {
                 switch amount {
                 case _ where (amount.contains(".")):
@@ -57,7 +59,7 @@ class KeypadViewModel {
                 case _ where (amount.isEmpty):
                     amount.append("0.")
                 default:
-                    amount.append(key.value)
+                    amount.append(".")
                 }
             } else {
                 switch amount {
@@ -78,5 +80,24 @@ class KeypadViewModel {
                 amount.append(key.value)
             }
         }
+    }
+    
+    func keypadLabel(key: Key, hasDecimal: Bool, amount: String) -> AnyView {
+        var label: AnyView
+        
+        switch key.value {
+        case _ where (key.value == "Any"):
+            if hasDecimal {
+                label = AnyView(Text(".").keyPadButtonModifier(fontColor: .white, bgColor: .blue, borderColor: .white, opacityValue: opacityValue(amount: amount, key: key, hasDecimal: hasDecimal)))
+            } else {
+                label = AnyView(Image(systemName: "trash").keyPadButtonModifier(fontColor: .white, bgColor: .red, borderColor: .white, opacityValue: opacityValue(amount: amount, key: key, hasDecimal: hasDecimal)))
+                
+            }
+        case _ where (key.value == "Delete"):
+            label = AnyView(Image(systemName: "delete.left").keyPadButtonModifier(fontColor: .white, bgColor: .red, borderColor: .white, opacityValue: opacityValue(amount: amount, key: key, hasDecimal: hasDecimal)))
+        default:
+            label = AnyView(Text(key.value).keyPadButtonModifier(fontColor: .white, bgColor: .blue, borderColor: .white, opacityValue: opacityValue(amount: amount, key: key, hasDecimal: hasDecimal)))
+        }
+        return label
     }
 }

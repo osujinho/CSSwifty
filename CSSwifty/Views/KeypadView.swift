@@ -21,18 +21,12 @@ struct KeypadView: View {
                 HStack(alignment: .top, spacing: 5){
                     ForEach(keypadRow.row) { key in
                         Button(action: {
-                            keypadModel.keyBoardAction(key: key, hasDecimal: hasdecimal, maxDigits: maxDigits, amount: &amount)
+                            keypadModel.keypadAction(key: key, hasDecimal: hasdecimal, maxDigits: maxDigits, amount: &amount)
                         }) {
-                            switch key.value {
-                            case _ where (key.value == "Delete"):
-                                Image(systemName: "delete.left")
-                                    .keyPadButtonModifier(fontColor: .white, bgColor: .red, borderColor: .white, opacityValue: keypadModel.opacityValue(amount: amount, key: key))
-                            default:
-                                Text(key.value)
-                                    .keyPadButtonModifier(fontColor: .white, bgColor: .blue, borderColor: .white, opacityValue: keypadModel.opacityValue(amount: amount, key: key))
-                            }
+                            keypadModel.keypadLabel(key: key, hasDecimal: hasdecimal, amount: amount)
                         }.disabled(amount.isEmpty && key.value == "Delete")
-                        .disabled(amount.contains(".") && key.value == ".")
+                        .disabled(amount.contains(".") && key.value == "Any" && hasdecimal)
+                        .disabled(amount.isEmpty && key.value == "Any" && !hasdecimal)
                     }
                 }
             }
