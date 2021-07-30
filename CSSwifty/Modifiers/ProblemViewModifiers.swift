@@ -12,14 +12,11 @@ struct IntroView: View {
     let title: String
     let bullet = "• "
     let summarys: [String]
-    let backgroundColor: Color
-    let borderColor: Color
     
     var body: some View {
         VStack{
             Text(title)
                 .font(.headline)
-                .padding(.bottom, 5)
             ForEach(summarys, id: \.self) { summary in
                 HStack(alignment: .firstTextBaseline) {
                     Text(bullet)
@@ -30,7 +27,7 @@ struct IntroView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .containerViewModifier()
+        .containerViewModifier(fontColor: .white, borderColor: .black)
     }
 }
 
@@ -38,10 +35,9 @@ struct ImageAndRuleView: View {
     let imageName: String
     let bullet = "• "
     let rules: [String]
-    let backgroundColor: Color
     
     var body: some View {
-        HStack{
+        HStack(alignment: .top){
             Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -60,9 +56,8 @@ struct ImageAndRuleView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .background(backgroundColor)
         }
-        .containerViewModifier()
+        .containerViewModifier(fontColor: .white, borderColor: .black)
     }
 }
 
@@ -70,6 +65,7 @@ struct PyramidBoard: View {
     let imageName: String
     let texts: String
     let pyramidAlignment: Alignment
+    let fontColor = Color(red: 203.0 / 255.0, green: 79.0 / 255.0, blue: 15.0 / 255.0)
     
     var body: some View {
         ZStack(alignment: pyramidAlignment) {
@@ -79,28 +75,31 @@ struct PyramidBoard: View {
                 .cornerRadius(10)
             Text(texts)
                 .font(.system(.title3, design: .monospaced).leading(.tight))
-                .foregroundColor(pyramidColor)
                 .padding(.horizontal, 10)
                 .offset(x: 0, y: -10)
         }
-        .containerViewModifier()
+        .containerViewModifier(fontColor: fontColor, borderColor: .black)
     }
 }
 
 struct ContainerViewModifier: ViewModifier {
+    let fontColor: Color
+    let borderColor: Color
+    
     func body(content: Content) -> some View {
         content
-            .foregroundColor(.black)
-            .padding(5)
-            .background(Color.white.cornerRadius(10))
-            .padding(5)
-            .background(Color.black.cornerRadius(10))
+            .foregroundColor(fontColor)
+            .padding(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke((borderColor), lineWidth: 2)
+            )
             .padding(.horizontal, 15)
     }
 }
 
 extension View {
-    func containerViewModifier() -> some View {
-        self.modifier(ContainerViewModifier())
+    func containerViewModifier(fontColor: Color, borderColor: Color) -> some View {
+        self.modifier(ContainerViewModifier(fontColor: fontColor, borderColor: borderColor))
     }
 }

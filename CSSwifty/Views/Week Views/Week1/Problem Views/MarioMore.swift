@@ -17,9 +17,9 @@ struct MarioMore: View {
             LinearGradient(gradient: Gradient(colors: [marioMoreFirstColor, marioMoreSecondColor]), startPoint: .topLeading, endPoint: .bottomTrailing).edgesIgnoringSafeArea(.all)
             
             VStack {
-                IntroView(title: "Introduction", summarys: model.intro, backgroundColor: .white, borderColor: .black)
+                IntroView(title: "Introduction", summarys: model.intro)
                 
-                ImageAndRuleView(imageName: "Mario-More", rules: model.rules, backgroundColor: .white)
+                ImageAndRuleView(imageName: "Mario-More", rules: model.rules)
                 
                 Stepper(value: $model.selectedHeight, in: 0...8, step: 1) {
                     HStack {
@@ -28,12 +28,12 @@ struct MarioMore: View {
                             .foregroundColor(.blue)
                     }
                 }
-                .containerViewModifier()
+                .containerViewModifier(fontColor: .white, borderColor: .black)
                 
                 PyramidBoard(imageName: "MarioBg", texts: model.drawPyramid(), pyramidAlignment: .bottom)
                 
             }
         }.navigationBarBackButtonHidden(true)
-        .subViewNavigationBar(title: "Mario More", titleColor: .white, fontSize: 30, presentationMode: presentationMode, buttonColor: .white)
+        .subViewNavigationBar(title: "Mario More", titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)
     }
 }

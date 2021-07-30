@@ -31,26 +31,21 @@ struct SummaryView: View {
     let title: String
     let bullet = "• "
     let summary: [String]
-    let backgroundColor: Color
-    let borderColor: Color
     
     var body: some View {
         VStack{
             Text(title)
                 .font(.title)
-                .padding(.bottom, 5)
+                .fontWeight(.bold)
+                .padding(.bottom, 1)
             ForEach(summary, id: \.self) { topic in
                 Text(bullet + topic)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .foregroundColor(.black)
+        .foregroundColor(.white)
         .padding(10)
-        .background(backgroundColor)
-        .cornerRadius(10)
-        .padding(5)
-        .background(borderColor.cornerRadius(10))
-        .padding(.horizontal)
+        .padding(.horizontal, 15)
     }
 }
 
@@ -66,7 +61,6 @@ struct ProblemCardView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .clipShape(Capsule())
-                    //.opacity(0.6)
                 HStack {
                     Spacer()
                     Text(problem.title)

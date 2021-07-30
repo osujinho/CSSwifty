@@ -20,9 +20,13 @@ struct Week1: View {
                 WeekImage(imageName: "Week 1", borderColor: .black)
                     .frame(maxWidth: .infinity)
                 
-                SummaryView(title: model.title, summary: model.summary, backgroundColor: .white, borderColor: .black)
+                SummaryView(title: model.title, summary: model.summary)
                     .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height / 5)
                 
+                Text("Problem Sets")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
                 Carousel(
                     numberOfItems: CGFloat(model.problems.count),
                     spacing: appModel.spacing,
@@ -38,7 +42,7 @@ struct Week1: View {
             }
         }
         .navigationBarBackButtonHidden(true)
-        .subViewNavigationBar(title: "Week 1", titleColor: .white, fontSize: 30.0, presentationMode: presentationMode, buttonColor: .white)
+        .subViewNavigationBar(title: "Week 1", titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)
     }
 }
 
