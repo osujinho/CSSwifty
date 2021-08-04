@@ -31,7 +31,7 @@ class KeypadViewModel {
         switch amount {
         case _ where (hasDecimal && amount.contains(".") && key.value == "Any"):
             opacityDouble = 0.6
-        case _ where (!hasDecimal && amount.isEmpty && key.value == "Any"):
+        case _ where (!hasDecimal && amount.count < 13 && key.value == "Any"):
             opacityDouble = 0.6
         case _ where (amount.isEmpty && key.value == "Delete"):
             opacityDouble = 0.6
