@@ -8,12 +8,25 @@
 import SwiftUI
 
 struct KeypadView: View {
+    typealias Func = () -> Void
     
     var keypadModel = KeypadViewModel()
     @Binding var amount: String
     
-    let hasdecimal: Bool
+    let hasDecimal: Bool
     let maxDigits: Int
+    let submitFunction: Func
+    
+    init(
+        amount: Binding<String>,
+        hasDecimal: Bool,
+        maxDigits: Int,
+        submitFunction: @escaping Func = { }) {
+        self._amount = amount
+        self.hasDecimal = hasDecimal
+        self.maxDigits = maxDigits
+        self.submitFunction = submitFunction
+    }
     
     var body: some View {
         VStack(alignment: .center, spacing: 5) {
@@ -21,12 +34,12 @@ struct KeypadView: View {
                 HStack(alignment: .top, spacing: 5){
                     ForEach(keypadRow.row) { key in
                         Button(action: {
-                            keypadModel.keypadAction(key: key, hasDecimal: hasdecimal, maxDigits: maxDigits, amount: &amount)
+                            keypadModel.keypadAction(key: key, hasDecimal: hasDecimal, maxDigits: maxDigits, amount: &amount, submitFunction: submitFunction)
                         }) {
-                            keypadModel.keypadLabel(key: key, hasDecimal: hasdecimal, amount: amount)
+                            keypadModel.keypadLabel(key: key, hasDecimal: hasDecimal, amount: amount)
                         }.disabled(amount.isEmpty && key.value == "Delete")
-                        .disabled(amount.contains(".") && key.value == "Any" && hasdecimal)
-                        .disabled(amount.isEmpty && key.value == "Any" && !hasdecimal)
+                        .disabled(amount.contains(".") && key.value == "Any" && hasDecimal)
+                        .disabled(amount.count < 13 && key.value == "Any" && !hasDecimal)
                     }
                 }
             }

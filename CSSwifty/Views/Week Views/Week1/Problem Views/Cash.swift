@@ -34,7 +34,7 @@ struct Cash: View {
                 Amount(amount: model.changeString, calcChange: model.calculateChange, clearAmount: model.clearAmount)
                     .coinStackModifier(bgColor: .clear, lineColor: .black)
                 
-                KeypadView(amount: $model.changeString, hasdecimal: true, maxDigits: 4)
+                KeypadView(amount: $model.changeString, hasDecimal: true, maxDigits: 4)
                 
             }
         }.navigationBarBackButtonHidden(true)
