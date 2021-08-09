@@ -38,6 +38,8 @@
 		B3A5A83326B4712200A59B25 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A83226B4712200A59B25 /* KeypadView.swift */; };
 		B3A5A83526B4719700A59B25 /* CashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A83426B4719700A59B25 /* CashViewModel.swift */; };
 		B3A5A83726B472D000A59B25 /* KeypadModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A83626B472D000A59B25 /* KeypadModifiers.swift */; };
+		B3E4258626C1D2A60047F925 /* CreditCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4258526C1D2A60047F925 /* CreditCardModel.swift */; };
+		B3E4258826C1D3000047F925 /* CreditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4258726C1D3000047F925 /* CreditViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +76,8 @@
 		B3A5A83226B4712200A59B25 /* KeypadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
 		B3A5A83426B4719700A59B25 /* CashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashViewModel.swift; sourceTree = "<group>"; };
 		B3A5A83626B472D000A59B25 /* KeypadModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadModifiers.swift; sourceTree = "<group>"; };
+		B3E4258526C1D2A60047F925 /* CreditCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardModel.swift; sourceTree = "<group>"; };
+		B3E4258726C1D3000047F925 /* CreditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +215,7 @@
 				B3A55DA626A8B164008A988D /* MarioMoreViewModel.swift */,
 				B3A5A83026B470E700A59B25 /* KeypadViewModel.swift */,
 				B3A5A83426B4719700A59B25 /* CashViewModel.swift */,
+				B3E4258726C1D3000047F925 /* CreditViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				B3953F96268CF33C00946B55 /* AppModel.swift */,
+				B3E4258526C1D2A60047F925 /* CreditCardModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -354,9 +360,11 @@
 				B3953F8F268B801D00946B55 /* NavBarModifers.swift in Sources */,
 				B371E9492694A1F3007E2302 /* Week6.swift in Sources */,
 				B371E951269CA7C8007E2302 /* WeekViewModifiers.swift in Sources */,
+				B3E4258826C1D3000047F925 /* CreditViewModel.swift in Sources */,
 				B371E94D2694A20B007E2302 /* Week8.swift in Sources */,
 				B3A55DA726A8B164008A988D /* MarioMoreViewModel.swift in Sources */,
 				B3953F8B268B676E00946B55 /* Week1.swift in Sources */,
+				B3E4258626C1D2A60047F925 /* CreditCardModel.swift in Sources */,
 				B371E965269CD6DA007E2302 /* Credit.swift in Sources */,
 				B371E9412694A1C0007E2302 /* Week2.swift in Sources */,
 				B371E9472694A1E6007E2302 /* Week5.swift in Sources */,

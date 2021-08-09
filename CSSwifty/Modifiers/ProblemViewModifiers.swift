@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Intro View for all Problems
 struct IntroView: View {
     
     let title: String
@@ -31,6 +32,7 @@ struct IntroView: View {
     }
 }
 
+// Image view for all problems
 struct ImageAndRuleView: View {
     let imageName: String
     let bullet = "• "
@@ -61,6 +63,7 @@ struct ImageAndRuleView: View {
     }
 }
 
+// Pyramid image for Mario less and Mario More
 struct PyramidBoard: View {
     let imageName: String
     let texts: String
@@ -82,28 +85,8 @@ struct PyramidBoard: View {
     }
 }
 
-struct ContainerViewModifier: ViewModifier {
-    let fontColor: Color
-    let borderColor: Color
-    
-    func body(content: Content) -> some View {
-        content
-            .foregroundColor(fontColor)
-            .padding(10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke((borderColor), lineWidth: 2)
-            )
-            .padding(.horizontal, 15)
-    }
-}
 
-extension View {
-    func containerViewModifier(fontColor: Color, borderColor: Color) -> some View {
-        self.modifier(ContainerViewModifier(fontColor: fontColor, borderColor: borderColor))
-    }
-}
-
+// Coin stack view for Cash
 struct Coin: View {
     let coinName: String
     let coinAmount: Int
@@ -124,6 +107,7 @@ struct Coin: View {
     }
 }
 
+// Amount View for Cash
 struct Amount: View {
     var amount: String
     var calcChange: () -> ()
@@ -151,6 +135,120 @@ struct Amount: View {
     }
 }
 
+//------------------------ For Credit ---------------------------
+
+// ---------To input the card number
+struct CardNumber: View {
+    let cardNumber: String
+    let validateCard: () -> ()
+    let imageName: String
+    
+    var body: some View {
+        HStack {
+            Text("Card Number:")
+                .font(.headline)
+                .fontWeight(.bold)
+                .foregroundColor(.blue)
+                .layoutPriority(1)
+            Text(cardNumber.cardFormat())
+                .foregroundColor(cardNumber.isEmpty ? .gray : .white)
+            Spacer()
+            if cardNumber.count < 2 {
+                EmptyView()
+            } else {
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 30, height: 20, alignment: .trailing)
+                    .padding(.trailing, 5)
+            }
+        }
+        .coinStackModifier(bgColor: .clear, lineColor: .black)
+    }
+    
+}
+
+// ------------------------ Show the card image --------------
+struct CardImage: View {
+    let cardName: String
+    let imageName: String
+    let cardValidity: CardValidity
+    let reset: () -> ()
+    @State var validAnimationAmount = 1.0
+    @State var invalidAnimationAmount = 0.0
+    @State var viewOpacity = 1.0
+    
+    var body: some View {
+        if cardValidity == .none {
+            EmptyView()
+        } else {
+            HStack(alignment: .bottom, spacing: 10) {
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                VStack {
+                    Text("The").fontWeight(.bold).foregroundColor(.white)
+                    Text(cardName + " card").fontWeight(.bold).foregroundColor(.blue)
+                    Text("you entered is...").fontWeight(.bold).foregroundColor(.white)
+                    Text(cardValidity.status)
+                        .fontWeight(.bold)
+                        .foregroundColor(cardValidity == .valid ? .green : .red)
+                        .padding(.vertical, 5)
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 1.0)) {
+                            viewOpacity -= 1
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                            reset()
+                        })
+                    }) {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "clear")
+                            Text("Reset")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                            Spacer()
+                        }
+                        .foregroundColor(.white)
+                        .padding(.vertical, 5)
+                        .background(Color.blue.cornerRadius(10))
+                    }
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(lineWidth: 0)
+            )
+            .modifier(Shake(animatableData: CGFloat(invalidAnimationAmount)))
+            .scaleEffect(CGFloat(validAnimationAmount))
+            .opacity(viewOpacity)
+            .onAppear {
+                if cardValidity == .invalid {
+                    withAnimation(.default) {
+                        invalidAnimationAmount += 1
+                    }
+                } else {
+                    validAnimationAmount = 0
+                    withAnimation(.easeInOut(duration: 2.0)) {
+                        validAnimationAmount += 1
+                    }
+                }
+            }
+            .onDisappear {
+                viewOpacity = 1.0
+                invalidAnimationAmount = 0.0
+                validAnimationAmount = 1.0
+            }
+        }
+        
+    }
+}
+
+// ------------------------------ View Modifiers -------------------------
+
 struct CoinStackModifier: ViewModifier {
     var bgColor: Color
     var borderColor: Color
@@ -174,4 +272,40 @@ extension View {
     }
 }
 
+struct ContainerViewModifier: ViewModifier {
+    let fontColor: Color
+    let borderColor: Color
+    
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(fontColor)
+            .padding(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke((borderColor), lineWidth: 2)
+            )
+            .padding(.horizontal, 15)
+    }
+}
 
+extension View {
+    func containerViewModifier(fontColor: Color, borderColor: Color) -> some View {
+        self.modifier(ContainerViewModifier(fontColor: fontColor, borderColor: borderColor))
+    }
+}
+
+
+// -------------------------- Animations ---------------------------------
+
+// Shake Animation for wrong answer
+struct Shake: GeometryEffect {
+    var amount: CGFloat = 10
+    var shakesPerUnit = 5
+    var animatableData: CGFloat
+
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        ProjectionTransform(CGAffineTransform(translationX:
+            amount * sin(animatableData * .pi * CGFloat(shakesPerUnit)),
+            y: 0))
+    }
+}
