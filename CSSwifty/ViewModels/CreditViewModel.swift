@@ -66,7 +66,7 @@ class CreditViewModel: ObservableObject {
     
     func getCardInfo() -> CreditCard? {
         let prefix = String(cardNumber.prefix(2))
-        return CreditCard.all.first(where: { $0.prefix.contains(prefix)})
+        return CreditCard.allCases.first(where: { $0.prefix.contains(prefix)})
     }
     
     func resetCard() {

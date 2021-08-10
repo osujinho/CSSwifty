@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CreditCard {
+enum CreditCard: CaseIterable {
     case visa
     case masterCard
     case maestro13
@@ -19,20 +19,6 @@ enum CreditCard {
     case jcb15
     case jcb16
     
-    static var all: [CreditCard] {
-        return [
-            .visa,
-            .masterCard,
-            .maestro13,
-            .maetro15,
-            .maestro16,
-            .americanExpress,
-            .dinersClub,
-            .discovery,
-            .jcb15,
-            .jcb16
-        ]
-    }
     
     var name: String {
         switch self {
@@ -97,7 +83,7 @@ enum CreditCard {
 // Extension to format the Card Number input
 extension String {
     func cardFormat() -> String {
-        let mask = CreditCard.all.first(where: { $0.prefix.contains(String(self.prefix(2))) })? .cardMask ?? "XXXX XXXX XXXX XXXX XXX"
+        let mask = CreditCard.allCases.first(where: { $0.prefix.contains(String(self.prefix(2))) })? .cardMask ?? "XXXX XXXX XXXX XXXX XXX"
         let numbers = self.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
         var index = numbers.startIndex // numbers iterator
