@@ -9,7 +9,7 @@ import SwiftUI
 
 // View Composition for the Circle week number
 struct WeekCircle: View {
-    let week: Week
+    let week: Weeks
     
     var body: some View {
         ZStack {
@@ -21,7 +21,7 @@ struct WeekCircle: View {
                 Text("Week")
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.white)
-                Text("\(week.weekNumber)")
+                Text("\(week.number)")
                     .font(.caption)
                     .foregroundColor(.white)
             }
@@ -29,39 +29,14 @@ struct WeekCircle: View {
     }
 }
 
-// View composition for the week view list
-struct WeekDetail: View {
-    let week: Week
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(week.title)
-                .font(.headline)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .lineLimit(2)
-                .padding(.bottom, 5)
-            Text("Problem Sets")
-                .foregroundColor(.gray)
-                .padding(.bottom, 2)
-            HStack {
-                ForEach(week.problems, id: \.self) { problem in
-                    ProblemSet(problemName: problem)
-                }
-            }
-        }.padding(.trailing, 10)
-        .padding(.leading, 10)
-    }
-}
-
 // View Composition for the Problem set names
 struct ProblemSet: View {
-    var problemName: String
+    var problem: Problems
     var fontSize: CGFloat = 12.0
     
     var body: some View {
         ZStack {
-            Text(problemName)
+            Text(problem.name)
                 .font(.system(size: fontSize, weight: .regular))
                 .lineLimit(2)
                 .foregroundColor(.white)
@@ -72,18 +47,47 @@ struct ProblemSet: View {
     }
 }
 
-// View Composition for the Week View
-struct WeekView: View {
-    let week: Week
+
+// View composition for the week view list
+struct WeekDetail: View {
+    let week: Weeks
     
     var body: some View {
-        HStack(alignment: .center) {
-            WeekCircle(week: week)
-                .padding(.leading, 5)
-            WeekDetail(week: week)
+        VStack(alignment: .leading) {
+            Text(week.topic)
+                .font(.headline)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .lineLimit(2)
                 .padding(.bottom, 5)
-            Spacer()
-        }.containerModifier()
+            Text("Problem Sets")
+                .foregroundColor(.gray)
+                .padding(.bottom, 2)
+            HStack {
+                ForEach(week.problems, id: \.self) { problem in
+                    ProblemSet(problem: problem)
+                }
+            }
+        }.padding(.trailing, 10)
+        .padding(.leading, 10)
+    }
+}
+
+
+// View Composition for the Week View
+struct WeekContainer: View {
+    let week: Weeks
+    
+    var body: some View {
+        NavigationLink(destination: WeekView(week: week)) {
+            HStack(alignment: .center) {
+                WeekCircle(week: week)
+                    .padding(.leading, 5)
+                WeekDetail(week: week)
+                    .padding(.bottom, 5)
+                Spacer()
+            }.containerModifier()
+        }
     }
 }
 

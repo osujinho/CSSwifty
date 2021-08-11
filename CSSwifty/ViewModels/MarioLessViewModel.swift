@@ -18,6 +18,8 @@ class MarioLessViewModel: ObservableObject {
         "Numbers from 1-8 inclusive"
     ]
     
+    let problem: Problems = .marioless
+    
     @Published var selectedHeight = 0
     
     func drawPyramid() -> String {

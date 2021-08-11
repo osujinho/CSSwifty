@@ -9,11 +9,10 @@ import SwiftUI
 
 @main
 struct CSSwiftyApp: App {
-    @StateObject var appModel = AppViewModel()
     
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(appModel)
+            ContentView()
         }
     }
 }

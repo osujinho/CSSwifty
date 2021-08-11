@@ -18,6 +18,8 @@ class CashViewModel: ObservableObject {
         "ONLY positive integers",
     ]
     
+    let problem: Problems = .cash
+    
     @Published var changeString = ""
     @Published var pennies = 0
     @Published var nickels = 0

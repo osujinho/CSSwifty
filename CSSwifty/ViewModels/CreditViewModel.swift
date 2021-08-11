@@ -19,6 +19,8 @@ class CreditViewModel: ObservableObject {
         "ONLY Numbers 0-9"
     ]
     
+    let problem: Problems = .credit
+    
     @Published var cardNumber = ""
     @Published var cardValidity: CardValidity = CardValidity.none
     

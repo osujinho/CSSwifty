@@ -9,73 +9,89 @@ import SwiftUI
 
 // Week Image view
 struct WeekImage: View {
-    let imageName: String
+    let week: Weeks
     let borderColor: Color
     
     var body: some View {
         VStack {
-            Image(imageName)
+            Image(week.image)
             .resizable()
-            .aspectRatio(contentMode: .fill)
+            .aspectRatio(contentMode: .fit)
             .cornerRadius(10)
             .padding(5)
             .background(borderColor.cornerRadius(10))
             .padding()
-        }
+        }.frame(maxWidth: .infinity)
     }
 }
 
 // Week Summary/detail view
 struct SummaryView: View {
     
-    let title: String
+    let week: Weeks
     let bullet = "• "
-    let summary: [String]
+    
+    let columns = [
+        GridItem(.adaptive(minimum: 160))
+    ]
     
     var body: some View {
-        VStack{
-            Text(title)
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(.bottom, 1)
-            ForEach(summary, id: \.self) { topic in
-                Text(bullet + topic)
+        
+        LazyVGrid(columns: columns, alignment: .leading, spacing: 10, pinnedViews: [.sectionHeaders]) {
+            Section(header: Text(week.name + " Overview").font(.title3).fontWeight(.bold).foregroundColor(.white)) {
+                ForEach(week.overview, id: \.self) { topic in
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(bullet)
+                        Text(topic)
+                    }
+                }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .foregroundColor(.white)
-        .padding(10)
+        .padding(.vertical, 10)
         .padding(.horizontal, 15)
     }
 }
 
+
 // Week problem card view (What will go into the carousel)
 struct ProblemCardView: View {
-    var problem: Problem
+    
+    var problems: [Problems]
+    
+    let columns = [
+        GridItem(.adaptive(minimum: 150))
+    ]
     
     var body: some View {
-        NavigationLink(destination: AnyView(_fromValue: problem.problemView)) {
-            ZStack(alignment: .bottom) {
-                Image(problem.imageName)
-                    .renderingMode(.original)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .clipShape(Capsule())
-                HStack {
-                    Spacer()
-                    Text(problem.title)
-                        .font(.headline)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
-                    Spacer()
+        
+        LazyVGrid(columns: columns, alignment: .center, spacing: 20, pinnedViews: [.sectionHeaders]) {
+            Section(header: Text("Problem Sets").font(.title3).fontWeight(.bold).foregroundColor(.white)) {
+                ForEach(problems, id: \.rawValue) { problem in
+                    NavigationLink(destination: AnyView(_fromValue: problem.view)) {
+                        ZStack(alignment: .center) {
+                            LinearGradient(gradient: Gradient(colors: getGradients(colors: problem.gradient)), startPoint: .topLeading, endPoint: .bottomTrailing)
+                            HStack {
+                                Image(systemName: problem.icon)
+                                Text(problem.name)
+                                    .font(.headline)
+                                    .fontWeight(.bold)
+                            }
+                            .foregroundColor(.white)
+                            .padding(.vertical, 10)
+                        }
+                        .frame(height: 70)
+                        .cornerRadius(30)
+                        .overlay(RoundedRectangle(cornerRadius: 30).stroke(Color.white, lineWidth: 2))
+                        .shadow(color: .black, radius: 2)
+                    }
                 }
-                .background(Color.gray.opacity(0.7))
             }
-            .clipShape(Capsule())
-            .overlay(Capsule().stroke(Color.black, lineWidth: 2))
-            .shadow(color: .black, radius: 2)
             
         }
+        .padding(.horizontal)
+        .padding(.vertical, 10)
+        
     }
 }
 

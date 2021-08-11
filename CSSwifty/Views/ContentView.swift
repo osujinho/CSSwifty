@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var appModel: AppViewModel
     
     var body: some View {
         NavigationView {
@@ -17,11 +16,8 @@ struct ContentView: View {
                     
                 
                 ScrollView {
-                    ForEach(appModel.weeks) { week in
-                        NavigationLink (destination: AnyView(_fromValue: week.weekView),
-                                        label: {
-                                            WeekView(week: week)
-                                        })
+                    ForEach(Weeks.allCases, id: \.rawValue) { week in
+                        WeekContainer(week: week)
                     }
                 }
             }
