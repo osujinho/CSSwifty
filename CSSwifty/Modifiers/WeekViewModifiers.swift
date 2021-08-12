@@ -36,9 +36,12 @@ struct SummaryView: View {
     ]
     
     var body: some View {
-        
-        LazyVGrid(columns: columns, alignment: .leading, spacing: 10, pinnedViews: [.sectionHeaders]) {
-            Section(header: Text(week.name + " Overview").font(.title3).fontWeight(.bold).foregroundColor(.white)) {
+        VStack {
+            Text(week.name + " overview")
+                .font(.title3)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+            LazyVGrid(columns: columns, alignment: .leading, spacing: 10) {
                 ForEach(week.overview, id: \.self) { topic in
                     HStack(alignment: .firstTextBaseline) {
                         Text(bullet)
@@ -46,10 +49,10 @@ struct SummaryView: View {
                     }
                 }
             }
+            .foregroundColor(.white)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 15)
         }
-        .foregroundColor(.white)
-        .padding(.vertical, 10)
-        .padding(.horizontal, 15)
     }
 }
 

@@ -17,6 +17,12 @@ struct WeekView: View {
             LinearGradient(gradient: Gradient(colors: getGradients(colors: week.gradient)), startPoint: .topLeading, endPoint: .bottomTrailing).edgesIgnoringSafeArea(.all)
         
             VStack(spacing: 10) {
+                Text(week.topic)
+                    .font(.system(size: 18))
+                    .fontWeight(.heavy)
+                    .foregroundColor(.white)
+                    .padding(.bottom, 5)
+                
                 WeekImage(week: week, borderColor: .black)
                 
                 SummaryView(week: week)
