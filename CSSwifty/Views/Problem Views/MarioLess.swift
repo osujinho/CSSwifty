@@ -34,7 +34,7 @@ struct MarioLess: View {
                 
             }
         }.navigationBarBackButtonHidden(true)
-        .subViewNavigationBar(title: "Mario Less", titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)
+        .subViewNavigationBar(title: model.problem.name, titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)
     }
 }
 
