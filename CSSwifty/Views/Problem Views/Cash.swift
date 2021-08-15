@@ -38,6 +38,6 @@ struct Cash: View {
                 
             }
         }.navigationBarBackButtonHidden(true)
-        .subViewNavigationBar(title: "Cash", titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)
+        .subViewNavigationBar(title: model.problem.name, titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)
     }
 }

@@ -201,3 +201,5 @@ enum Problems: String, CaseIterable {
         }
     }
 }
+
+typealias Func = () -> Void

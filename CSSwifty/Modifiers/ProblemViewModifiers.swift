@@ -47,7 +47,6 @@ struct ImageAndRuleView: View {
             VStack {
                 Text("Rules")
                     .font(.headline)
-                    .padding(.bottom, 5)
                 ForEach(rules, id:\.self) { rule in
                     HStack(alignment: .firstTextBaseline) {
                         Text(bullet)
@@ -85,7 +84,7 @@ struct PyramidBoard: View {
     }
 }
 
-
+// ---------------------------------FOR CASH ----------------------------
 // Coin stack view for Cash
 struct Coin: View {
     let coinName: String
@@ -135,7 +134,7 @@ struct Amount: View {
     }
 }
 
-//------------------------ For Credit ---------------------------
+//------------------------ For Credit ----------------------------------------
 
 // ---------To input the card number
 struct CardNumber: View {
@@ -168,7 +167,7 @@ struct CardNumber: View {
     
 }
 
-// ------------------------ Show the card image --------------
+// - Show the card image --------------
 struct CardImage: View {
     let cardName: String
     let imageName: String
@@ -247,6 +246,108 @@ struct CardImage: View {
     }
 }
 
+// -----------------------------FOR READABILITY-----------------------------
+struct Analysis: View {
+    let label: String
+    let display: String
+    let borderColor: Color
+    
+    var body: some View {
+        HStack {
+            Text(label)
+                .font(.subheadline)
+                .fontWeight(.bold)
+            Spacer()
+            Text("\(display)")
+        }
+        .padding(.vertical, 5)
+        .padding(.horizontal, 10)
+        .foregroundColor(.white)
+        .overlay(RoundedRectangle(cornerRadius: 10)
+                    .stroke((borderColor), lineWidth: 1))
+    }
+}
+
+struct AnalysisView: View {
+    let sentenceCount: String
+    let wordCount: String
+    let characterCount: String
+    let grade: String
+    
+    var body: some View {
+        VStack{
+            Analysis(label: "Sentence Count:", display: sentenceCount, borderColor: .black)
+            Analysis(label: "Word Count:", display: wordCount, borderColor: .black)
+            Analysis(label: "Appropriate For:", display: grade, borderColor: .green)
+        }.coinStackModifier(bgColor: .clear, lineColor: .black)
+    }
+}
+
+struct TextEditorView: View {
+    @Binding var text: String
+    @Binding var characters: String
+    let clearFunc: Func
+    let submitFunc: Func
+    let charCount: Func
+    
+    let clear: ClearSubmit = .clear
+    let submit: ClearSubmit = .submit
+    
+    init(text: Binding<String>, characters: Binding<String>, clearFunc: @escaping Func, submitFunc: @escaping Func, charCount: @escaping Func) {
+        UITextView.appearance().backgroundColor = .clear
+        self._text = text
+        self._characters = characters
+        self.clearFunc = clearFunc
+        self.submitFunc = submitFunc
+        self.charCount = charCount
+    }
+    
+    var body: some View {
+        HStack {
+            VStack {
+                TextEditor(text: $text)
+                    .onChange(of: text, perform: { _ in
+                        charCount()
+                    })
+                    .padding()
+                    .background(Color.yellow.opacity(0.5))
+                    .foregroundColor(Color.white)
+                    .font(Font.custom("AvenirNext-Regular", size: 14, relativeTo: .body))
+                    .cornerRadius(25)
+                ProgressView("Characters: \(characters) / 500", value: Double(characters), total: 500)
+                    .frame(width: 150)
+                    .padding(.horizontal, 20)
+                    .accentColor(.yellow)
+                    .foregroundColor(.white)
+            }
+            VStack(spacing: 50) {
+                Button(action: {
+                    clearFunc()
+                }, label: {
+                    HStack {
+                        Image(systemName: clear.icon)
+                        //Text(clear.name)
+                    }.deleteSubmitButtonModifier(fontColor: .white, bgColor: .red, borderColor: .white)
+                    .opacity(text.isEmpty ? 0.5 : 1.0)
+                }).disabled(text.isEmpty)
+                
+                
+                
+                Button(action: {
+                    submitFunc()
+                }, label: {
+                    HStack {
+                        Image(systemName: submit.icon)
+                        //Text(submit.name)
+                    }.deleteSubmitButtonModifier(fontColor: .white, bgColor: .green, borderColor: .white)
+                    .opacity(text.isEmpty ? 0.5 : 1.0)
+                }).disabled(text.isEmpty)
+            }.foregroundColor(.white)
+        }
+        .padding(.horizontal, 15)
+    }
+}
+
 // ------------------------------ View Modifiers -------------------------
 
 struct CoinStackModifier: ViewModifier {
@@ -291,6 +392,28 @@ struct ContainerViewModifier: ViewModifier {
 extension View {
     func containerViewModifier(fontColor: Color, borderColor: Color) -> some View {
         self.modifier(ContainerViewModifier(fontColor: fontColor, borderColor: borderColor))
+    }
+}
+
+struct DeleteSubmitButtonModifier: ViewModifier {
+    let fontColor: Color
+    let bgColor: Color
+    let borderColor: Color
+    
+    func body(content: Content) -> some View {
+        content
+            .font(Font.system(size: 20, weight: .semibold))
+            .foregroundColor(fontColor)
+            .padding()
+            .background(bgColor.cornerRadius(40))
+            .overlay(RoundedRectangle(cornerRadius: 40)
+                        .stroke((borderColor), lineWidth: 1))
+    }
+}
+
+extension View {
+    func deleteSubmitButtonModifier(fontColor: Color, bgColor: Color, borderColor: Color) -> some View {
+        self.modifier(DeleteSubmitButtonModifier(fontColor: fontColor, bgColor: bgColor, borderColor: borderColor))
     }
 }
 

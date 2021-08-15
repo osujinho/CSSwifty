@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct KeypadView: View {
-    typealias Func = () -> Void
     
     var keypadModel = KeypadViewModel()
     @Binding var amount: String
