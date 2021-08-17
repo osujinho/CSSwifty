@@ -33,7 +33,7 @@ class CaesarViewModel: ObservableObject {
         }
     }
     @Published var outputText = ""
-    @Published var key = 0
+    @Published var key: UInt8 = 0
     @Published var characterCount = ""
     
     var maximumCharacters = 150
@@ -50,21 +50,22 @@ class CaesarViewModel: ObservableObject {
         let texts = Array(inputText)
         var newTexts = [String]()
         let optionKey = outputType == .encrypt ? (key % 26) : (26 - (key % 26))
+        let asciiValues = texts.compactMap { $0.asciiValue }
         
-        for text in texts {
-            let textAscii = text.asciiValue!
-            if (65...90).contains(textAscii) {
-                let cipherAscii = 65 + (((Int(textAscii) - 65) + (optionKey)) % 26)
-                let cipherChar = String(UnicodeScalar(cipherAscii)!)
+        for asciiValue in asciiValues {
+            
+            if (65...90).contains(asciiValue) {
+                let cipherAscii = 65 + (((asciiValue - 65) + (optionKey % 26)) % 26)
+                let cipherChar = String(UnicodeScalar(cipherAscii))
                 
                 newTexts.append(cipherChar)
-            } else if (97...122).contains(textAscii) {
-                let cipherAscii = 97 + (((Int(textAscii) - 97) + (optionKey)) % 26)
-                let cipherChar = String(UnicodeScalar(cipherAscii)!)
+            } else if (97...122).contains(asciiValue) {
+                let cipherAscii = 97 + (((asciiValue - 97) + (optionKey % 26)) % 26)
+                let cipherChar = String(UnicodeScalar(cipherAscii))
                 
                 newTexts.append(cipherChar)
             } else {
-                let ciperChar = String(UnicodeScalar(textAscii))
+                let ciperChar = String(UnicodeScalar(asciiValue))
                 newTexts.append(ciperChar)
             }
         }

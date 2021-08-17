@@ -47,9 +47,9 @@ struct AnalysisView: View {
 // -----------------------------FOR CAESAR ----------------------------
 struct InputView: View {
     @Binding var outputType: TextOption
-    @Binding var key: Int
+    @Binding var key: UInt8
     
-    init(outputType: Binding<TextOption>, key: Binding<Int>) {
+    init(outputType: Binding<TextOption>, key: Binding<UInt8>) {
         self._outputType = outputType
         self._key = key
         
@@ -83,7 +83,7 @@ struct InputView: View {
 
 // -----Custom stepper for input
 struct NumericStepper: View {
-    @Binding var key: Int
+    @Binding var key: UInt8
     @State var decreasePressed = false
     @State var increasePressed = false
     
