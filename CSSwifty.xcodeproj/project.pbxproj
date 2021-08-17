@@ -37,12 +37,15 @@
 		B3953F95268CE7F500946B55 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3953F94268CE7F500946B55 /* CustomColors.swift */; };
 		B3953F97268CF33C00946B55 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3953F96268CF33C00946B55 /* AppModel.swift */; };
 		B3A55DA126A74D96008A988D /* MarioLessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A55DA026A74D96008A988D /* MarioLessViewModel.swift */; };
-		B3A55DA526A8A5C7008A988D /* ProblemViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A55DA426A8A5C7008A988D /* ProblemViewModifiers.swift */; };
 		B3A55DA726A8B164008A988D /* MarioMoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A55DA626A8B164008A988D /* MarioMoreViewModel.swift */; };
 		B3A5A83126B470E700A59B25 /* KeypadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A83026B470E700A59B25 /* KeypadViewModel.swift */; };
 		B3A5A83326B4712200A59B25 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A83226B4712200A59B25 /* KeypadView.swift */; };
 		B3A5A83526B4719700A59B25 /* CashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A83426B4719700A59B25 /* CashViewModel.swift */; };
 		B3A5A83726B472D000A59B25 /* KeypadModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A83626B472D000A59B25 /* KeypadModifiers.swift */; };
+		B3B35DD226CB842D000D56CB /* CaesarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B35DD126CB842D000D56CB /* CaesarViewModel.swift */; };
+		B3B35DD626CB86A2000D56CB /* ProblemsTwoModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B35DD526CB86A2000D56CB /* ProblemsTwoModifiers.swift */; };
+		B3B35DD826CB86FF000D56CB /* ProblemOnesModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B35DD726CB86FF000D56CB /* ProblemOnesModifiers.swift */; };
+		B3B35DDA26CB87B2000D56CB /* PublicModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B35DD926CB87B2000D56CB /* PublicModifiers.swift */; };
 		B3E4258626C1D2A60047F925 /* CreditCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4258526C1D2A60047F925 /* CreditCardModel.swift */; };
 		B3E4258826C1D3000047F925 /* CreditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4258726C1D3000047F925 /* CreditViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -80,12 +83,15 @@
 		B3953F94268CE7F500946B55 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		B3953F96268CF33C00946B55 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		B3A55DA026A74D96008A988D /* MarioLessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarioLessViewModel.swift; sourceTree = "<group>"; };
-		B3A55DA426A8A5C7008A988D /* ProblemViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemViewModifiers.swift; sourceTree = "<group>"; };
 		B3A55DA626A8B164008A988D /* MarioMoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarioMoreViewModel.swift; sourceTree = "<group>"; };
 		B3A5A83026B470E700A59B25 /* KeypadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadViewModel.swift; sourceTree = "<group>"; };
 		B3A5A83226B4712200A59B25 /* KeypadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
 		B3A5A83426B4719700A59B25 /* CashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashViewModel.swift; sourceTree = "<group>"; };
 		B3A5A83626B472D000A59B25 /* KeypadModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadModifiers.swift; sourceTree = "<group>"; };
+		B3B35DD126CB842D000D56CB /* CaesarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaesarViewModel.swift; sourceTree = "<group>"; };
+		B3B35DD526CB86A2000D56CB /* ProblemsTwoModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemsTwoModifiers.swift; sourceTree = "<group>"; };
+		B3B35DD726CB86FF000D56CB /* ProblemOnesModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemOnesModifiers.swift; sourceTree = "<group>"; };
+		B3B35DD926CB87B2000D56CB /* PublicModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicModifiers.swift; sourceTree = "<group>"; };
 		B3E4258526C1D2A60047F925 /* CreditCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardModel.swift; sourceTree = "<group>"; };
 		B3E4258726C1D3000047F925 /* CreditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +179,7 @@
 				B3A5A83426B4719700A59B25 /* CashViewModel.swift */,
 				B3E4258726C1D3000047F925 /* CreditViewModel.swift */,
 				B333324626C8B0810090B410 /* ReadabilityViewModel.swift */,
+				B3B35DD126CB842D000D56CB /* CaesarViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -194,8 +201,10 @@
 				B3953F8E268B801D00946B55 /* NavBarModifers.swift */,
 				B3953F92268CE6F300946B55 /* WeekList.swift */,
 				B371E950269CA7C8007E2302 /* WeekViewModifiers.swift */,
-				B3A55DA426A8A5C7008A988D /* ProblemViewModifiers.swift */,
 				B3A5A83626B472D000A59B25 /* KeypadModifiers.swift */,
+				B3B35DD926CB87B2000D56CB /* PublicModifiers.swift */,
+				B3B35DD726CB86FF000D56CB /* ProblemOnesModifiers.swift */,
+				B3B35DD526CB86A2000D56CB /* ProblemsTwoModifiers.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -283,6 +292,7 @@
 				B3A5A83726B472D000A59B25 /* KeypadModifiers.swift in Sources */,
 				B3953F78268B651700946B55 /* ContentView.swift in Sources */,
 				B3A55DA126A74D96008A988D /* MarioLessViewModel.swift in Sources */,
+				B3B35DD226CB842D000D56CB /* CaesarViewModel.swift in Sources */,
 				B333324126C457FA0090B410 /* Movies.swift in Sources */,
 				B371E961269CD6C2007E2302 /* MarioMore.swift in Sources */,
 				B371E95F269CD6A3007E2302 /* MarioLess.swift in Sources */,
@@ -298,8 +308,9 @@
 				B3A5A83326B4712200A59B25 /* KeypadView.swift in Sources */,
 				B3953F95268CE7F500946B55 /* CustomColors.swift in Sources */,
 				B333323D26C457DF0090B410 /* Speller.swift in Sources */,
+				B3B35DD826CB86FF000D56CB /* ProblemOnesModifiers.swift in Sources */,
+				B3B35DD626CB86A2000D56CB /* ProblemsTwoModifiers.swift in Sources */,
 				B333324326C4580E0090B410 /* Fiftyville.swift in Sources */,
-				B3A55DA526A8A5C7008A988D /* ProblemViewModifiers.swift in Sources */,
 				B3953F97268CF33C00946B55 /* AppModel.swift in Sources */,
 				B333323F26C457F00090B410 /* Dna.swift in Sources */,
 				B3953F93268CE6F300946B55 /* WeekList.swift in Sources */,
@@ -310,6 +321,7 @@
 				B333324926C8B1190090B410 /* GradesModel.swift in Sources */,
 				B371E951269CA7C8007E2302 /* WeekViewModifiers.swift in Sources */,
 				B3E4258826C1D3000047F925 /* CreditViewModel.swift in Sources */,
+				B3B35DDA26CB87B2000D56CB /* PublicModifiers.swift in Sources */,
 				B3A55DA726A8B164008A988D /* MarioMoreViewModel.swift in Sources */,
 				B333323126C457700090B410 /* Plurality.swift in Sources */,
 				B333322F26C4575C0090B410 /* Substitution.swift in Sources */,

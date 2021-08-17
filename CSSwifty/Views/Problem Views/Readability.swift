@@ -23,7 +23,7 @@ struct Readability: View {
                 
                 AnalysisView(sentenceCount: model.sentenceCount, wordCount: model.wordCount, characterCount: model.characterCount, grade: model.grade.name)
                 
-                TextEditorView(text: $model.text, characters: $model.characterCount, clearFunc: model.clear, submitFunc: model.submit, charCount: model.totalCharacters)
+                TextEditorView(text: $model.text, characters: $model.characterCount, clearFunc: model.clear, submitFunc: model.submit, charCount: model.totalCharacters, charTotal: 500, label: "Enter your text:")
                 
             }
         }.navigationBarBackButtonHidden(true)

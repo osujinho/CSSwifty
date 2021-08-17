@@ -8,13 +8,25 @@
 import SwiftUI
 
 struct Caesar: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @ObservedObject var model = CaesarViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct Caesar_Previews: PreviewProvider {
-    static var previews: some View {
-        Caesar()
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: getGradients(colors: model.problem.gradient)), startPoint: .top, endPoint: .trailing).edgesIgnoringSafeArea(.all)
+            
+            ScrollView {
+                IntroView(title: "Caesar Cipher", summarys: model.intro)
+                
+                ImageAndRuleView(imageName:  model.problem.image, rules: model.rules)
+                
+                InputView(outputType: $model.outputType, key: $model.key)
+                
+                CiperOutput(cipher: model.outputText, option: model.outputType)
+                
+                TextEditorView(text: $model.inputText, characters: $model.characterCount, clearFunc: model.clear, submitFunc: model.submit, charCount: model.totalCharacter, charTotal: model.maximumCharacters, label: model.textEditorLabel())
+            }
+        }.navigationBarBackButtonHidden(true)
+        .subViewNavigationBar(title: model.problem.name, titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)
     }
 }
