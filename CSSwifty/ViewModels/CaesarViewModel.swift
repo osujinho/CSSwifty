@@ -47,26 +47,18 @@ class CaesarViewModel: ObservableObject {
     
     // Function when you press the submit button
     func submit() {
-        let texts = Array(inputText)
         var newTexts = [String]()
         let optionKey = outputType == .encrypt ? (key % 26) : (26 - (key % 26))
-        let asciiValues = texts.compactMap { $0.asciiValue }
+        let asciiValues = inputText.compactMap { $0.asciiValue }
         
         for asciiValue in asciiValues {
-            
-            if (65...90).contains(asciiValue) {
-                let cipherAscii = 65 + (((asciiValue - 65) + (optionKey % 26)) % 26)
-                let cipherChar = String(UnicodeScalar(cipherAscii))
-                
-                newTexts.append(cipherChar)
-            } else if (97...122).contains(asciiValue) {
-                let cipherAscii = 97 + (((asciiValue - 97) + (optionKey % 26)) % 26)
-                let cipherChar = String(UnicodeScalar(cipherAscii))
-                
-                newTexts.append(cipherChar)
-            } else {
-                let ciperChar = String(UnicodeScalar(asciiValue))
-                newTexts.append(ciperChar)
+            switch asciiValue {
+            case _ where (65...90).contains(asciiValue):
+                newTexts.append(String(UnicodeScalar(65 + (((asciiValue - 65) + (optionKey % 26)) % 26))))
+            case _ where (97...122).contains(asciiValue):
+                newTexts.append(String(UnicodeScalar(97 + (((asciiValue - 97) + (optionKey % 26)) % 26))))
+            default:
+                newTexts.append(String(UnicodeScalar(asciiValue)))
             }
         }
         outputText = newTexts.joined()
