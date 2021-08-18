@@ -24,7 +24,7 @@ struct Caesar: View {
                 
                 CiperOutput(cipher: model.outputText, option: model.outputType)
                 
-                TextEditorView(text: $model.inputText, characters: $model.characterCount, clearFunc: model.clear, submitFunc: model.submit, charCount: model.totalCharacter, charTotal: model.maximumCharacters, label: model.textEditorLabel())
+                TextEditorView(text: $model.inputText, characters: $model.characterCount, clearFunc: model.clear, submitFunc: model.newCipherText, charCount: model.totalCharacter, charTotal: model.maximumCharacters, label: model.textEditorLabel())
             }
         }.navigationBarBackButtonHidden(true)
         .subViewNavigationBar(title: model.problem.name, titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)

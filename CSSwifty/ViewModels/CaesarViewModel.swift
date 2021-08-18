@@ -45,24 +45,26 @@ class CaesarViewModel: ObservableObject {
         key = 0
     }
     
-    // Function when you press the submit button
-    func submit() {
-        var newTexts = [String]()
-        let optionKey = outputType == .encrypt ? (key % 26) : (26 - (key % 26))
-        let asciiValues = inputText.compactMap { $0.asciiValue }
-        
-        for asciiValue in asciiValues {
-            switch asciiValue {
-            case _ where (65...90).contains(asciiValue):
-                newTexts.append(String(UnicodeScalar(65 + (((asciiValue - 65) + (optionKey % 26)) % 26))))
-            case _ where (97...122).contains(asciiValue):
-                newTexts.append(String(UnicodeScalar(97 + (((asciiValue - 97) + (optionKey % 26)) % 26))))
-            default:
-                newTexts.append(String(UnicodeScalar(asciiValue)))
-            }
+    // Function to determine the ascii values based on case
+    
+    private func cypherFor(asciiValue: UInt8, key: UInt8) -> String {
+        switch asciiValue {
+        case _ where (65...90).contains(asciiValue):
+            return String(UnicodeScalar(65 + (((asciiValue - 65) + (key % 26)) % 26)))
+        case _ where (97...122).contains(asciiValue):
+            return String(UnicodeScalar(97 + (((asciiValue - 97) + (key % 26)) % 26)))
+        default:
+            return String(UnicodeScalar(asciiValue))
         }
+    }
+
+    // Function to return cipher text.
+    func newCipherText() {
+        let optionKey = outputType == .encrypt ? (key % 26) : (26 - (key % 26))
+        let newTexts = inputText.compactMap { $0.asciiValue }.map { cypherFor(asciiValue: $0, key: optionKey)}
         outputText = newTexts.joined()
     }
+    
     
     func totalCharacter() {
         characterCount = String(inputText.count)
