@@ -102,13 +102,3 @@ extension String {
         return result
     }
 }
-
-enum CardValidity: String {
-    case none
-    case valid
-    case invalid
-    
-    var status: String {
-        return self.rawValue.uppercased()
-    }
-}

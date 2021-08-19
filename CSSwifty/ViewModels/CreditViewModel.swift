@@ -9,7 +9,7 @@ import Foundation
 
 class CreditViewModel: ObservableObject {
     @Published var cardNumber = ""
-    @Published var cardValidity: CardValidity = CardValidity.none
+    @Published var cardValidity: ValidStatus = ValidStatus.none
     let intro = [
         "A credit (or debit) card, is a means of payment for goods and services.",
         "Every card has a unique number that has a “checksum” built into them, which enables computers to detect invalid numbers",

@@ -203,3 +203,13 @@ enum Problems: String, CaseIterable {
 }
 
 typealias Func = () -> Void
+
+enum ValidStatus: String {
+    case none
+    case valid
+    case invalid
+    
+    var status: String {
+        return self.rawValue.uppercased()
+    }
+}

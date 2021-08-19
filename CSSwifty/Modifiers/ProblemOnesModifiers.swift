@@ -116,7 +116,7 @@ struct CardNumber: View {
 struct CardImage: View {
     let cardName: String
     let imageName: String
-    let cardValidity: CardValidity
+    let cardValidity: ValidStatus
     let reset: () -> ()
     @State var validAnimationAmount = 1.0
     @State var invalidAnimationAmount = 0.0
