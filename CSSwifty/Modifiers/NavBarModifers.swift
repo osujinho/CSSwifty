@@ -28,7 +28,6 @@ struct NavigationBarModifier: ViewModifier {
         UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
     }
     
-    
     func body(content: Content) -> some View {
         ZStack{
             content
