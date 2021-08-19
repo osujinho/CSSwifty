@@ -20,7 +20,12 @@ struct Caesar: View {
                 
                 ImageAndRuleView(imageName:  model.problem.image, rules: model.rules)
                 
-                InputView(outputType: $model.outputType, key: $model.key)
+                //InputView(outputType: $model.outputType, key: $model.key)
+                HStack {
+                    OptionPicker(outputType: $model.outputType)
+                    Spacer()
+                    NumericStepper(key: $model.key)
+                }.containerViewModifier(fontColor: .white, borderColor: .black)
                 
                 CiperOutput(cipher: model.outputText, option: model.outputType)
                 

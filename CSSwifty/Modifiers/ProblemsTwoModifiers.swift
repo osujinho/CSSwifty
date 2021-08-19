@@ -45,13 +45,11 @@ struct AnalysisView: View {
 }
 
 // -----------------------------FOR CAESAR ----------------------------
-struct InputView: View {
+struct OptionPicker: View {
     @Binding var outputType: TextOption
-    @Binding var key: UInt8
     
-    init(outputType: Binding<TextOption>, key: Binding<UInt8>) {
+    init(outputType: Binding<TextOption>) {
         self._outputType = outputType
-        self._key = key
         
         UISegmentedControl.appearance().selectedSegmentTintColor = .systemGreen
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.systemYellow], for: .normal)
@@ -60,24 +58,17 @@ struct InputView: View {
     
     var body: some View {
         HStack {
-            HStack {
-                Text("Option")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                Picker("Text option", selection: $outputType) {
-                    ForEach(TextOption.allCases) { type in
-                        HStack {
-                            Text(type.name)
-                        }
+            Text("Option")
+                .font(.subheadline)
+                .fontWeight(.semibold)
+            Picker("Text option", selection: $outputType) {
+                ForEach(TextOption.allCases) { type in
+                    HStack {
+                        Text(type.name)
                     }
-                }.pickerStyle(SegmentedPickerStyle())
-            }
-            
-            Spacer()
-            
-            NumericStepper(key: $key)
-            
-        }.containerViewModifier(fontColor: .white, borderColor: .black)
+                }
+            }.pickerStyle(SegmentedPickerStyle())
+        }
     }
 }
 

@@ -86,14 +86,14 @@ struct WeekContainer: View {
                 WeekDetail(week: week)
                     .padding(.bottom, 5)
                 Spacer()
-            }.containerModifier()
+            }.weekContainerModifier()
         }
     }
 }
 
 
 // HStack for the week container modifier
-struct ContainerModifier: ViewModifier {
+struct WeekContainerModifier: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .padding(.top, 10)
@@ -106,8 +106,8 @@ struct ContainerModifier: ViewModifier {
 }
 
 extension View {
-    func containerModifier() -> some View {
-        self.modifier(ContainerModifier())
+    func weekContainerModifier() -> some View {
+        self.modifier(WeekContainerModifier())
     }
 }
 
