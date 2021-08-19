@@ -23,7 +23,15 @@ struct Readability: View {
                 
                 AnalysisView(sentenceCount: model.sentenceCount, wordCount: model.wordCount, characterCount: model.characterCount, grade: model.grade.name)
                 
-                TextEditorView(text: $model.text, characters: $model.characterCount, clearFunc: model.clear, submitFunc: model.submit, charCount: model.totalCharacters, charTotal: 500, label: "Enter your text:")
+                HStack {
+                    TextEditorView(text: $model.text, characters: $model.characterCount, charCount: model.totalCharacters, charTotal: 500, label: "Enter your text:")
+                    VStack {
+                        ClearOrSubmitButton(icon: "xmark", buttonAction: model.clear, isDisabled: model.text.isEmpty, bgColor: .red)
+                        Spacer()
+                        ClearOrSubmitButton(icon: "return", buttonAction: model.submit, isDisabled: model.text.isEmpty, bgColor: .green)
+                    }
+                }.containerViewModifier(fontColor: .white, borderColor: .black)
+                
                 
             }
         }.navigationBarBackButtonHidden(true)

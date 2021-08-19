@@ -128,20 +128,3 @@ class ReadabilityViewModel: ObservableObject {
         }
     }
 }
-
-
-
-enum ClearSubmit: String, CaseIterable {
-    case clear, submit
-    
-    var name: String {
-        return self.rawValue.capitalized
-    }
-    
-    var icon: String {
-        switch self {
-        case .clear: return "clear.fill"
-        case .submit: return "return"
-        }
-    }
-}

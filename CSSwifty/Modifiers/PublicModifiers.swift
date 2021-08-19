@@ -62,32 +62,25 @@ struct ImageAndRuleView: View {
     }
 }
 
-// Text Editor with character count, a clear and submit button
+// Text Editor with character count
 struct TextEditorView: View {
     @Binding var text: String
     @Binding var characters: String
-    let clearFunc: Func
-    let submitFunc: Func
     let charCount: Func
-    
-    let clear: ClearSubmit = .clear
-    let submit: ClearSubmit = .submit
     let charTotal: Int
     let label: String
     
-    init(text: Binding<String>, characters: Binding<String>, clearFunc: @escaping Func, submitFunc: @escaping Func, charCount: @escaping Func, charTotal: Int, label: String) {
+    init(text: Binding<String>, characters: Binding<String>, charCount: @escaping Func, charTotal: Int, label: String) {
         UITextView.appearance().backgroundColor = .clear
         self._text = text
         self._characters = characters
-        self.clearFunc = clearFunc
-        self.submitFunc = submitFunc
         self.charCount = charCount
         self.charTotal = charTotal
         self.label = label
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .center) {
             Text(label)
                 .font(.subheadline)
                 .fontWeight(.semibold)
@@ -101,37 +94,35 @@ struct TextEditorView: View {
                 .foregroundColor(Color.white)
                 .font(Font.custom("AvenirNext-Regular", size: 14, relativeTo: .body))
                 .cornerRadius(25)
-            
-            HStack {
-                Button(action: {
-                    clearFunc()
-                }, label: {
-                    HStack {
-                        Image(systemName: "xmark")
-                        //Text(clear.name)
-                    }.deleteSubmitButtonModifier(fontColor: .white, bgColor: .red, borderColor: .white)
-                    .opacity(text.isEmpty ? 0.5 : 1.0)
-                }).disabled(text.isEmpty)
-                Spacer()
-                ProgressView("Characters: \(characters) / \(charTotal)", value: Double(characters), total: Double(charTotal))
-                    //.frame(width: 150)
-                    .font(.caption2)
-                    .padding(.horizontal, 20)
-                    .accentColor(.yellow)
-                Spacer()
-                Button(action: {
-                    submitFunc()
-                }, label: {
-                    HStack {
-                        Image(systemName: "return")
-                        //Text(submit.name)
-                    }.deleteSubmitButtonModifier(fontColor: .white, bgColor: .green, borderColor: .white)
-                    .opacity(text.isEmpty ? 0.5 : 1.0)
-                }).disabled(text.isEmpty)
-            }.foregroundColor(.white)
+            ProgressView("Characters: \(characters) / \(charTotal)", value: Double(characters), total: Double(charTotal))
+                .font(.caption2)
+                .padding(.horizontal, 20)
+                .accentColor(.yellow)
         }
-        .padding(10)
-        .containerViewModifier(fontColor: .white, borderColor: .black)
+    }
+}
+
+struct ClearOrSubmitButton: View {
+    let icon: String
+    let buttonAction: Func
+    let isDisabled: Bool
+    let bgColor: Color
+    
+    var body: some View {
+        Button(action: {
+            buttonAction()
+        }, label: {
+            HStack {
+                Image(systemName: icon)
+            }
+            .font(Font.system(size: 20, weight: .semibold))
+            .foregroundColor(.white)
+            .padding()
+            .background(bgColor.cornerRadius(40))
+            .overlay(RoundedRectangle(cornerRadius: 40)
+                        .stroke((Color.white), lineWidth: 1))
+            .opacity(isDisabled ? 0.5 : 1.0)
+        }).disabled(isDisabled)
     }
 }
 

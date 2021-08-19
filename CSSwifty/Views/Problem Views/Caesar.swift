@@ -20,16 +20,22 @@ struct Caesar: View {
                 
                 ImageAndRuleView(imageName:  model.problem.image, rules: model.rules)
                 
-                //InputView(outputType: $model.outputType, key: $model.key)
                 HStack {
                     OptionPicker(outputType: $model.outputType)
                     Spacer()
                     NumericStepper(key: $model.key)
                 }.containerViewModifier(fontColor: .white, borderColor: .black)
                 
-                CiperOutput(cipher: model.outputText, option: model.outputType)
+                CipherOutput(cipher: model.outputText, option: model.outputType)
                 
-                TextEditorView(text: $model.inputText, characters: $model.characterCount, clearFunc: model.clear, submitFunc: model.newCipherText, charCount: model.totalCharacter, charTotal: model.maximumCharacters, label: model.textEditorLabel())
+                HStack {
+                    TextEditorView(text: $model.inputText, characters: $model.characterCount, charCount: model.totalCharacter, charTotal: model.maximumCharacters, label: model.textEditorLabel())
+                    VStack {
+                        ClearOrSubmitButton(icon: "xmark", buttonAction: model.clear, isDisabled: model.inputText.isEmpty, bgColor: .red)
+                        Spacer()
+                        ClearOrSubmitButton(icon: "return", buttonAction: model.newCipherText, isDisabled: model.inputText.isEmpty, bgColor: .green)
+                    }
+                }.containerViewModifier(fontColor: .white, borderColor: .black)
             }
         }.navigationBarBackButtonHidden(true)
         .subViewNavigationBar(title: model.problem.name, titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)

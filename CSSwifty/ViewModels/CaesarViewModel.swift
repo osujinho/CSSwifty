@@ -76,7 +76,6 @@ class CaesarViewModel: ObservableObject {
     
 }
 
-
 enum TextOption: String, CaseIterable, Identifiable {
     case encrypt, decrypt
     

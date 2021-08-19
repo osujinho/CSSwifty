@@ -8,23 +8,18 @@
 import Foundation
 
 class CreditViewModel: ObservableObject {
+    @Published var cardNumber = ""
+    @Published var cardValidity: CardValidity = CardValidity.none
     let intro = [
         "A credit (or debit) card, is a means of payment for goods and services.",
         "Every card has a unique number that has a “checksum” built into them, which enables computers to detect invalid numbers",
         "Most cards use Luhn’s algorithm, to determine if a card number is (syntactically) valid."
     ]
-    
     let rules = [
         "Major Credit cards",
         "ONLY Numbers 0-9"
     ]
-    
     let problem: Problems = .credit
-    
-    @Published var cardNumber = ""
-    @Published var cardValidity: CardValidity = CardValidity.none
-    
-    
     
     func validateCard() {
         var doubleOddDigits = [Int]()
@@ -65,7 +60,6 @@ class CreditViewModel: ObservableObject {
         return (evenDigits, oddDigits)
     }
     
-    
     func getCardInfo() -> CreditCard? {
         let prefix = String(cardNumber.prefix(2))
         return CreditCard.allCases.first(where: { $0.prefix.contains(prefix)})
@@ -74,16 +68,5 @@ class CreditViewModel: ObservableObject {
     func resetCard() {
         cardNumber = ""
         cardValidity = .none
-    }
-    
-}
-
-enum CardValidity: String {
-    case none
-    case valid
-    case invalid
-    
-    var status: String {
-        return self.rawValue.uppercased()
     }
 }

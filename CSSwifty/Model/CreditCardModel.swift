@@ -19,7 +19,6 @@ enum CreditCard: CaseIterable {
     case jcb15
     case jcb16
     
-    
     var name: String {
         switch self {
         case .visa: return "VISA"
@@ -79,7 +78,6 @@ enum CreditCard: CaseIterable {
     
 }
 
-
 // Extension to format the Card Number input
 extension String {
     func cardFormat() -> String {
@@ -102,5 +100,15 @@ extension String {
             }
         }
         return result
+    }
+}
+
+enum CardValidity: String {
+    case none
+    case valid
+    case invalid
+    
+    var status: String {
+        return self.rawValue.uppercased()
     }
 }
