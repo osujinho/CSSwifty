@@ -158,9 +158,10 @@ struct CipherOutput: View {
 
 // ------------------------ SUBSTITUTION ---------------------------------------------
 // textfield for entering the key with a clear button inside the textField
-struct KeyInput: View {
+struct TextFieldInput: View {
     @Binding var target: String
     let label: String
+    let placeHolder: String
     let onChangeFunc: Func
     
     var body: some View {
@@ -169,7 +170,7 @@ struct KeyInput: View {
                 .font(.subheadline)
                 .fontWeight(.semibold)
             ZStack(alignment: .trailing) {
-                TextField("Enter the \(label.lowercased())", text: $target)
+                TextField(placeHolder, text: $target)
                     .onChange(of: target) { _ in
                         onChangeFunc()
                     }

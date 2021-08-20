@@ -22,7 +22,7 @@ struct Substitution: View {
                 
                 OptionPicker(outputType: $model.outputType).containerViewModifier(fontColor: .white, borderColor: .black)
                 
-                KeyInput(target: $model.key, label: "Key", onChangeFunc: model.validateKey).containerViewModifier(fontColor: .white, borderColor: .black)
+                TextFieldInput(target: $model.key, label: "Key", placeHolder: "Enter the key...", onChangeFunc: model.validateKey).containerViewModifier(fontColor: .white, borderColor: .black)
                 
                 CipherOutput(cipher: model.outputText, option: model.outputType)
                 
