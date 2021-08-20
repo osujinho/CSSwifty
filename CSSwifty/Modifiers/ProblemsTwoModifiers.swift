@@ -159,31 +159,32 @@ struct CipherOutput: View {
 // ------------------------ SUBSTITUTION ---------------------------------------------
 // textfield for entering the key with a clear button inside the textField
 struct KeyInput: View {
-    @Binding var key: String
+    @Binding var target: String
+    let label: String
     let onChangeFunc: Func
     
     var body: some View {
         HStack {
-            Text("Key: ")
+            Text(label + ":")
                 .font(.subheadline)
                 .fontWeight(.semibold)
             ZStack(alignment: .trailing) {
-                TextField("Enter the key", text: $key)
-                    .onChange(of: key) { _ in
+                TextField("Enter the \(label.lowercased())", text: $target)
+                    .onChange(of: target) { _ in
                         onChangeFunc()
                     }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .foregroundColor(.black)
                     .font(.subheadline)
-                if !key.isEmpty {
+                if !target.isEmpty {
                     Button(action: {
-                        key = ""
+                        target = ""
                     }, label: {
                         Image(systemName: "clear")
                             .foregroundColor(Color(UIColor.opaqueSeparator))
                     }).padding(.trailing, 8)
                 }
             }
-        }.containerViewModifier(fontColor: .white, borderColor: .black)
+        }
     }
 }
