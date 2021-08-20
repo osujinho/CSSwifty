@@ -107,6 +107,7 @@ struct ClearOrSubmitButton: View {
     let buttonAction: Func
     let isDisabled: Bool
     let bgColor: Color
+    let paddingValue: CGFloat
     
     var body: some View {
         Button(action: {
@@ -117,9 +118,9 @@ struct ClearOrSubmitButton: View {
             }
             .font(Font.system(size: 20, weight: .semibold))
             .foregroundColor(.white)
-            .padding()
-            .background(bgColor.cornerRadius(40))
-            .overlay(RoundedRectangle(cornerRadius: 40)
+            .padding(paddingValue)
+            .background(bgColor.cornerRadius(20))
+            .overlay(RoundedRectangle(cornerRadius: 20)
                         .stroke((Color.white), lineWidth: 1))
             .opacity(isDisabled ? 0.5 : 1.0)
         }).disabled(isDisabled)

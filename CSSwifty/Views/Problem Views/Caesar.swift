@@ -31,9 +31,9 @@ struct Caesar: View {
                 HStack {
                     TextEditorView(text: $model.inputText, characters: $model.characterCount, charCount: model.totalCharacter, charTotal: model.maximumCharacters, label: model.textEditorLabel())
                     VStack {
-                        ClearOrSubmitButton(icon: "xmark", buttonAction: model.clear, isDisabled: model.inputText.isEmpty, bgColor: .red)
+                        ClearOrSubmitButton(icon: "xmark", buttonAction: model.clear, isDisabled: model.inputText.isEmpty, bgColor: .red, paddingValue: 10)
                         Spacer()
-                        ClearOrSubmitButton(icon: "return", buttonAction: model.newCipherText, isDisabled: model.inputText.isEmpty, bgColor: .green)
+                        ClearOrSubmitButton(icon: "return", buttonAction: model.newCipherText, isDisabled: model.inputText.isEmpty, bgColor: .green, paddingValue: 10)
                     }
                 }.containerViewModifier(fontColor: .white, borderColor: .black)
             }

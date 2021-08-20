@@ -26,9 +26,9 @@ struct Readability: View {
                 HStack {
                     TextEditorView(text: $model.text, characters: $model.characterCount, charCount: model.totalCharacters, charTotal: 500, label: "Enter your text:")
                     VStack {
-                        ClearOrSubmitButton(icon: "xmark", buttonAction: model.clear, isDisabled: model.text.isEmpty, bgColor: .red)
+                        ClearOrSubmitButton(icon: "xmark", buttonAction: model.clear, isDisabled: model.text.isEmpty, bgColor: .red, paddingValue: 10)
                         Spacer()
-                        ClearOrSubmitButton(icon: "return", buttonAction: model.submit, isDisabled: model.text.isEmpty, bgColor: .green)
+                        ClearOrSubmitButton(icon: "return", buttonAction: model.submit, isDisabled: model.text.isEmpty, bgColor: .green, paddingValue: 10)
                     }
                 }.containerViewModifier(fontColor: .white, borderColor: .black)
                 
