@@ -11,7 +11,6 @@ struct MarioMore: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var model = MarioMoreViewModel()
     
-    
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: getGradients(colors: model.problem.gradient)), startPoint: .topLeading, endPoint: .bottomTrailing).edgesIgnoringSafeArea(.all)
@@ -31,7 +30,6 @@ struct MarioMore: View {
                 .containerViewModifier(fontColor: .white, borderColor: .black)
                 
                 PyramidBoard(imageName: "MarioBg", texts: model.drawPyramid(), pyramidAlignment: .bottom)
-                
             }
         }.navigationBarBackButtonHidden(true)
         .subViewNavigationBar(title: model.problem.name, titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)

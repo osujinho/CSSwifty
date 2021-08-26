@@ -31,7 +31,6 @@ struct WeekView: View {
                 
                 Spacer()
             }
-            
         }
         .navigationBarBackButtonHidden(true)
         .subViewNavigationBar(title: week.name, titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)

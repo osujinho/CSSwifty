@@ -11,7 +11,6 @@ struct Cash: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var model = CashViewModel()
     
-    
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: getGradients(colors: model.problem.gradient)), startPoint: .top, endPoint: .trailing).edgesIgnoringSafeArea(.all)
@@ -20,7 +19,6 @@ struct Cash: View {
                 IntroView(title: "Greddy Algorithms", summarys: model.intro)
                 
                 ImageAndRuleView(imageName: "Cash", rules: model.rules)
-                
                 
                 VStack(alignment: .leading, spacing: 1) {
                     Coin(coinName: "Pennies", coinAmount: model.pennies, borderColor: .black)
@@ -35,7 +33,6 @@ struct Cash: View {
                     .coinStackModifier(bgColor: .clear, lineColor: .black)
                 
                 KeypadView(amount: $model.changeString, hasDecimal: true, maxDigits: 4)
-                
             }
         }.navigationBarBackButtonHidden(true)
         .subViewNavigationBar(title: model.problem.name, titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)

@@ -25,11 +25,9 @@ struct Credit: View {
                 CardNumber(cardNumber: model.cardNumber, validateCard: model.validateCard, imageName: model.getCardInfo()?.cardImage ?? "Invalid")
                 
                 KeypadView(amount: $model.cardNumber, hasDecimal: false, maxDigits: model.getCardInfo()?.cardLength ?? 19, submitFunction: model.validateCard)
-                
             }
         }
         .navigationBarBackButtonHidden(true)
         .subViewNavigationBar(title: model.problem.name, titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)
     }
 }
-
