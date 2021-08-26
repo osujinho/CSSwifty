@@ -204,7 +204,7 @@ enum Problems: String, CaseIterable {
 
 typealias Func = () -> Void
 
-enum ValidStatus: String {
+enum ValidStatus: String, Identifiable {
     case none
     case valid
     case invalid
@@ -212,4 +212,6 @@ enum ValidStatus: String {
     var status: String {
         return self.rawValue.uppercased()
     }
+    
+    var id: ValidStatus { self }
 }

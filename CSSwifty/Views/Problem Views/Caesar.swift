@@ -23,7 +23,7 @@ struct Caesar: View {
                 HStack {
                     OptionPicker(outputType: $model.outputType)
                     Spacer()
-                    NumericStepper(key: $model.key)
+                    NumericStepper(key: $model.key, maxValue: 26, label: "Key")
                 }.containerViewModifier(fontColor: .white, borderColor: .black)
                 
                 CipherOutput(cipher: model.outputText, option: model.outputType)

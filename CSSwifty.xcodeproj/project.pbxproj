@@ -47,6 +47,8 @@
 		B3B35DD626CB86A2000D56CB /* ProblemsTwoModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B35DD526CB86A2000D56CB /* ProblemsTwoModifiers.swift */; };
 		B3B35DD826CB86FF000D56CB /* ProblemOnesModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B35DD726CB86FF000D56CB /* ProblemOnesModifiers.swift */; };
 		B3B35DDA26CB87B2000D56CB /* PublicModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B35DD926CB87B2000D56CB /* PublicModifiers.swift */; };
+		B3B7127426D7FF950015012B /* PluralityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7127326D7FF950015012B /* PluralityViewModel.swift */; };
+		B3B7127626D8026D0015012B /* ProblemsThreeModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7127526D8026D0015012B /* ProblemsThreeModifiers.swift */; };
 		B3E4258626C1D2A60047F925 /* CreditCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4258526C1D2A60047F925 /* CreditCardModel.swift */; };
 		B3E4258826C1D3000047F925 /* CreditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4258726C1D3000047F925 /* CreditViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -94,6 +96,8 @@
 		B3B35DD526CB86A2000D56CB /* ProblemsTwoModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemsTwoModifiers.swift; sourceTree = "<group>"; };
 		B3B35DD726CB86FF000D56CB /* ProblemOnesModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemOnesModifiers.swift; sourceTree = "<group>"; };
 		B3B35DD926CB87B2000D56CB /* PublicModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicModifiers.swift; sourceTree = "<group>"; };
+		B3B7127326D7FF950015012B /* PluralityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluralityViewModel.swift; sourceTree = "<group>"; };
+		B3B7127526D8026D0015012B /* ProblemsThreeModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemsThreeModifiers.swift; sourceTree = "<group>"; };
 		B3E4258526C1D2A60047F925 /* CreditCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardModel.swift; sourceTree = "<group>"; };
 		B3E4258726C1D3000047F925 /* CreditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +187,7 @@
 				B333324626C8B0810090B410 /* ReadabilityViewModel.swift */,
 				B3B35DD126CB842D000D56CB /* CaesarViewModel.swift */,
 				B30A4C6C26CE2AC200C6D9C3 /* SubstitutionViewModel.swift */,
+				B3B7127326D7FF950015012B /* PluralityViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -208,6 +213,7 @@
 				B3B35DD926CB87B2000D56CB /* PublicModifiers.swift */,
 				B3B35DD726CB86FF000D56CB /* ProblemOnesModifiers.swift */,
 				B3B35DD526CB86A2000D56CB /* ProblemsTwoModifiers.swift */,
+				B3B7127526D8026D0015012B /* ProblemsThreeModifiers.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -309,10 +315,12 @@
 				B3953F76268B651700946B55 /* CSSwiftyApp.swift in Sources */,
 				B333323926C457C50090B410 /* FilterMore.swift in Sources */,
 				B3A5A83326B4712200A59B25 /* KeypadView.swift in Sources */,
+				B3B7127626D8026D0015012B /* ProblemsThreeModifiers.swift in Sources */,
 				B3953F95268CE7F500946B55 /* CustomColors.swift in Sources */,
 				B333323D26C457DF0090B410 /* Speller.swift in Sources */,
 				B3B35DD826CB86FF000D56CB /* ProblemOnesModifiers.swift in Sources */,
 				B3B35DD626CB86A2000D56CB /* ProblemsTwoModifiers.swift in Sources */,
+				B3B7127426D7FF950015012B /* PluralityViewModel.swift in Sources */,
 				B333324326C4580E0090B410 /* Fiftyville.swift in Sources */,
 				B3953F97268CF33C00946B55 /* AppModel.swift in Sources */,
 				B333323F26C457F00090B410 /* Dna.swift in Sources */,

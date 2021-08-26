@@ -33,7 +33,7 @@ class CaesarViewModel: ObservableObject {
         }
     }
     @Published var outputText = ""
-    @Published var key: UInt8 = 0
+    @Published var key: Int = 0
     @Published var characterCount = ""
     
     var maximumCharacters = 150
@@ -60,7 +60,7 @@ class CaesarViewModel: ObservableObject {
 
     // Function to return cipher text.
     func newCipherText() {
-        let optionKey = outputType == .encrypt ? (key % 26) : (26 - (key % 26))
+        let optionKey = outputType == .encrypt ? UInt8(key % 26) : UInt8(26 - (key % 26))
         let newTexts = inputText.compactMap { $0.asciiValue }.map { cypherFor(asciiValue: $0, key: optionKey)}
         outputText = newTexts.joined()
     }

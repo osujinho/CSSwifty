@@ -74,13 +74,15 @@ struct OptionPicker: View {
 
 // -----Custom stepper for input
 struct NumericStepper: View {
-    @Binding var key: UInt8
+    @Binding var key: Int
     @State var decreasePressed = false
     @State var increasePressed = false
+    var maxValue: Int
+    var label: String
     
     var body: some View {
         HStack{
-            Text("Key")
+            Text(label)
                 .font(.subheadline)
                 .fontWeight(.semibold)
             Button(action: {
@@ -105,7 +107,7 @@ struct NumericStepper: View {
                 .foregroundColor(fontColor())
             
             Button(action: {
-                if key == 26 {
+                if key == maxValue {
                     return
                 } else {
                     key += 1
@@ -118,9 +120,9 @@ struct NumericStepper: View {
             }) {
                 Image(systemName: "chevron.right")
             }
-            .disabled(key >= 26)
+            .disabled(key >= maxValue)
             .foregroundColor(increasePressed ? .green : .yellow)
-            .opacity(key >= 26 ? 0.5 : 1.0)
+            .opacity(key >= maxValue ? 0.5 : 1.0)
         }
         .padding(10)
     }
