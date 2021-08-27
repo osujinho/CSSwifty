@@ -29,6 +29,11 @@ struct WeekView: View {
                 
                 ProblemCardView(problems: week.problems)
                 
+                // This fixes the bug in swiftui where the navigationLink pops out
+                NavigationLink(destination: EmptyView()) {
+                    EmptyView()
+                }
+                
                 Spacer()
             }
         }
