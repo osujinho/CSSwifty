@@ -23,6 +23,7 @@ struct ContentView: View {
             .navigationTitle("CS Swifty")
             .navigationBarModifier(titleColor: .white, firstGradientColor: navBarDarkGradient, secondGradientColor: navBarLightGradient)
         }
+        // This addresses the bug of the navigation View in swiftui
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
