@@ -11,7 +11,7 @@ class PluralityViewModel: ObservableObject {
     @Published var numberOfVoters = 0
     @Published var currentVoterNumber = 1
     @Published var voterName = ""
-    @Published var addStatus: ValidStatus?
+    @Published var addStatus: ValidStatus = .none
     @Published var electionScreen: ElectionScreen = .addCandidate
     @Published var doneVoting = false
     @Published var nameOfCandidate = ""
@@ -79,6 +79,11 @@ class PluralityViewModel: ObservableObject {
     // Function to switch screens
     func switchScreen(screen: ElectionScreen) {
         self.electionScreen = screen
+    }
+    
+    // Function to switch to number of Voter Screen
+    func switchToNumberOfVoterScreen() {
+        switchScreen(screen: .numberOfVoter)
     }
     
     // Function for when candidate name is invalid and not added

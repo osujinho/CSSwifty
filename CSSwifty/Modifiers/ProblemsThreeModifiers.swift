@@ -11,27 +11,24 @@ import SwiftUI
 
 // ------------ Add candidate View -----------------
 struct AddCandidate: View {
-    @EnvironmentObject var model: PluralityViewModel
     @State private var invalidShakeAmount = 0.0
     @State private var validScaleAmount = 1.0
-    @State private var iconOpacity = 0.0
+    @State private var candidateConfirmation = false
+    @Binding var candidates: [String : Int]
+    
+    let addCandidate: Func
+    let addStatus: ValidStatus
+    let candidateName: String
+    let updateMenu: Func
+    let opacityValue: Double
     
     var body: some View {
         VStack {
-            HStack {
-                TextFieldInput(target: $model.nameOfCandidate, label: "Add Candidate", placeHolder: "Name of candidate", onChangeFunc: model.filterCandidateName)
-                
-                // Delete button to remove all candidates
-                Button(action: {model.candidates.removeAll()}, label: {})
-                    .buttonStyle(IconButtonStyle(iconName: "trash", iconColor: .red))
-                    .opacity(model.candidates.isEmpty ? 0.5 : 1.0)
-                    .disabled(model.candidates.isEmpty)
-            }
             HStack{
                 Button(action: {
-                    model.addCandidates()
+                    addCandidate()
                     
-                    if model.addStatus == .invalid {
+                    if addStatus == .invalid {
                         withAnimation(.default) {
                             invalidShakeAmount += 1
                         }
@@ -42,60 +39,81 @@ struct AddCandidate: View {
                         }
                     }
                 }) {
-                    Text("Add " + model.nameOfCandidate)
+                    Text("Add " + candidateName)
                         .singleButtonModifier(fontSize: 15, bgColor: .blue, verticalPadding: 10, horizontalPadding: 20, radius: 10)
-                        .opacity(model.nameOfCandidate.isEmpty ? 0.5 : 1.0)
-                }.disabled(model.nameOfCandidate.isEmpty)
+                        .opacity(candidateName.isEmpty ? 0.5 : 1.0)
+                }.disabled(candidateName.isEmpty)
                 
                 Spacer()
                 
+                // Calls the confirmation Action Sheet
                 Button(action: {
-                    model.switchScreen(screen: .numberOfVoter)
+                    self.candidateConfirmation = true
                 }) {
                     Text("Proceed")
-                        .singleButtonModifier(fontSize: 15, bgColor: .blue, verticalPadding: 10, horizontalPadding: 20, radius: 10)
-                        .opacity(model.candidates.count < 2 ? 0.2 : 1.0)
-                }.disabled(model.candidates.count < 2)
+                        .singleButtonModifier(fontSize: 15, bgColor: .green, verticalPadding: 10, horizontalPadding: 20, radius: 10)
+                        .opacity(candidates.count < 2 ? 0.2 : 1.0)
+                }.disabled(candidates.count < 2)
                 
                 
-                Image(systemName: model.addStatus == .valid ? "checkmark" : "xmark")
+                Image(systemName: addStatus == .valid ? "checkmark" : "xmark")
                     .resizable()
                     .frame(width: 20, height: 20)
                     .foregroundColor(.white)
                     .padding(10)
-                    .background(model.addStatus == .valid ? (Color.green.clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)) : (Color.red.clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)))
-                    .opacity(model.validIconOpacity)
+                    .background(addStatus == .valid ? (Color.green.clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)) : (Color.red.clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)))
+                    .opacity(opacityValue)
                 
             }
-            Text(model.addStatus == .valid ? model.nameOfCandidate + " added!" : model.nameOfCandidate + " already exists!")
-                .foregroundColor(model.addStatus == .valid ? .green : .red)
-                .opacity(model.validIconOpacity)
+            
+            Text(addStatus == .valid ? candidateName + " added!" : candidateName + " already exists!")
+                .foregroundColor(addStatus == .valid ? .green : .red)
+                .opacity(opacityValue)
                 .scaleEffect(CGFloat(validScaleAmount))
         }
         .modifier(Shake(animatableData: CGFloat(invalidShakeAmount)))
+        .actionSheet(isPresented: $candidateConfirmation) {
+            ActionSheet(
+                title: Text("Confirm Candidates"),
+                message: Text("""
+                    The added candidates are...
+                    \(candidates.keys.joined(separator: "\n"))
+                    """),
+                buttons: [
+                    .default(Text("Confirm Candidates")) {
+                        updateMenu()
+                    },
+                    .destructive(Text("Reset Candidates"), action: {
+                        candidates.removeAll()
+                    })
+            ])
+        }
     }
 }
 
 // -------------- Select Number of voters View -------------------
 struct NumberOfVoters: View {
-    @EnvironmentObject var model: PluralityViewModel
+    @Binding var numberOfVoters: Int
+    let switchScreen: (ElectionScreen) -> ()
+    let previousScreen: ElectionScreen
+    let nextScreen: ElectionScreen
     
     var body: some View {
         VStack(alignment: .leading) {
-            Button(action: {model.switchScreen(screen: .addCandidate)}, label: {}).buttonStyle(IconButtonStyle(iconName: "chevron.left", iconColor: .blue))
+            Button(action: {switchScreen(previousScreen)}, label: {}).buttonStyle(IconButtonStyle(iconName: "chevron.left", iconColor: .blue))
             
             HStack {
-                NumericStepper(key: $model.numberOfVoters,maxValue: 10, label: "Number of Voters")
+                NumericStepper(key: $numberOfVoters, maxValue: 10, label: "Number of Voters")
                 
                 Spacer()
                 
                 Button(action: {
-                    model.switchScreen(screen: .votingBooth)
+                    switchScreen(nextScreen)
                 }, label: {
                     Text("Proceed")
                         .singleButtonModifier(fontSize: 15, bgColor: .blue, verticalPadding: 10, horizontalPadding: 15, radius: 10)
-                        .opacity(model.numberOfVoters == 0 ? 0.5 : 1.0)
-                }).disabled(model.numberOfVoters == 0)
+                        .opacity(numberOfVoters == 0 ? 0.5 : 1.0)
+                }).disabled(numberOfVoters == 0)
             }
         }
     }
