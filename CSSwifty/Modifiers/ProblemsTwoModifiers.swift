@@ -160,22 +160,28 @@ struct TextFieldInput: View {
     
     var body: some View {
         HStack(alignment: .bottom) {
-            HeadlineLabel(label: label + ":")
+            HeadlineLabel(label: label)
             ZStack(alignment: .trailing) {
                 TextField(placeHolder, text: $target)
                     .onChange(of: target) { _ in
                         onChangeFunc()
                     }
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
                     .foregroundColor(.black)
-                    .font(.subheadline)
+                    .font(.footnote)
+                    .frame(height: 25)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .padding(.horizontal, 8)
+                    .cornerRadius(10)
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray))
+                    .background(Color.white.cornerRadius(10))
+                    .padding(.horizontal, 5)
                 if !target.isEmpty {
                     Button(action: {
                         target = ""
                     }, label: {
                         Image(systemName: "clear")
                             .foregroundColor(Color(UIColor.opaqueSeparator))
-                    }).padding(.trailing, 8)
+                    }).padding(.horizontal, 8)
                 }
             }
         }
