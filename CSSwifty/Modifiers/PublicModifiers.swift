@@ -81,9 +81,7 @@ struct TextEditorView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text(label)
-                .font(.subheadline)
-                .fontWeight(.semibold)
+            HeadlineLabel(label: label)
                 .foregroundColor(.white)
             TextEditor(text: $text)
                 .onChange(of: text, perform: { _ in
@@ -174,6 +172,17 @@ struct DropDownMenu: View {
     }
 }
 
+// Container label Texts
+struct HeadlineLabel: View {
+    let label: String
+    
+    var body: some View {
+        Text(label)
+            .font(.headline)
+            .fontWeight(.semibold)
+    }
+}
+
 // Delete or Submit button with icon only
 struct ClearOrSubmitButton: View {
     let icon: String
@@ -246,6 +255,7 @@ struct ContainerViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(fontColor)
+            .font(.system(size: 14))
             .padding(10)
             .background(Color.black.opacity(0.5).cornerRadius(10))
             .overlay(

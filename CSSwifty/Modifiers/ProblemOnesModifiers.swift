@@ -40,7 +40,7 @@ struct Coin: View {
     
     var body: some View {
         HStack(alignment: .center) {
-            Text(coinName + ": ")
+            HeadlineLabel(label: coinName + ": ")
             Spacer()
             Text("\(coinAmount)")
         }
@@ -60,7 +60,7 @@ struct Amount: View {
     
     var body: some View {
         HStack {
-            Text("Change Owed:")
+            HeadlineLabel(label: "Change Owed:")
                 .foregroundColor(.white)
             Text(amount.isEmpty ? "0.00" : amount)
                 .onChange(of: amount) { _ in
@@ -90,9 +90,7 @@ struct CardNumber: View {
     
     var body: some View {
         HStack {
-            Text("Card Number:")
-                .font(.headline)
-                .fontWeight(.bold)
+            HeadlineLabel(label: "Card Number: ")
                 .foregroundColor(.blue)
                 .layoutPriority(1)
             Text(cardNumber.cardFormat())

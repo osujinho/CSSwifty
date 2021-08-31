@@ -21,8 +21,8 @@ struct MarioLess: View {
                 ImageAndRuleView(imageName: "Mario-Less", rules: model.rules)
                 
                 Stepper(value: $model.selectedHeight, in: 0...8, step: 1) {
-                    HStack {
-                        Text("Pyramid Height:")
+                    HStack(alignment: .firstTextBaseline) {
+                        HeadlineLabel(label: "Pyramid Height:")
                         Text("\(model.selectedHeight)")
                             .foregroundColor(.blue)
                     }

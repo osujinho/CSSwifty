@@ -15,9 +15,7 @@ struct Analysis: View {
     
     var body: some View {
         HStack {
-            Text(label)
-                .font(.subheadline)
-                .fontWeight(.bold)
+            HeadlineLabel(label: label)
             Spacer()
             Text("\(display)")
         }
@@ -58,9 +56,7 @@ struct OptionPicker: View {
     
     var body: some View {
         HStack {
-            Text("Option")
-                .font(.subheadline)
-                .fontWeight(.semibold)
+            HeadlineLabel(label: "Option")
             Picker("Text option", selection: $outputType) {
                 ForEach(TextOption.allCases) { type in
                     HStack {
@@ -82,9 +78,7 @@ struct NumericStepper: View {
     
     var body: some View {
         HStack{
-            Text(label)
-                .font(.subheadline)
-                .fontWeight(.semibold)
+            HeadlineLabel(label: label)
             Button(action: {
                 if key == 0 {
                     return
@@ -146,9 +140,7 @@ struct CipherOutput: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(option == .encrypt ? "CipherText" : "PlainText")
-                .font(.subheadline)
-                .fontWeight(.semibold)
+            HeadlineLabel(label: option == .encrypt ? "CipherText" : "PlainText")
                 .foregroundColor(.white)
             Text(cipher)
                 .foregroundColor(.yellow)
@@ -168,9 +160,7 @@ struct TextFieldInput: View {
     
     var body: some View {
         HStack {
-            Text(label + ":")
-                .font(.subheadline)
-                .fontWeight(.semibold)
+            HeadlineLabel(label: label + ":")
             ZStack(alignment: .trailing) {
                 TextField(placeHolder, text: $target)
                     .onChange(of: target) { _ in
