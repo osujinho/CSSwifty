@@ -159,7 +159,7 @@ struct TextFieldInput: View {
     let onChangeFunc: Func
     
     var body: some View {
-        HStack {
+        HStack(alignment: .bottom) {
             HeadlineLabel(label: label + ":")
             ZStack(alignment: .trailing) {
                 TextField(placeHolder, text: $target)
