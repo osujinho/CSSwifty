@@ -33,7 +33,12 @@ struct KeypadView: View {
                 HStack(alignment: .top, spacing: 5){
                     ForEach(keypadRow.row) { key in
                         Button(action: {
-                            keypadModel.keypadAction(key: key, hasDecimal: hasDecimal, maxDigits: maxDigits, amount: &amount, submitFunction: submitFunction)
+                            keypadModel.keypadAction(
+                                key: key,
+                                hasDecimal: hasDecimal,
+                                maxDigits: maxDigits,
+                                amount: &amount,
+                                submitFunction: submitFunction)
                         }) {
                             keypadModel.keypadLabel(key: key, hasDecimal: hasDecimal, amount: amount)
                         }.disabled(amount.isEmpty && key.value == "Delete")

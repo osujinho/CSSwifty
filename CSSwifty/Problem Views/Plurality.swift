@@ -23,9 +23,18 @@ struct Plurality: View {
                 VStack{
                     switch model.electionScreen {
                     case .addCandidate:
-                        AddCandidate(candidates: $model.candidates, candidateName: $model.nameOfCandidate, addCandidate: model.addCandidates, nameFilter: model.filterCandidateName, addStatus: model.addStatus, updateMenu: model.switchToNumberOfVoterScreen, opacityValue: model.validIconOpacity)
+                        AddCandidate(
+                            candidates: $model.candidates,
+                            candidateName: $model.nameOfCandidate,
+                            addCandidate: model.addCandidates,
+                            nameFilter: model.filterCandidateName,
+                            addStatus: model.addStatus,
+                            updateMenu: model.switchToNumberOfVoterScreen,
+                            opacityValue: model.validIconOpacity)
                     case .numberOfVoter:
-                        NumberOfVoters(numberOfVoters: $model.numberOfVoters, switchScreen: model.switchScreen(screen:))
+                        NumberOfVoters(
+                            numberOfVoters: $model.numberOfVoters,
+                            switchScreen: model.switchScreen(screen:))
                     case .votingBooth: VotingBooth()
                     case .winner: WinnerView()
                     }

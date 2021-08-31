@@ -20,18 +20,39 @@ struct Substitution: View {
                 
                 ImageAndRuleView(imageName:  model.problem.image, rules: model.rules)
                 
-                OptionPicker(outputType: $model.outputType).containerViewModifier(fontColor: .white, borderColor: .black)
+                OptionPicker(outputType: $model.outputType)
+                    .containerViewModifier(fontColor: .white, borderColor: .black)
                 
-                TextFieldInput(target: $model.key, label: "Key", placeHolder: "Enter the key...", onChangeFunc: model.validateKey).containerViewModifier(fontColor: .white, borderColor: .black)
+                TextFieldInput(
+                    target: $model.key,
+                    label: "Key",
+                    placeHolder: "Enter the key...",
+                    onChangeFunc: model.validateKey
+                ).containerViewModifier(fontColor: .white, borderColor: .black)
                 
                 CipherOutput(cipher: model.outputText, option: model.outputType)
                 
                 HStack {
-                    TextEditorView(text: $model.inputText, characters: $model.characterCount, charCount: model.totalCharacter, charTotal: model.maximumCharacters, label: model.textEditorLabel())
+                    TextEditorView(
+                        text: $model.inputText,
+                        characters: $model.characterCount,
+                        charCount: model.totalCharacter,
+                        charTotal: model.maximumCharacters,
+                        label: model.textEditorLabel())
                     VStack {
-                        ClearOrSubmitButton(icon: "xmark", buttonAction: model.clear, isDisabled: model.key.count < 26 && model.inputText.isEmpty, bgColor: .red, paddingValue: 10)
+                        ClearOrSubmitButton(
+                            icon: "xmark",
+                            buttonAction: model.clear,
+                            isDisabled: model.key.count < 26 && model.inputText.isEmpty,
+                            bgColor: .red,
+                            paddingValue: 10)
                         Spacer()
-                        ClearOrSubmitButton(icon: "return", buttonAction: model.modifiedText, isDisabled: model.key.count < 26 && model.inputText.isEmpty, bgColor: .green, paddingValue: 10)
+                        ClearOrSubmitButton(
+                            icon: "return",
+                            buttonAction: model.modifiedText,
+                            isDisabled: model.key.count < 26 && model.inputText.isEmpty,
+                            bgColor: .green,
+                            paddingValue: 10)
                     }
                 }
                 .containerViewModifier(fontColor: .white, borderColor: .black)

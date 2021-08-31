@@ -29,8 +29,11 @@ struct Cash: View {
                 }
                 .coinStackModifier(bgColor: .clear, lineColor: .black)
                 
-                Amount(amount: model.changeString, calcChange: model.calculateChange, clearAmount: model.clearAmount)
-                    .coinStackModifier(bgColor: .clear, lineColor: .black)
+                Amount(
+                    amount: model.changeString,
+                    calcChange: model.calculateChange,
+                    clearAmount: model.clearAmount
+                ).coinStackModifier(bgColor: .clear, lineColor: .black)
                 
                 KeypadView(amount: $model.changeString, hasDecimal: true, maxDigits: 4)
             }

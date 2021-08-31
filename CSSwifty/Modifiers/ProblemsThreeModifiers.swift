@@ -196,7 +196,12 @@ struct VotingBooth: View {
             }
             
             HStack {
-                ClearOrSubmitButton(icon: "xmark", buttonAction: model.clearSelections, isDisabled: model.voterName.isEmpty && model.candidateVotingFor.isEmpty, bgColor: .red, paddingValue: 10)
+                ClearOrSubmitButton(
+                    icon: "xmark",
+                    buttonAction: model.clearSelections,
+                    isDisabled: model.voterName.isEmpty && model.candidateVotingFor.isEmpty,
+                    bgColor: .red,
+                    paddingValue: 10)
                 
                 Spacer()
                 Text(model.voterName + " has voted for " + model.candidateVotingFor + "!")

@@ -20,11 +20,22 @@ struct Credit: View {
                 
                 ImageAndRuleView(imageName: "Credit", rules: model.rules)
                 
-                CardImage(cardName: model.getCardInfo()?.name ?? "Unidentified", imageName: model.getCardInfo()?.cardImage ?? "invalidcard", cardValidity: model.cardValidity, reset: model.resetCard)
+                CardImage(
+                    cardName: model.getCardInfo()?.name ?? "Unidentified",
+                    imageName: model.getCardInfo()?.cardImage ?? "invalidcard",
+                    cardValidity: model.cardValidity,
+                    reset: model.resetCard)
                 
-                CardNumber(cardNumber: model.cardNumber, validateCard: model.validateCard, imageName: model.getCardInfo()?.cardImage ?? "Invalid")
+                CardNumber(
+                    cardNumber: model.cardNumber,
+                    validateCard: model.validateCard,
+                    imageName: model.getCardInfo()?.cardImage ?? "Invalid")
                 
-                KeypadView(amount: $model.cardNumber, hasDecimal: false, maxDigits: model.getCardInfo()?.cardLength ?? 19, submitFunction: model.validateCard)
+                KeypadView(
+                    amount: $model.cardNumber,
+                    hasDecimal: false,
+                    maxDigits: model.getCardInfo()?.cardLength ?? 19,
+                    submitFunction: model.validateCard)
             }
         }
         .navigationBarBackButtonHidden(true)
