@@ -14,16 +14,35 @@ struct AddCandidate: View {
     @State private var invalidShakeAmount = 0.0
     @State private var validScaleAmount = 1.0
     @State private var candidateConfirmation = false
-    @Binding var candidates: [String : Int]
     
+    @Binding var candidates: [String : Int]
+    @Binding var candidateName: String
     let addCandidate: Func
+    let nameFilter: Func
     let addStatus: ValidStatus
-    let candidateName: String
     let updateMenu: Func
     let opacityValue: Double
     
     var body: some View {
         VStack {
+            // Title
+            Text("ADD CANDIDATES")
+                .font(.headline)
+                .foregroundColor(.yellow)
+                .fontWeight(.bold)
+                .padding(.bottom, 5)
+            
+            HStack {
+                TextFieldInput(target: $candidateName, label: "Name", placeHolder: "Name of candidate", onChangeFunc: nameFilter)
+                
+                // Delete button to remove all candidates
+                Button(action: {candidates.removeAll()}, label: {})
+                    .buttonStyle(IconButtonStyle(iconName: "trash", iconColor: .red))
+                    .opacity(candidates.isEmpty ? 0.5 : 1.0)
+                    .disabled(candidates.isEmpty)
+            }
+            .padding(.bottom, 10)
+            
             HStack{
                 Button(action: {
                     addCandidate()

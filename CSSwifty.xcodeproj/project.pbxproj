@@ -158,7 +158,9 @@
 			children = (
 				B3953F87268B658700946B55 /* Model */,
 				B3953F86268B657300946B55 /* Modifiers */,
+				B3B7127F26DE99710015012B /* SubViews */,
 				B3953F85268B656A00946B55 /* Views */,
+				B371E95D269CD667007E2302 /* Problem Views */,
 				B3953F84268B655D00946B55 /* ViewModels */,
 				B3953F75268B651700946B55 /* CSSwiftyApp.swift */,
 				B3953F79268B652300946B55 /* Assets.xcassets */,
@@ -198,7 +200,6 @@
 				B3953F77268B651700946B55 /* ContentView.swift */,
 				B333324426C46D3B0090B410 /* WeekView.swift */,
 				B3A5A83226B4712200A59B25 /* KeypadView.swift */,
-				B371E95D269CD667007E2302 /* Problem Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -227,6 +228,13 @@
 				B333324826C8B1190090B410 /* GradesModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B3B7127F26DE99710015012B /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

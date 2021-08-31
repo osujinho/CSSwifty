@@ -23,20 +23,7 @@ struct Plurality: View {
                 VStack{
                     switch model.electionScreen {
                     case .addCandidate:
-                        VStack {
-                            HStack {
-                                TextFieldInput(target: $model.nameOfCandidate, label: "Add Candidate", placeHolder: "Name of candidate", onChangeFunc: model.filterCandidateName)
-                                
-                                // Delete button to remove all candidates
-                                Button(action: {model.candidates.removeAll()}, label: {})
-                                    .buttonStyle(IconButtonStyle(iconName: "trash", iconColor: .red))
-                                    .opacity(model.candidates.isEmpty ? 0.5 : 1.0)
-                                    .disabled(model.candidates.isEmpty)
-                            }
-                            .padding(.bottom, 10)
-                            
-                            AddCandidate(candidates: $model.candidates, addCandidate: model.addCandidates, addStatus: model.addStatus, candidateName: model.nameOfCandidate, updateMenu: model.switchToNumberOfVoterScreen, opacityValue: model.validIconOpacity)
-                        }
+                        AddCandidate(candidates: $model.candidates, candidateName: $model.nameOfCandidate, addCandidate: model.addCandidates, nameFilter: model.filterCandidateName, addStatus: model.addStatus, updateMenu: model.switchToNumberOfVoterScreen, opacityValue: model.validIconOpacity)
                     case .numberOfVoter:
                         NumberOfVoters(numberOfVoters: $model.numberOfVoters, switchScreen: model.switchScreen(screen:), previousScreen: .addCandidate, nextScreen: .votingBooth)
                     case .votingBooth: VotingBooth()
