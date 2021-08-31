@@ -9,6 +9,25 @@ import SwiftUI
 
 // -------------------------------- PLURALITY ---------------------------------------
 
+struct TitleAndBack: View {
+    let screen: ElectionScreen
+    let switchScreen: (ElectionScreen) -> ()
+    let title: String
+    
+    var body: some View {
+        HStack(alignment: .bottom) {
+            Button(action: {switchScreen(screen)}, label: {}).buttonStyle(IconButtonStyle(iconName: "chevron.left", iconColor: .blue))
+            Spacer()
+            Text(title.uppercased())
+                .font(.headline)
+                .foregroundColor(.yellow)
+                .fontWeight(.bold)
+            Spacer()
+        }
+        .padding(.bottom, 5)
+    }
+}
+
 // ------------ Add candidate View -----------------
 struct AddCandidate: View {
     @State private var invalidShakeAmount = 0.0
@@ -114,12 +133,11 @@ struct AddCandidate: View {
 struct NumberOfVoters: View {
     @Binding var numberOfVoters: Int
     let switchScreen: (ElectionScreen) -> ()
-    let previousScreen: ElectionScreen
-    let nextScreen: ElectionScreen
     
     var body: some View {
         VStack(alignment: .leading) {
-            Button(action: {switchScreen(previousScreen)}, label: {}).buttonStyle(IconButtonStyle(iconName: "chevron.left", iconColor: .blue))
+            
+            TitleAndBack(screen: .addCandidate, switchScreen: switchScreen, title: "How many Voters")
             
             HStack {
                 NumericStepper(key: $numberOfVoters, maxValue: 10, label: "Number of Voters")
@@ -127,7 +145,7 @@ struct NumberOfVoters: View {
                 Spacer()
                 
                 Button(action: {
-                    switchScreen(nextScreen)
+                    switchScreen(.votingBooth)
                 }, label: {
                     Text("Proceed")
                         .singleButtonModifier(fontSize: 15, bgColor: .blue, verticalPadding: 10, horizontalPadding: 15, radius: 10)
