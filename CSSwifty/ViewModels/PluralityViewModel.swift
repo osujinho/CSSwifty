@@ -40,7 +40,8 @@ class PluralityViewModel: ObservableObject {
         "All voters must vote before the winner is declared."
     ]
     
-    // --------------------------- PROBLEM ALGORITHM ----------------------
+    //Mark: - PROBLEM ALGORITHM
+    
     // Function to add candidates to the dictionary
     func addCandidates() {
         if candidates.keys.contains(nameOfCandidate.capitalized) {
@@ -102,7 +103,8 @@ class PluralityViewModel: ObservableObject {
         electionScreen = .addCandidate
     }
     
-    // ---------------------------- ADD CANDIDATE SCREEN ---------------------------
+    //Mark: - ADD CANDIDATE SCREEN
+    
     // Function to ensure candidate name does not contain numbers
     func filterCandidateName() {
         for letter in nameOfCandidate {
@@ -144,8 +146,8 @@ class PluralityViewModel: ObservableObject {
         return "\n" + names.joined(separator: "\n")
     }
     
-    // ------------------------------ VOTING BOOTH SCREEN --------------------------
-    // Function to clear the selections on the voting booth
+    //Mark: - VOTING BOOTH SCREEN
+    
     // Function to ensure voter's name does not contain numbers
     func filterVoterName() {
         for letter in voterName {
@@ -155,6 +157,7 @@ class PluralityViewModel: ObservableObject {
         }
     }
     
+    // Function to clear the selections on the voting booth
     func clearSelections() {
         voterName = ""
         candidateVotingFor = ""
@@ -181,6 +184,8 @@ class PluralityViewModel: ObservableObject {
         return voterName.capitalized + " you have selected to vote for.."
     }
 }
+
+//Mark: - Election screen enum
 
 enum ElectionScreen: Identifiable {
     case addCandidate, numberOfVoter, votingBooth, winner
