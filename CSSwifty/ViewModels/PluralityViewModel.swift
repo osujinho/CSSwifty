@@ -40,6 +40,7 @@ class PluralityViewModel: ObservableObject {
         "All voters must vote before the winner is declared."
     ]
     
+    // --------------------------- PROBLEM ALGORITHM ----------------------
     // Function to add candidates to the dictionary
     func addCandidates() {
         if candidates.keys.contains(nameOfCandidate.capitalized) {
@@ -49,21 +50,13 @@ class PluralityViewModel: ObservableObject {
         }
     }
     
-    // Function to declare the winner
-    func declareWinner() {
-        winningVoteCount = candidates.reduce(0) { max($0, $1.1) }
-        for (key, value) in candidates {
-            if value == winningVoteCount {
-                winners.append(key)
-            }
-        }
-        switchScreen(screen: .winner)
-    }
-    
-    // Function to update the vote count for candidates once they have been voted for.
-    func updateCandidateVote() {
-        let vote = (candidates[candidateVotingFor] ?? 0) + 1
-        candidates.updateValue(vote, forKey: candidateVotingFor)
+    /* Function to add candidates' names to the drop menu display
+       called after confirming at the add candidate screen
+    */
+    func addCandidatesToMenu() {
+        candidatesMenu.removeAll()
+        candidatesMenu.append(contentsOf: candidates.keys)
+        electionScreen = .numberOfVoter
     }
     
     // Function for when vote is pressed in the voting booth screen
@@ -81,14 +74,42 @@ class PluralityViewModel: ObservableObject {
         }
     }
     
-    // Function to switch screens
-    func switchScreen(screen: ElectionScreen) {
-        self.electionScreen = screen
+    // Function to update the vote count for candidates once they have been voted for.
+    func updateCandidateVote() {
+        let vote = (candidates[candidateVotingFor] ?? 0) + 1
+        candidates.updateValue(vote, forKey: candidateVotingFor)
     }
     
-    // Function to switch to number of Voter Screen
-    func switchToNumberOfVoterScreen() {
-        switchScreen(screen: .numberOfVoter)
+    // Function to declare the winner
+    func declareWinner() {
+        winningVoteCount = candidates.reduce(0) { max($0, $1.1) }
+        for (key, value) in candidates {
+            if value == winningVoteCount {
+                winners.append(key)
+            }
+        }
+        electionScreen = .winner
+    }
+    
+    // Function to reset the election at the end
+    func resetElection() {
+        numberOfVoters = 0
+        currentVoterNumber = 1
+        nameOfCandidate = ""
+        voterName = ""
+        winners.removeAll()
+        candidates.removeAll()
+        electionScreen = .addCandidate
+    }
+    
+    // ---------------------------- ADD CANDIDATE SCREEN ---------------------------
+    // Function to ensure candidate name does not contain numbers
+    func filterCandidateName() {
+        for letter in nameOfCandidate {
+            if letter.isNumber {
+                nameOfCandidate.removeLast()
+            }
+        }
     }
     
     // Function for when candidate name is invalid and not added
@@ -112,52 +133,19 @@ class PluralityViewModel: ObservableObject {
         })
     }
     
-    /* Function to add candidates' names to the drop menu display
-       called after confirming at the add candidate screen
-    */
-    func addCandidatesToMenu() {
-        candidatesMenu.removeAll()
-        candidatesMenu.append(contentsOf: candidates.keys)
-        switchScreen(screen: .numberOfVoter)
-    }
-    
-    // Function for when clear is pressed on the voting booth screen
-    func clearSelections() {
-        voterName = ""
-        candidateVotingFor = ""
-    }
-    
-    // Function for when the vote button is pressed
-    func voteButtonAction() {
-        disableVoterName = true
-        voterCompleted = true
-    }
-    
-    // Function to reset the voter's choice
-    func resetVoterChoice() {
-        candidateVotingFor.removeAll()
-    }
-    
-    // Function to reset the election at the end
-    func resetElection() {
-        numberOfVoters = 0
-        currentVoterNumber = 1
-        nameOfCandidate = ""
-        voterName = ""
-        winners.removeAll()
-        candidates.removeAll()
-        switchScreen(screen: .addCandidate)
-    }
-    
-    // Function to ensure candidate name does not contain numbers
-    func filterCandidateName() {
-        for letter in nameOfCandidate {
-            if letter.isNumber {
-                nameOfCandidate.removeLast()
-            }
+    // Function to display the added candidates action sheet message
+    func addedCandidateMessage() -> String {
+        var order = 1
+        var names = [String]()
+        for candidate in candidates.keys {
+            names.append("\(order). " + candidate)
+            order += 1
         }
+        return "\n" + names.joined(separator: "\n")
     }
     
+    // ------------------------------ VOTING BOOTH SCREEN --------------------------
+    // Function to clear the selections on the voting booth
     // Function to ensure voter's name does not contain numbers
     func filterVoterName() {
         for letter in voterName {
@@ -167,15 +155,20 @@ class PluralityViewModel: ObservableObject {
         }
     }
     
-    // Function to display the added candidate action sheet message
-    func addedCandidateMessage() -> String {
-        var order = 1
-        var names = [String]()
-        for candidate in candidates.keys {
-            names.append("\(order). " + candidate)
-            order += 1
-        }
-        return "\n" + names.joined(separator: "\n")
+    func clearSelections() {
+        voterName = ""
+        candidateVotingFor = ""
+    }
+    
+    // Function for when the vote button is pressed on the voting booth
+    func voteButtonAction() {
+        disableVoterName = true
+        voterCompleted = true
+    }
+    
+    // Function to reset the voter's choice on the voting booth
+    func resetVoterChoice() {
+        candidateVotingFor.removeAll()
     }
     
     // Function to return string for candidate voted for
@@ -187,8 +180,6 @@ class PluralityViewModel: ObservableObject {
     func actionSheetTitle() -> String {
         return voterName.capitalized + " you have selected to vote for.."
     }
-    
-    
 }
 
 enum ElectionScreen: Identifiable {
