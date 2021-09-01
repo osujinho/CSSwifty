@@ -18,6 +18,7 @@ class PluralityViewModel: ObservableObject {
     @Published var candidateVotingFor = ""
     @Published var validIconOpacity = 0.0
     @Published var candidates = [String : Int]()
+    @Published var candidatesMenu = [String]()
     
     var winners = [String]()
     var winningVoteCount = 0
@@ -107,6 +108,15 @@ class PluralityViewModel: ObservableObject {
         })
     }
     
+    /* Function to add candidates' names to the drop menu display
+       called after confirming at the add candidate screen
+    */
+    func addCandidatesToMenu() {
+        candidatesMenu.removeAll()
+        candidatesMenu.append(contentsOf: candidates.keys)
+        switchScreen(screen: .numberOfVoter)
+    }
+    
     // Function for when clear is pressed on the voting booth screen
     func clearSelections() {
         voterName = ""
@@ -140,6 +150,11 @@ class PluralityViewModel: ObservableObject {
                 voterName.removeLast()
             }
         }
+    }
+    
+    // Function to return string for candidate voted for
+    func candidateVotedFor() -> String {
+        return voterName + " has voted for " + candidateVotingFor + "!"
     }
 }
 

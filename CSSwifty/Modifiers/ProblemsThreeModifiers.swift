@@ -9,19 +9,17 @@ import SwiftUI
 
 // -------------------------------- PLURALITY ---------------------------------------
 
+// Back button and title stack
 struct TitleAndBack: View {
-    let screen: ElectionScreen
-    let switchScreen: (ElectionScreen) -> ()
+    let action: () -> Void
     let title: String
     
     var body: some View {
         HStack(alignment: .bottom) {
-            Button(action: {switchScreen(screen)}, label: {}).buttonStyle(IconButtonStyle(iconName: "chevron.left", iconColor: .blue))
+            IconButton(icon: "chevron.left", iconColor: .blue, action: action)
             Spacer()
-            Text(title.uppercased())
-                .font(.headline)
+            HeadlineLabel(label: title.uppercased())
                 .foregroundColor(.yellow)
-                .fontWeight(.bold)
             Spacer()
         }
         .padding(.bottom, 5)
@@ -45,61 +43,50 @@ struct AddCandidate: View {
     var body: some View {
         VStack {
             // Title
-            Text("ADD CANDIDATES")
-                .font(.headline)
+            HeadlineLabel(label: "ADD CANDIDATES")
                 .foregroundColor(.yellow)
-                .fontWeight(.bold)
                 .padding(.bottom, 5)
             
             HStack {
                 TextFieldInput(target: $candidateName, label: "Name", placeHolder: "Name of candidate", onChangeFunc: nameFilter)
-                
-                // Delete button to remove all candidates
-                Button(action: {candidates.removeAll()}, label: {})
-                    .buttonStyle(IconButtonStyle(iconName: "trash", iconColor: .red))
-                    .opacity(candidates.isEmpty ? 0.5 : 1.0)
-                    .disabled(candidates.isEmpty)
             }
             .padding(.bottom, 10)
             
             HStack{
-                Button(action: {
-                    addCandidate()
-                    
-                    if addStatus == .invalid {
-                        withAnimation(.default) {
-                            invalidShakeAmount += 1
+                LabelButton(
+                    label: "Add " + candidateName,
+                    bgColor: .blue,
+                    action: {
+                        addCandidate()
+                        
+                        if addStatus == .invalid {
+                            withAnimation(.default) {
+                                invalidShakeAmount += 1
+                            }
+                        } else {
+                            validScaleAmount = 0.0
+                            withAnimation(.easeInOut(duration: 1.0)) {
+                                validScaleAmount += 1
+                            }
                         }
-                    } else {
-                        validScaleAmount = 0.0
-                        withAnimation(.easeInOut(duration: 1.0)) {
-                            validScaleAmount += 1
-                        }
-                    }
-                }) {
-                    Text("Add " + candidateName)
-                        .singleButtonModifier(fontSize: 15, bgColor: .blue, verticalPadding: 10, horizontalPadding: 20, radius: 10)
-                        .opacity(candidateName.isEmpty ? 0.5 : 1.0)
-                }.disabled(candidateName.isEmpty)
+                    },
+                    isDisabled: candidateName.isEmpty)
                 
                 Spacer()
                 
                 // Calls the confirmation Action Sheet
-                Button(action: {
-                    self.candidateConfirmation = true
-                }) {
-                    Text("Proceed")
-                        .singleButtonModifier(fontSize: 15, bgColor: .green, verticalPadding: 10, horizontalPadding: 20, radius: 10)
-                        .opacity(candidates.count < 2 ? 0.2 : 1.0)
-                }.disabled(candidates.count < 2)
-                
+                LabelButton(
+                    label: "Proceed",
+                    bgColor: .green,
+                    action: { self.candidateConfirmation = true },
+                    isDisabled: candidates.count < 2)
                 
                 Image(systemName: addStatus == .valid ? "checkmark" : "xmark")
                     .resizable()
                     .frame(width: 20, height: 20)
                     .foregroundColor(.white)
                     .padding(10)
-                    .background(addStatus == .valid ? (Color.green.clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)) : (Color.red.clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)))
+                    .background(addStatus == .valid ? (Color.green.clipShape(Circle())) : (Color.red.clipShape(Circle())))
                     .opacity(opacityValue)
                 
             }
@@ -132,25 +119,24 @@ struct AddCandidate: View {
 // -------------- Select Number of voters View -------------------
 struct NumberOfVoters: View {
     @Binding var numberOfVoters: Int
-    let switchScreen: (ElectionScreen) -> ()
+    @Binding var screen: ElectionScreen
     
     var body: some View {
         VStack(alignment: .leading) {
-            
-            TitleAndBack(screen: .addCandidate, switchScreen: switchScreen, title: "How many Voters")
+            TitleAndBack(
+                action: { screen = .addCandidate },
+                title: "Number of voters")
             
             HStack {
                 NumericStepper(key: $numberOfVoters, maxValue: 10, label: "Number of Voters")
                 
                 Spacer()
                 
-                Button(action: {
-                    switchScreen(.votingBooth)
-                }, label: {
-                    Text("Proceed")
-                        .singleButtonModifier(fontSize: 15, bgColor: .blue, verticalPadding: 10, horizontalPadding: 15, radius: 10)
-                        .opacity(numberOfVoters == 0 ? 0.5 : 1.0)
-                }).disabled(numberOfVoters == 0)
+                LabelButton(
+                    label: "Proceed",
+                    bgColor: .blue,
+                    action: { screen = .votingBooth },
+                    isDisabled: numberOfVoters == 0)
             }
         }
     }
@@ -158,89 +144,95 @@ struct NumberOfVoters: View {
 
 // -------------------- Voting Booth Screen -------------------------------
 struct VotingBooth: View {
-    @EnvironmentObject var model: PluralityViewModel
     @State private var voteConfirmation = false
     @State private var voteSuccessfulOpacity = 0.0
+    @Binding var selectedCandidate: String
+    @Binding var voterName: String
+    @Binding var screen: ElectionScreen
+    @Binding var doneVoting: Bool
+    
+    let currentVoter: Int
+    let totalVoters: Int
+    let filterName: Func
+    let candidateChoices: [String]
+    let candidateVotedFor: String
+    let buttonLabel: String
+    let buttonColor: Color
+    let declareWinner: Func
+    let submitVote: Func
     
     var body: some View {
         VStack{
             // Title of Stack
-            HStack {
-                Button(action: {model.switchScreen(screen: .numberOfVoter)}, label: {}).buttonStyle(IconButtonStyle(iconName: "chevron.left", iconColor: .blue))
-                Spacer()
-                Text("Voting Booth")
-                    .font(.headline)
-                Spacer()
-            }
-            .padding(.bottom, 5)
+            TitleAndBack(
+                action: { screen = .numberOfVoter },
+                title: "Voting Booth")
             
             // The voter's number and name
-            HStack {
-                Text("Voter Number: ")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                Text("\(model.currentVoterNumber) of \(model.numberOfVoters)")
-                Spacer()
+            HStack(alignment: .bottom) {
+                HeadlineLabel(label: "Voter")
+                Text("\(currentVoter) of \(totalVoters)")
+                
+                Spacer(minLength: 40)
+                
+                TextFieldInput(target: $voterName, label: "Name", placeHolder: "Enter your name", onChangeFunc: filterName)
             }
-            
-            TextFieldInput(target: $model.voterName, label: "Name", placeHolder: "Enter your name", onChangeFunc: model.filterVoterName)
             
             Spacer()
             
+            // Candidates names
             HStack {
-                Text("Candidate Name: ")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                DropDownMenu(selection: $model.candidateVotingFor, collection: Array(model.candidates.keys), label: "Select...")
-                Spacer()
-            }
-            
-            HStack {
-                ClearOrSubmitButton(
-                    icon: "xmark",
-                    buttonAction: model.clearSelections,
-                    isDisabled: model.voterName.isEmpty && model.candidateVotingFor.isEmpty,
-                    bgColor: .red,
-                    paddingValue: 10)
+                HeadlineLabel(label: "Candidate Name: ")
+                
+                DropDownMenu(selection: $selectedCandidate, collection: candidateChoices, label: "Select...")
+                
+                IconButton(
+                    icon: "trash",
+                    iconColor: .red,
+                    action: { selectedCandidate.removeAll() },
+                    isDisabled: selectedCandidate.isEmpty)
                 
                 Spacer()
-                Text(model.voterName + " has voted for " + model.candidateVotingFor + "!")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
+            }
+            .padding(.bottom, 10)
+            
+            // Voted Text and vote button
+            HStack {
+                // Vote button
+                LabelButton(
+                    label: buttonLabel,
+                    bgColor: buttonColor,
+                    action: { self.voteConfirmation = true },
+                    isDisabled: selectedCandidate.isEmpty || voterName.isEmpty)
+                
+                Spacer()
+                
+                // Text displaying selected choice
+                HeadlineLabel(label: candidateVotedFor)
                     .foregroundColor(.yellow)
                     .shadow(color: .green, radius: 10)
                     .opacity(voteSuccessfulOpacity)
-                
-                Spacer()
-                Button(action: {
-                    self.voteConfirmation = true
-                }, label: {
-                    Text("Vote")
-                        .singleButtonModifier(fontSize: 15, bgColor: .green, verticalPadding: 10, horizontalPadding: 20, radius: 10)
-                        .opacity(model.candidateVotingFor.isEmpty && model.voterName.isEmpty ? 0.5 : 1.0)
-                }).disabled(model.candidateVotingFor.isEmpty && model.voterName.isEmpty)
             }
         }
-        .alert(isPresented: $model.doneVoting) {
+        .alert(isPresented: $doneVoting) {
             Alert(
                 title: Text("Counting Votes"),
                 message: Text("Everyone has voted, we are counting the votes..."),
                 dismissButton: .default(Text("Show Result")) {
-                    model.declareWinner()
+                    declareWinner()
                 })
         }
         .actionSheet(isPresented: $voteConfirmation) {
             ActionSheet(
                 title: Text("Confirm Vote"),
-                message: Text(model.voterName + " are you sure you want to vote for " + model.candidateVotingFor + "?"),
+                message: Text(voterName + " are you sure you want to vote for " + selectedCandidate + "?"),
                 buttons: [
-                    .default(Text("Confirm Vote for " + model.candidateVotingFor)) {
+                    .default(Text("Confirm Vote for " + selectedCandidate)) {
                         withAnimation(.easeInOut(duration: 1.0)) {
                             voteSuccessfulOpacity += 1
                         }
-                        
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                            model.submitVote()
+                            submitVote()
                             voteSuccessfulOpacity -= 1
                         })
                     },

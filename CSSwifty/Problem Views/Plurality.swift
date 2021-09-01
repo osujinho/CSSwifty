@@ -29,13 +29,25 @@ struct Plurality: View {
                             addCandidate: model.addCandidates,
                             nameFilter: model.filterCandidateName,
                             addStatus: model.addStatus,
-                            updateMenu: model.switchToNumberOfVoterScreen,
+                            updateMenu: model.addCandidatesToMenu,
                             opacityValue: model.validIconOpacity)
                     case .numberOfVoter:
-                        NumberOfVoters(
-                            numberOfVoters: $model.numberOfVoters,
-                            switchScreen: model.switchScreen(screen:))
-                    case .votingBooth: VotingBooth()
+                        NumberOfVoters(numberOfVoters: $model.numberOfVoters, screen: $model.electionScreen)
+                    case .votingBooth:
+                        VotingBooth(
+                            selectedCandidate: $model.candidateVotingFor,
+                            voterName: $model.voterName,
+                            screen: $model.electionScreen,
+                            doneVoting: $model.doneVoting,
+                            currentVoter: model.currentVoterNumber,
+                            totalVoters: model.numberOfVoters,
+                            filterName: model.filterVoterName,
+                            candidateChoices: model.candidatesMenu,
+                            candidateVotedFor: model.candidateVotedFor(),
+                            buttonLabel: "Vote",
+                            buttonColor: .green,
+                            declareWinner: model.declareWinner,
+                            submitVote: model.submitVote)
                     case .winner: WinnerView()
                     }
                 }.containerViewModifier(fontColor: .white, borderColor: .black)
