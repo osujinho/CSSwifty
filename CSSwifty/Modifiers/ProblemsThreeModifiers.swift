@@ -244,20 +244,23 @@ struct VotingBooth: View {
 
 // Winner View
 struct WinnerView: View {
-    @EnvironmentObject var model: PluralityViewModel
     @State private var winnerOpacity = 0.0
     @State private var votesOpacity = 0.0
     @State private var scaleValue: CGFloat = 0.0
     
+    let winners: [String]
+    let winningVoteCount: Int
+    let resetAction: () -> Void
+    
     var body: some View {
         VStack {
-            Text(model.winners.count < 2 ? "And the winner is..." : "The winners are...")
+            Text(winners.count < 2 ? "And the winner is..." : "The winners are...")
                 .font(.headline)
                 .fontWeight(.semibold)
                 .foregroundColor(.blue)
             
             VStack {
-                ForEach(model.winners, id: \.self) { winner in
+                ForEach(winners, id: \.self) { winner in
                     Text(winner)
                         .fontWeight(.bold)
                 }
@@ -271,8 +274,8 @@ struct WinnerView: View {
             .scaleEffect(scaleValue)
             .opacity(winnerOpacity)
             
-            if model.winners.count > 1 {
-                Text("In a \(model.winners.count)-way tie!")
+            if winners.count > 1 {
+                Text("In a \(winners.count)-way tie!")
                     .font(.headline)
                     .fontWeight(.semibold)
                     .foregroundColor(.blue)
@@ -280,19 +283,15 @@ struct WinnerView: View {
                     .padding(.bottom, 3)
             }
             
-            Text(model.winners.count < 2 ? "With \(model.winningVoteCount) votes!" : "With \(model.winningVoteCount) votes each!")
+            Text(winners.count < 2 ? "With \(winningVoteCount) votes!" : "With \(winningVoteCount) votes each!")
                 .font(.headline)
                 .fontWeight(.semibold)
                 .foregroundColor(.orange)
                 .opacity(votesOpacity)
             
             Divider()
-            Button(action: {
-                model.resetElection()
-            }, label: {
-                Text("Continue")
-                    .singleButtonModifier(fontSize: 15, bgColor: .green, verticalPadding: 10, horizontalPadding: 20, radius: 10)
-            })
+            
+            LabelButton(label: "Continue", bgColor: .green, action: resetAction)
         }
         .onAppear{
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {

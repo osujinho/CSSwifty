@@ -48,7 +48,8 @@ struct Plurality: View {
                             buttonColor: .green,
                             declareWinner: model.declareWinner,
                             submitVote: model.submitVote)
-                    case .winner: WinnerView()
+                    case .winner:
+                        WinnerView(winners: model.winners, winningVoteCount: model.winningVoteCount, resetAction: model.resetElection)
                     }
                 }.containerViewModifier(fontColor: .white, borderColor: .black)
             }
