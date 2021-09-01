@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B30A4C6D26CE2AC200C6D9C3 /* SubstitutionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30A4C6C26CE2AC200C6D9C3 /* SubstitutionViewModel.swift */; };
 		B32FA6F326DFF46B00D755A3 /* ViewBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FA6F226DFF46B00D755A3 /* ViewBuilders.swift */; };
+		B32FA6F526E0078900D755A3 /* PublicExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FA6F426E0078900D755A3 /* PublicExtensions.swift */; };
 		B333322B26C457280090B410 /* Readability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333322A26C457280090B410 /* Readability.swift */; };
 		B333322D26C4573C0090B410 /* Caesar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333322C26C4573C0090B410 /* Caesar.swift */; };
 		B333322F26C4575C0090B410 /* Substitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333322E26C4575C0090B410 /* Substitution.swift */; };
@@ -57,6 +58,7 @@
 /* Begin PBXFileReference section */
 		B30A4C6C26CE2AC200C6D9C3 /* SubstitutionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstitutionViewModel.swift; sourceTree = "<group>"; };
 		B32FA6F226DFF46B00D755A3 /* ViewBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilders.swift; sourceTree = "<group>"; };
+		B32FA6F426E0078900D755A3 /* PublicExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicExtensions.swift; sourceTree = "<group>"; };
 		B333322A26C457280090B410 /* Readability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readability.swift; sourceTree = "<group>"; };
 		B333322C26C4573C0090B410 /* Caesar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caesar.swift; sourceTree = "<group>"; };
 		B333322E26C4575C0090B410 /* Substitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Substitution.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				B3953F79268B652300946B55 /* Assets.xcassets */,
 				B3953F7E268B652300946B55 /* Info.plist */,
 				B3953F7B268B652300946B55 /* Preview Content */,
+				B32FA6F426E0078900D755A3 /* PublicExtensions.swift */,
 			);
 			path = CSSwifty;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				B333323B26C457D50090B410 /* Recover.swift in Sources */,
 				B3953F76268B651700946B55 /* CSSwiftyApp.swift in Sources */,
 				B333323926C457C50090B410 /* FilterMore.swift in Sources */,
+				B32FA6F526E0078900D755A3 /* PublicExtensions.swift in Sources */,
 				B32FA6F326DFF46B00D755A3 /* ViewBuilders.swift in Sources */,
 				B3A5A83326B4712200A59B25 /* KeypadView.swift in Sources */,
 				B3B7127626D8026D0015012B /* ProblemsThreeModifiers.swift in Sources */,
