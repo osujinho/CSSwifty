@@ -254,7 +254,7 @@ struct VotingBooth: View {
 struct WinnerView: View {
     @State private var winnerOpacity = 0.0
     @State private var votesOpacity = 0.0
-    @State private var scaleValue: CGFloat = 0.0
+    @State private var scaleValue: CGFloat = 0.1
     
     let winners: [String]
     let winningVoteCount: Int
