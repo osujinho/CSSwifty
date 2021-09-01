@@ -26,28 +26,34 @@ struct Plurality: View {
                         AddCandidate(
                             candidates: $model.candidates,
                             candidateName: $model.nameOfCandidate,
-                            addCandidate: model.addCandidates,
+                            addStatus: $model.addStatus, addCandidate: model.addCandidates,
                             nameFilter: model.filterCandidateName,
-                            addStatus: model.addStatus,
                             updateMenu: model.addCandidatesToMenu,
-                            opacityValue: model.validIconOpacity)
+                            opacityValue: model.validIconOpacity,
+                            actionSheetMessage: model.addedCandidateMessage())
                     case .numberOfVoter:
                         NumberOfVoters(numberOfVoters: $model.numberOfVoters, screen: $model.electionScreen)
                     case .votingBooth:
                         VotingBooth(
+                            voterCompleted: $model.voterCompleted,
                             selectedCandidate: $model.candidateVotingFor,
                             voterName: $model.voterName,
                             screen: $model.electionScreen,
                             doneVoting: $model.doneVoting,
+                            disableVoterName: model.disableVoterName,
                             currentVoter: model.currentVoterNumber,
                             totalVoters: model.numberOfVoters,
                             filterName: model.filterVoterName,
                             candidateChoices: model.candidatesMenu,
                             candidateVotedFor: model.candidateVotedFor(),
-                            buttonLabel: "Vote",
-                            buttonColor: .green,
+                            voteButtonLabel: "Vote",
+                            voteButtonColor: .green,
+                            voteButtonAction: model.voteButtonAction,
                             declareWinner: model.declareWinner,
-                            submitVote: model.submitVote)
+                            submitVote: model.submitVote,
+                            actionSheetTitle: model.actionSheetTitle(),
+                            actionSheetMesage: model.candidateVotingFor,
+                            actionSheetReset: model.resetVoterChoice)
                     case .winner:
                         WinnerView(winners: model.winners, winningVoteCount: model.winningVoteCount, resetAction: model.resetElection)
                     }

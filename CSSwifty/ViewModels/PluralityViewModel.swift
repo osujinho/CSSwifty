@@ -11,6 +11,8 @@ class PluralityViewModel: ObservableObject {
     @Published var numberOfVoters = 0
     @Published var currentVoterNumber = 1
     @Published var voterName = ""
+    @Published var disableVoterName = false
+    @Published var voterCompleted = false
     @Published var addStatus: ValidStatus = .none
     @Published var electionScreen: ElectionScreen = .addCandidate
     @Published var doneVoting = false
@@ -70,6 +72,8 @@ class PluralityViewModel: ObservableObject {
             updateCandidateVote()
             clearSelections()
             currentVoterNumber += 1
+            voterCompleted = false
+            disableVoterName = false
         } else {
             updateCandidateVote()
             clearSelections()
@@ -123,6 +127,17 @@ class PluralityViewModel: ObservableObject {
         candidateVotingFor = ""
     }
     
+    // Function for when the vote button is pressed
+    func voteButtonAction() {
+        disableVoterName = true
+        voterCompleted = true
+    }
+    
+    // Function to reset the voter's choice
+    func resetVoterChoice() {
+        candidateVotingFor.removeAll()
+    }
+    
     // Function to reset the election at the end
     func resetElection() {
         numberOfVoters = 0
@@ -152,10 +167,28 @@ class PluralityViewModel: ObservableObject {
         }
     }
     
+    // Function to display the added candidate action sheet message
+    func addedCandidateMessage() -> String {
+        var order = 1
+        var names = [String]()
+        for candidate in candidates.keys {
+            names.append("\(order). " + candidate)
+            order += 1
+        }
+        return "\n" + names.joined(separator: "\n")
+    }
+    
     // Function to return string for candidate voted for
     func candidateVotedFor() -> String {
-        return voterName + " has voted for " + candidateVotingFor + "!"
+        return voterName.capitalized + " has voted for " + candidateVotingFor + "!"
     }
+    
+    // function to display the action sheet title
+    func actionSheetTitle() -> String {
+        return voterName.capitalized + " you have selected to vote for.."
+    }
+    
+    
 }
 
 enum ElectionScreen: Identifiable {

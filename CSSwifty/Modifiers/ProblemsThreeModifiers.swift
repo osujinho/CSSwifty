@@ -34,11 +34,12 @@ struct AddCandidate: View {
     
     @Binding var candidates: [String : Int]
     @Binding var candidateName: String
+    @Binding var addStatus: ValidStatus
     let addCandidate: Func
     let nameFilter: Func
-    let addStatus: ValidStatus
     let updateMenu: Func
     let opacityValue: Double
+    let actionSheetMessage: String
     
     var body: some View {
         VStack {
@@ -64,7 +65,7 @@ struct AddCandidate: View {
                                 invalidShakeAmount += 1
                             }
                         } else {
-                            validScaleAmount = 0.0
+                            validScaleAmount = 0.1
                             withAnimation(.easeInOut(duration: 1.0)) {
                                 validScaleAmount += 1
                             }
@@ -86,7 +87,7 @@ struct AddCandidate: View {
                     .frame(width: 20, height: 20)
                     .foregroundColor(.white)
                     .padding(10)
-                    .background(addStatus == .valid ? (Color.green.clipShape(Circle())) : (Color.red.clipShape(Circle())))
+                    .background(addStatus == .valid ? (Color.green.clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)) : (Color.red.clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)))
                     .opacity(opacityValue)
                 
             }
@@ -99,17 +100,15 @@ struct AddCandidate: View {
         .modifier(Shake(animatableData: CGFloat(invalidShakeAmount)))
         .actionSheet(isPresented: $candidateConfirmation) {
             ActionSheet(
-                title: Text("Confirm Candidates"),
-                message: Text("""
-                    The added candidates are...
-                    \(candidates.keys.joined(separator: "\n"))
-                    """),
+                title: Text("The added candidates are..."),
+                message: Text(actionSheetMessage),
                 buttons: [
                     .default(Text("Confirm Candidates")) {
                         updateMenu()
                     },
                     .destructive(Text("Reset Candidates"), action: {
                         candidates.removeAll()
+                        candidateName.removeAll()
                     })
             ])
         }
@@ -144,22 +143,27 @@ struct NumberOfVoters: View {
 
 // -------------------- Voting Booth Screen -------------------------------
 struct VotingBooth: View {
-    @State private var voteConfirmation = false
-    @State private var voteSuccessfulOpacity = 0.0
+    @Binding var voterCompleted: Bool
     @Binding var selectedCandidate: String
     @Binding var voterName: String
     @Binding var screen: ElectionScreen
     @Binding var doneVoting: Bool
+    @State private var voteSuccessfulOpacity = 0.0
     
+    let disableVoterName: Bool
     let currentVoter: Int
     let totalVoters: Int
     let filterName: Func
     let candidateChoices: [String]
     let candidateVotedFor: String
-    let buttonLabel: String
-    let buttonColor: Color
+    let voteButtonLabel: String
+    let voteButtonColor: Color
+    let voteButtonAction: Func
     let declareWinner: Func
     let submitVote: Func
+    let actionSheetTitle: String
+    let actionSheetMesage: String
+    let actionSheetReset: Func
     
     var body: some View {
         VStack{
@@ -176,6 +180,8 @@ struct VotingBooth: View {
                 Spacer(minLength: 40)
                 
                 TextFieldInput(target: $voterName, label: "Name", placeHolder: "Enter your name", onChangeFunc: filterName)
+                    .opacity(disableVoterName ? 0.6 : 1.0)
+                    .disabled(disableVoterName)
             }
             
             Spacer()
@@ -200,9 +206,9 @@ struct VotingBooth: View {
             HStack {
                 // Vote button
                 LabelButton(
-                    label: buttonLabel,
-                    bgColor: buttonColor,
-                    action: { self.voteConfirmation = true },
+                    label: voteButtonLabel,
+                    bgColor: voteButtonColor,
+                    action: { voteButtonAction() },
                     isDisabled: selectedCandidate.isEmpty || voterName.isEmpty)
                 
                 Spacer()
@@ -222,12 +228,12 @@ struct VotingBooth: View {
                     declareWinner()
                 })
         }
-        .actionSheet(isPresented: $voteConfirmation) {
+        .actionSheet(isPresented: $voterCompleted) {
             ActionSheet(
-                title: Text("Confirm Vote"),
-                message: Text(voterName + " are you sure you want to vote for " + selectedCandidate + "?"),
+                title: Text(actionSheetTitle),
+                message: Text( actionSheetMesage ),
                 buttons: [
-                    .default(Text("Confirm Vote for " + selectedCandidate)) {
+                    .default(Text("Submit")) {
                         withAnimation(.easeInOut(duration: 1.0)) {
                             voteSuccessfulOpacity += 1
                         }
@@ -236,7 +242,9 @@ struct VotingBooth: View {
                             voteSuccessfulOpacity -= 1
                         })
                     },
-                    .cancel()
+                    .destructive(Text("Reset"), action: {
+                        actionSheetReset()
+                    })
             ])
         }
     }
