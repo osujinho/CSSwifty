@@ -57,7 +57,6 @@ class PluralityViewModel: ObservableObject {
     func addCandidatesToMenu() {
         candidatesMenu.removeAll()
         candidatesMenu.append(contentsOf: candidates.keys)
-        electionScreen = .numberOfVoter
     }
     
     // Function for when vote is pressed in the voting booth screen

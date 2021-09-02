@@ -26,13 +26,17 @@ struct Plurality: View {
                         AddCandidate(
                             candidates: $model.candidates,
                             candidateName: $model.nameOfCandidate,
-                            addStatus: $model.addStatus, addCandidate: model.addCandidates,
+                            addStatus: $model.addStatus,
+                            screen: $model.electionScreen,
+                            addCandidate: model.addCandidates,
                             nameFilter: model.filterCandidateName,
                             updateMenu: model.addCandidatesToMenu,
                             opacityValue: model.validIconOpacity,
                             actionSheetMessage: model.addedCandidateMessage())
                     case .numberOfVoter:
-                        NumberOfVoters(numberOfVoters: $model.numberOfVoters, screen: $model.electionScreen)
+                        NumberOfVoters(
+                            numberOfVoters: $model.numberOfVoters,
+                            screen: $model.electionScreen)
                     case .votingBooth:
                         VotingBooth(
                             voterCompleted: $model.voterCompleted,
@@ -44,6 +48,7 @@ struct Plurality: View {
                             currentVoter: model.currentVoterNumber,
                             totalVoters: model.numberOfVoters,
                             filterName: model.filterVoterName,
+                            dropMenuLabel: "Candidate Name:",
                             candidateChoices: model.candidatesMenu,
                             candidateVotedFor: model.candidateVotedFor(),
                             voteButtonLabel: "Vote",
@@ -55,7 +60,10 @@ struct Plurality: View {
                             actionSheetMesage: model.candidateVotingFor,
                             actionSheetReset: model.resetVoterChoice)
                     case .winner:
-                        WinnerView(winners: model.winners, winningVoteCount: model.winningVoteCount, resetAction: model.resetElection)
+                        WinnerView(
+                            winners: model.winners,
+                            winningVoteCount: model.winningVoteCount,
+                            resetAction: model.resetElection)
                     }
                 }.containerViewModifier(fontColor: .white, borderColor: .black)
             }

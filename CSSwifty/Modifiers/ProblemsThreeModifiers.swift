@@ -35,6 +35,7 @@ struct AddCandidate: View {
     @Binding var candidates: [String : Int]
     @Binding var candidateName: String
     @Binding var addStatus: ValidStatus
+    @Binding var screen: ElectionScreen
     let addCandidate: Func
     let nameFilter: Func
     let updateMenu: Func
@@ -105,6 +106,7 @@ struct AddCandidate: View {
                 buttons: [
                     .default(Text("Confirm Candidates")) {
                         updateMenu()
+                        screen = .numberOfVoter
                     },
                     .destructive(Text("Reset Candidates"), action: {
                         candidates.removeAll()
@@ -154,6 +156,7 @@ struct VotingBooth: View {
     let currentVoter: Int
     let totalVoters: Int
     let filterName: Func
+    let dropMenuLabel: String
     let candidateChoices: [String]
     let candidateVotedFor: String
     let voteButtonLabel: String
@@ -188,7 +191,7 @@ struct VotingBooth: View {
             
             // Candidates names
             HStack {
-                HeadlineLabel(label: "Candidate Name: ")
+                HeadlineLabel(label: dropMenuLabel)
                 
                 DropDownMenu(selection: $selectedCandidate, collection: candidateChoices, label: "Select...")
                 
