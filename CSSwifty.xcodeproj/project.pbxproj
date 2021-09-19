@@ -119,6 +119,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B361427326F7D032007338F7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B32FA6F426E0078900D755A3 /* PublicExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		B371E95D269CD667007E2302 /* Problem Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,11 +175,11 @@
 				B3953F85268B656A00946B55 /* Views */,
 				B371E95D269CD667007E2302 /* Problem Views */,
 				B3953F84268B655D00946B55 /* ViewModels */,
+				B361427326F7D032007338F7 /* Extensions */,
 				B3953F75268B651700946B55 /* CSSwiftyApp.swift */,
 				B3953F79268B652300946B55 /* Assets.xcassets */,
 				B3953F7E268B652300946B55 /* Info.plist */,
 				B3953F7B268B652300946B55 /* Preview Content */,
-				B32FA6F426E0078900D755A3 /* PublicExtensions.swift */,
 			);
 			path = CSSwifty;
 			sourceTree = "<group>";
