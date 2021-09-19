@@ -15,7 +15,7 @@ struct Plurality: View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: getGradients(colors: model.problem.gradient)), startPoint: .top, endPoint: .trailing).edgesIgnoringSafeArea(.all)
             
-            ScrollView {
+            VStack {
                 IntroView(title: "Plurality Vote", summarys: model.intro)
                 
                 ImageAndRuleView(imageName:  model.problem.image, rules: model.rules)
@@ -36,7 +36,8 @@ struct Plurality: View {
                     case .numberOfVoter:
                         NumberOfVoters(
                             numberOfVoters: $model.numberOfVoters,
-                            screen: $model.electionScreen)
+                            screen: $model.electionScreen,
+                            maxVoters: model.maximumVoters)
                     case .votingBooth:
                         VotingBooth(
                             voterCompleted: $model.voterCompleted,
@@ -66,6 +67,7 @@ struct Plurality: View {
                             resetAction: model.resetElection)
                     }
                 }.containerViewModifier(fontColor: .white, borderColor: .black)
+                Spacer()
             }
         }.navigationBarBackButtonHidden(true)
         .subViewNavigationBar(title: model.problem.name, titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)

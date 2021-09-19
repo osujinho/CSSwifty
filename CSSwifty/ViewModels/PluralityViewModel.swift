@@ -26,6 +26,7 @@ class PluralityViewModel: ObservableObject {
     var winningVoteCount = 0
     let week: Weeks = .week3
     let problem: Problems = .plurality
+    let maximumVoters = 50
     
     let intro = [
         "Plurality is a type of election in which the winner takes all.",

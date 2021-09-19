@@ -26,6 +26,7 @@
 		B333324526C46D3B0090B410 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333324426C46D3B0090B410 /* WeekView.swift */; };
 		B333324726C8B0810090B410 /* ReadabilityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333324626C8B0810090B410 /* ReadabilityViewModel.swift */; };
 		B333324926C8B1190090B410 /* GradesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333324826C8B1190090B410 /* GradesModel.swift */; };
+		B361427226F7CC36007338F7 /* RunoffViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361427126F7CC36007338F7 /* RunoffViewModel.swift */; };
 		B371E951269CA7C8007E2302 /* WeekViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B371E950269CA7C8007E2302 /* WeekViewModifiers.swift */; };
 		B371E95F269CD6A3007E2302 /* MarioLess.swift in Sources */ = {isa = PBXBuildFile; fileRef = B371E95E269CD6A3007E2302 /* MarioLess.swift */; };
 		B371E961269CD6C2007E2302 /* MarioMore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B371E960269CD6C2007E2302 /* MarioMore.swift */; };
@@ -75,6 +76,7 @@
 		B333324426C46D3B0090B410 /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		B333324626C8B0810090B410 /* ReadabilityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadabilityViewModel.swift; sourceTree = "<group>"; };
 		B333324826C8B1190090B410 /* GradesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradesModel.swift; sourceTree = "<group>"; };
+		B361427126F7CC36007338F7 /* RunoffViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunoffViewModel.swift; sourceTree = "<group>"; };
 		B371E950269CA7C8007E2302 /* WeekViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModifiers.swift; sourceTree = "<group>"; };
 		B371E95E269CD6A3007E2302 /* MarioLess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarioLess.swift; sourceTree = "<group>"; };
 		B371E960269CD6C2007E2302 /* MarioMore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarioMore.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				B3B35DD126CB842D000D56CB /* CaesarViewModel.swift */,
 				B30A4C6C26CE2AC200C6D9C3 /* SubstitutionViewModel.swift */,
 				B3B7127326D7FF950015012B /* PluralityViewModel.swift */,
+				B361427126F7CC36007338F7 /* RunoffViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				B333323326C457820090B410 /* Runoff.swift in Sources */,
 				B333322B26C457280090B410 /* Readability.swift in Sources */,
 				B333324926C8B1190090B410 /* GradesModel.swift in Sources */,
+				B361427226F7CC36007338F7 /* RunoffViewModel.swift in Sources */,
 				B371E951269CA7C8007E2302 /* WeekViewModifiers.swift in Sources */,
 				B3E4258826C1D3000047F925 /* CreditViewModel.swift in Sources */,
 				B3B35DDA26CB87B2000D56CB /* PublicModifiers.swift in Sources */,

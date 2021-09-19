@@ -121,6 +121,7 @@ struct AddCandidate: View {
 struct NumberOfVoters: View {
     @Binding var numberOfVoters: Int
     @Binding var screen: ElectionScreen
+    let maxVoters: Int
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -129,7 +130,7 @@ struct NumberOfVoters: View {
                 title: "Number of voters")
             
             HStack {
-                NumericStepper(key: $numberOfVoters, maxValue: 10, label: "Number of Voters")
+                NumericStepper(key: $numberOfVoters, maxValue: maxVoters, label: "Number of Voters")
                 
                 Spacer()
                 

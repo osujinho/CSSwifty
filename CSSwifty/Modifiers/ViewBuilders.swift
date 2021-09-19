@@ -109,66 +109,95 @@ struct DropDownMenu: View {
     let label: String
     
     let buttonHeight: CGFloat = 30
-    let bgColor = Color(red: 86 / 255, green: 86 / 255, blue: 86 / 255, opacity: 0.5)
+    let screenHeight = UIScreen.main.bounds.height
+    let bgColor = Color(red: 86 / 255, green: 86 / 255, blue: 86 / 255, opacity: 1.0)
     
     
     var body: some View {
-        VStack {
-            Button(action: {
-                isPressed.toggle()
-            }) {
-                HStack {
-                    Text(selection.isEmpty ? label : selection)
-                    Spacer()
-                        .frame(width: 30)
-                    Image(systemName: isPressed ? "chevron.up" : "chevron.down")
-                }
-                .font(.subheadline)
-                .foregroundColor(.yellow)
-                
-            }
-            .padding(.horizontal)
-            .cornerRadius(10)
-            .frame(height: buttonHeight)
-            .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.white, lineWidth: 1))
-            .opacity(selection.isEmpty ? 0.8 : 1.0)
-            .overlay(
-                VStack(spacing: 5) {
-                    if isPressed {
-                        VStack {
-                            Spacer(minLength: buttonHeight - 10)
-                            ForEach(collection, id: \.self) { item in
-                                Button(action: {
-                                    selection = item
-                                    isPressed.toggle()
-                                }) {
-                                    Text(item.capitalized)
-                                }
-                                Divider()
-                                    .frame(width: 200)
-                            }
-                        }
-                        .background(bgColor)
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.secondary, lineWidth: 1)
-                        )
-                        .padding(.top, buttonHeight + 10)
-                    }
-                    
-                }, alignment: .topLeading
-            )
-            .background(
-                RoundedRectangle(cornerRadius: 10).fill(bgColor)
-            )
+        GeometryReader { geometry in
+            let verticalLocation = geometry.frame(in: .global).origin.y
             
+            VStack {
+                Button(action: {
+                    isPressed.toggle()
+                }) {
+                    HStack {
+                        Text(selection.isEmpty ? label : selection)
+                        Spacer()
+                            .frame(width: 30)
+                        Image(systemName: isPressed ? "chevron.up" : "chevron.down")
+                    }
+                    .font(.subheadline)
+                    .foregroundColor(.yellow)
+                }
+                .padding(.horizontal)
+                .cornerRadius(10)
+                .frame(height: buttonHeight)
+                .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.white, lineWidth: 1))
+                .opacity(selection.isEmpty ? 0.6 : 1.0)
+                .overlay(
+                    VStack(spacing: 5) {
+                        if isPressed {
+                            ScrollView {
+                                VStack {
+                                    Spacer(minLength: buttonHeight - 10)
+                                    ForEach(collection, id: \.self) { item in
+                                        Button(action: {
+                                            selection = item
+                                            withAnimation {
+                                                isPressed.toggle()
+                                            }
+                                        }) {
+                                            Text(item.capitalized)
+                                        }
+                                        Divider()
+                                            .frame(width: 200)
+                                    }
+                                }
+                                .background(bgColor)
+                                .cornerRadius(10)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.secondary, lineWidth: 1)
+                                )
+                            }
+                            .frame(height: menuHeight())
+                            .offset(y: offsetAmount(location: verticalLocation))
+                        }
+                    }, alignment: .topLeading
+                )
+                .background(
+                    RoundedRectangle(cornerRadius: 10).fill(bgColor)
+                )
+            }
+            .font(.subheadline)
+            .foregroundColor(.yellow)
+            .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke((Color.secondary), lineWidth: 1))
         }
-        .font(.subheadline)
-        .foregroundColor(.yellow)
-        .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke((Color.secondary), lineWidth: 1))
+        .frame(width: 150, height: 30)
+    }
+    
+    func menuHeight() -> CGFloat {
+        let maxHeight = 0.2 * screenHeight
+        if collection.count > 5 {
+            print(maxHeight)
+            return maxHeight
+        } else {
+            return CGFloat((collection.count % 6) + 1) * buttonHeight
+        }
+    }
+    
+    func offsetAmount(location: CGFloat) -> CGFloat {
+        let bottomSpace = screenHeight - (location + (2 * buttonHeight))
+        print("\(bottomSpace) = \(screenHeight) - \(location)")
+        print(menuHeight())
+        if menuHeight() >= bottomSpace {
+            return -(menuHeight() + 10)
+        } else {
+            return buttonHeight + 10
+        }
     }
 }
 
