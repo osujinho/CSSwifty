@@ -1,5 +1,5 @@
 //
-//  Runoff.swift
+//  Tideman.swift
 //  CSSwifty
 //
 //  Created by Michael Osuji on 8/11/21.
@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct Runoff: View {
+struct Tideman: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @StateObject var model = RunoffViewModel()
+    @StateObject var model = TidemanViewModel()
     
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: getGradients(colors: model.problem.gradient)), startPoint: .top, endPoint: .trailing).edgesIgnoringSafeArea(.all)
             
             VStack {
-                IntroView(title: "Runoff Election", summarys: model.intro)
+                IntroView(title: "Tideman Election", summarys: model.intro)
                 
                 ImageAndRuleView(imageName:  model.problem.image, rules: model.rules)
                 
@@ -55,7 +55,6 @@ struct Runoff: View {
                             voteButtonLabel: model.voteButtonLabel(),
                             voteButtonColor: model.voterPreferences.count == model.candidates.keys.count - 1 ? .green : .blue,
                             voteButtonAction: model.voteButtonAction,
-                            declareWinner: model.declareWinner,
                             submitVote: model.submitVote,
                             actionSheetTitle: model.actionSheetTitle(),
                             actionSheetMesage: model.actionSheetMessage(),
@@ -63,10 +62,10 @@ struct Runoff: View {
                     case .winner:
                         WinnerView(
                             winners: model.winners,
-                            winningVoteCount: model.winningVoteCount,
                             resetAction: model.resetElection)
                     }
                 }.containerViewModifier(fontColor: .white, borderColor: .black)
+                
                 Spacer()
             }
         }.navigationBarBackButtonHidden(true)

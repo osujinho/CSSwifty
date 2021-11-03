@@ -40,6 +40,9 @@
 		B3953F93268CE6F300946B55 /* WeekList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3953F92268CE6F300946B55 /* WeekList.swift */; };
 		B3953F95268CE7F500946B55 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3953F94268CE7F500946B55 /* CustomColors.swift */; };
 		B3953F97268CF33C00946B55 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3953F96268CF33C00946B55 /* AppModel.swift */; };
+		B3A4AC5427332F790085C7D0 /* TidemanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A4AC5327332F790085C7D0 /* TidemanViewModel.swift */; };
+		B3A4AC57273330390085C7D0 /* AdjacencyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A4AC56273330390085C7D0 /* AdjacencyList.swift */; };
+		B3A4AC5A2733307F0085C7D0 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A4AC592733307F0085C7D0 /* Stack.swift */; };
 		B3A55DA126A74D96008A988D /* MarioLessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A55DA026A74D96008A988D /* MarioLessViewModel.swift */; };
 		B3A55DA726A8B164008A988D /* MarioMoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A55DA626A8B164008A988D /* MarioMoreViewModel.swift */; };
 		B3A5A83126B470E700A59B25 /* KeypadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A83026B470E700A59B25 /* KeypadViewModel.swift */; };
@@ -92,6 +95,9 @@
 		B3953F92268CE6F300946B55 /* WeekList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekList.swift; sourceTree = "<group>"; };
 		B3953F94268CE7F500946B55 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		B3953F96268CF33C00946B55 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		B3A4AC5327332F790085C7D0 /* TidemanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidemanViewModel.swift; sourceTree = "<group>"; };
+		B3A4AC56273330390085C7D0 /* AdjacencyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjacencyList.swift; sourceTree = "<group>"; };
+		B3A4AC592733307F0085C7D0 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		B3A55DA026A74D96008A988D /* MarioLessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarioLessViewModel.swift; sourceTree = "<group>"; };
 		B3A55DA626A8B164008A988D /* MarioMoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarioMoreViewModel.swift; sourceTree = "<group>"; };
 		B3A5A83026B470E700A59B25 /* KeypadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadViewModel.swift; sourceTree = "<group>"; };
@@ -127,7 +133,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		B371E95D269CD667007E2302 /* Problem Views */ = {
+		B371E95D269CD667007E2302 /* ProblemViews */ = {
 			isa = PBXGroup;
 			children = (
 				B371E95E269CD6A3007E2302 /* MarioLess.swift */,
@@ -148,7 +154,7 @@
 				B333324026C457FA0090B410 /* Movies.swift */,
 				B333324226C4580E0090B410 /* Fiftyville.swift */,
 			);
-			path = "Problem Views";
+			path = ProblemViews;
 			sourceTree = "<group>";
 		};
 		B3953F69268B651600946B55 = {
@@ -170,10 +176,11 @@
 		B3953F74268B651700946B55 /* CSSwifty */ = {
 			isa = PBXGroup;
 			children = (
+				B3A4AC55273330070085C7D0 /* DataStructures */,
 				B3953F87268B658700946B55 /* Model */,
 				B3953F86268B657300946B55 /* Modifiers */,
 				B3953F85268B656A00946B55 /* Views */,
-				B371E95D269CD667007E2302 /* Problem Views */,
+				B371E95D269CD667007E2302 /* ProblemViews */,
 				B3953F84268B655D00946B55 /* ViewModels */,
 				B361427326F7D032007338F7 /* Extensions */,
 				B3953F75268B651700946B55 /* CSSwiftyApp.swift */,
@@ -205,6 +212,7 @@
 				B30A4C6C26CE2AC200C6D9C3 /* SubstitutionViewModel.swift */,
 				B3B7127326D7FF950015012B /* PluralityViewModel.swift */,
 				B361427126F7CC36007338F7 /* RunoffViewModel.swift */,
+				B3A4AC5327332F790085C7D0 /* TidemanViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -244,6 +252,15 @@
 				B333324826C8B1190090B410 /* GradesModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B3A4AC55273330070085C7D0 /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				B3A4AC56273330390085C7D0 /* AdjacencyList.swift */,
+				B3A4AC592733307F0085C7D0 /* Stack.swift */,
+			);
+			path = DataStructures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,6 +360,7 @@
 				B333324326C4580E0090B410 /* Fiftyville.swift in Sources */,
 				B3953F97268CF33C00946B55 /* AppModel.swift in Sources */,
 				B333323F26C457F00090B410 /* Dna.swift in Sources */,
+				B3A4AC5A2733307F0085C7D0 /* Stack.swift in Sources */,
 				B3953F93268CE6F300946B55 /* WeekList.swift in Sources */,
 				B371E963269CD6CE007E2302 /* Cash.swift in Sources */,
 				B3953F8F268B801D00946B55 /* NavBarModifers.swift in Sources */,
@@ -354,9 +372,11 @@
 				B3E4258826C1D3000047F925 /* CreditViewModel.swift in Sources */,
 				B3B35DDA26CB87B2000D56CB /* PublicModifiers.swift in Sources */,
 				B3A55DA726A8B164008A988D /* MarioMoreViewModel.swift in Sources */,
+				B3A4AC5427332F790085C7D0 /* TidemanViewModel.swift in Sources */,
 				B333323126C457700090B410 /* Plurality.swift in Sources */,
 				B333322F26C4575C0090B410 /* Substitution.swift in Sources */,
 				B3E4258626C1D2A60047F925 /* CreditCardModel.swift in Sources */,
+				B3A4AC57273330390085C7D0 /* AdjacencyList.swift in Sources */,
 				B371E965269CD6DA007E2302 /* Credit.swift in Sources */,
 				B333323526C457970090B410 /* Tideman.swift in Sources */,
 				B30A4C6D26CE2AC200C6D9C3 /* SubstitutionViewModel.swift in Sources */,

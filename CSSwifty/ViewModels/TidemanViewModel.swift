@@ -1,13 +1,13 @@
 //
-//  RunoffViewModel.swift
+//  TidemanViewModel.swift
 //  CSSwifty
 //
-//  Created by Michael Osuji on 9/19/21.
+//  Created by Michael Osuji on 11/3/21.
 //
 
 import Foundation
 
-class RunoffViewModel: ObservableObject {
+class TidemanViewModel: ObservableObject {
     @Published var numberOfVoters = 0
     @Published var currentVoterNumber = 1
     @Published var voterName = ""
@@ -20,21 +20,24 @@ class RunoffViewModel: ObservableObject {
     @Published var voterPreference = ""
     @Published var chosenCandidate = ""
     @Published var validIconOpacity = 0.0
-    @Published var candidates = [String : Int]()
-    @Published var candidatesMenu = [String]()
-    @Published var voterPreferences = [String]()
-    @Published var votersChoices = [Int : [String]]()
+    @Published var candidates: [String : Int] = [:]
+    @Published var candidatesMenu: [String] = []
+    @Published var voterPreferences: [String] = []
+    @Published var votersChoices: [Int : [String]] = [:]
     
-    var winners = [String]()
+    
     let week: Weeks = .week3
-    let problem: Problems = .runoff
+    let problem: Problems = .tideman
     let maximumVoters = 50
     
+    var candidateGraph = Graph<String>()
+    var candidatePairs: [(first: String, second: String)] = []
+    var winners: [String] = []
+    
     let intro = [
-        "Runoff is a ranked-choice voting system, where candidates get to vote for more than one candidate.",
-        "They rank he candidates in order of preference, and the candidate with more than 50% of the first preference vote is declared the winner.",
-        "However, if no candidate has more than 50% of the vote, an “instant runoff” occurrs.",
-        "The candidate with the fewest number of votes is eliminated and anyone who originally chose that candidate as their first preference, has their second preference considered."
+        "In plurality, there can be a tie, and with runoff, sometimes the least favored candidate wins.",
+        "The Tideman voting method (also known as “ranked pairs”) is a ranked-choice voting method that’s guaranteed to produce the Condorcet winner of the election if one exists.",
+        "The Condorcet winner of the election is the person who would have won any head-to-head matchup against another candidate."
     ]
     
     let rules = [
@@ -44,7 +47,7 @@ class RunoffViewModel: ObservableObject {
         "All voters must vote for all their choices before the winner is declared."
     ]
     
-    //Mark: - PROBLEM ALGORITHM
+    // Mark: - SETUP CODE
     
     // Function to add candidates to the dictionary
     func addCandidates() {
@@ -63,7 +66,19 @@ class RunoffViewModel: ObservableObject {
         candidatesMenu.append(contentsOf: candidates.keys)
     }
     
-    // Function for when vote is pressed in the voting booth screen
+    // Function to update the vote count for candidates once they have been voted for.
+    func castVote() {
+        // find the current vote count of the candidate and increase it by 1
+        let vote = (candidates[voterPreferences[0]] ?? 0) + 1
+        
+        // update the vote count of the candidate
+        candidates.updateValue(vote, forKey: voterPreferences[0])
+        
+        // update the voter choices dictionary with the voter's choices
+        votersChoices[currentVoterNumber] = voterPreferences
+    }
+    
+    // Function for when each voter pressed vote in the voting booth screen
     func submitVote() {
         if currentVoterNumber < numberOfVoters {
             castVote()
@@ -78,55 +93,6 @@ class RunoffViewModel: ObservableObject {
         }
     }
     
-    // Function to update the vote count for candidates once they have been voted for.
-    func castVote() {
-        // find the current vote count of the candidate and increase it by 1
-        let vote = (candidates[voterPreferences[0]] ?? 0) + 1
-        
-        // update the vote count of the candidate
-        candidates.updateValue(vote, forKey: voterPreferences[0])
-        
-        // update the voter choices dictionary with the voter's choices
-        votersChoices[currentVoterNumber] = voterPreferences
-    }
-    
-    // Function to eliminate the candidates with the lowest preference votes
-    func eliminationRunoff() {
-        let minVotes = candidates.values.reduce(Int.max, { min($0, $1) })
-        let minCandidate = candidates.keys.filter { candidates[$0] == minVotes }.joined()
-        candidates.removeValue(forKey: minCandidate)
-        updateVote()
-    }
-    
-    // Recounts the vote after elimination in runoff
-    func updateVote() {
-        // resets the dictionary to zero
-        candidates.keys.forEach { candidates[$0] = 0 }
-        
-        // Recounts the votes
-        for preferences in votersChoices.values {
-            if let preference = preferences.first( where: {candidates.keys.contains($0)} ) {
-                let vote = candidates[preference] ?? 0
-                candidates.updateValue(vote + 1, forKey: preference)
-            }
-        }
-    }
-    
-    // Function to declare the winner
-    func declareWinner() {
-        var maxVote = candidates.values.reduce(Int.min, { max($0, $1) })
-        
-        if maxVote > (votersChoices.count / 2) {
-            winners.append(contentsOf: candidates.filter { $0.value >= maxVote }.keys)
-        } else {
-            while maxVote <= votersChoices.count / 2 {
-                eliminationRunoff()
-                maxVote = candidates.values.reduce(Int.min, { max($0, $1) })
-            }
-            winners.append(contentsOf: candidates.filter { $0.value >= maxVote }.keys)
-        }
-    }
-    
     // Function to reset the election at the end
     func resetElection() {
         numberOfVoters = 0
@@ -136,6 +102,80 @@ class RunoffViewModel: ObservableObject {
         winners.removeAll()
         candidates.removeAll()
         electionScreen = .addCandidate
+    }
+    
+    // Mark: - PROBLEM ALGORITHM
+ 
+    // create a dictionary of pairs
+    func makeGraphPairs() {
+        let pairs = candidates.keys.map { $0 }.combination(length: 2)
+        for eachPair in pairs {
+            candidatePairs.append((eachPair[0], eachPair[1]))
+        }
+    }
+    
+    // Function to calculate the head to head winner between candidates
+    func headToHead(first: String, second: String) -> (source: String, destination: String, weight: Double) {
+        var pairs = [first : 0, second : 0]
+        var ballotForPairs: [Int : [String]] = [:]
+        
+        for (voterNumber, candidateChoices) in votersChoices {
+            let newChoices = candidateChoices.filter { pairs.keys.contains($0) }
+            ballotForPairs.updateValue(newChoices, forKey: voterNumber)
+        }
+        
+        for preferences in ballotForPairs.values {
+            let vote = (pairs[preferences[0]] ?? 0) + 1
+            pairs.updateValue(vote, forKey: preferences[0])
+        }
+        
+        let maxVote = pairs.values.reduce(Int.min, { max($0, $1) })
+        let minVote = pairs.values.reduce(Int.max, { min($0, $1) })
+        let winner = pairs.filter({ $0.value >= maxVote }).keys.joined()
+        let loser = pairs.filter({ $0.value < maxVote }).keys.joined()
+        let difference = Double(maxVote - minVote)
+        
+        return (winner, loser, difference)
+    }
+    
+    // Function to construct the graph based on votes
+    func assembleGraph() {
+        makeGraphPairs()
+        for (first, second) in candidatePairs {
+            
+            let firstCandidate =  headToHead(first: first, second: second).source
+            let secondCandidate = headToHead(first: first, second: second).destination
+            let weight = headToHead(first: first, second: second).weight
+            
+            let source = candidateGraph.createVertex(value: firstCandidate)
+            let destination = candidateGraph.createVertex(value: secondCandidate)
+            
+            candidateGraph.addEdge(type: .directed, source: source, destination: destination, weight: weight)
+        }
+    }
+    
+    // function to delete the lowest weight in the graph
+    func deleteLowestWeight() {
+        if let minEdge = candidateGraph.lowestEdge() {
+            candidateGraph.deleteEdge(edge: minEdge)
+        }
+    }
+    
+    // Function to determine the winner depending on cycle or not
+    func determineWinner() -> [String] {
+        return candidateGraph.allVertices().filter{ !candidateGraph.allEdges().contains($0) }.map { $0.description }
+    }
+    
+    // Function to declare the winner
+    func declareWinner() {
+        assembleGraph()
+        
+        if candidateGraph.isCyclic {
+            deleteLowestWeight()
+            winners.append(contentsOf: determineWinner())
+        } else {
+            winners.append(contentsOf: determineWinner())
+        }
     }
     
     //Mark: - ADD CANDIDATE SCREEN
@@ -271,7 +311,7 @@ class RunoffViewModel: ObservableObject {
         return voterName.capitalized + " please confirm the candidates in order of your preference."
     }
     
-    // Function for displaying the names of candidates in order on Action sheet
+    // Function for displaying the names of selected candidates in order on Action sheet
     func actionSheetMessage() -> String {
         var order = 1
         var names = [String]()

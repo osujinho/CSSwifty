@@ -163,7 +163,6 @@ struct VotingBooth: View {
     let voteButtonLabel: String
     let voteButtonColor: Color
     let voteButtonAction: Func
-    let declareWinner: Func
     let submitVote: Func
     let actionSheetTitle: String
     let actionSheetMesage: String
@@ -187,8 +186,6 @@ struct VotingBooth: View {
                     .opacity(disableVoterName ? 0.6 : 1.0)
                     .disabled(disableVoterName)
             }
-            
-            Spacer()
             
             // Candidates names
             HStack {
@@ -229,7 +226,7 @@ struct VotingBooth: View {
                 title: Text("Counting Votes"),
                 message: Text("Everyone has voted, we are counting the votes..."),
                 dismissButton: .default(Text("Show Result")) {
-                    declareWinner()
+                    screen = .winner
                 })
         }
         .actionSheet(isPresented: $voterCompleted) {
@@ -257,11 +254,9 @@ struct VotingBooth: View {
 // Winner View
 struct WinnerView: View {
     @State private var winnerOpacity = 0.0
-    @State private var votesOpacity = 0.0
     @State private var scaleValue: CGFloat = 0.1
     
     let winners: [String]
-    let winningVoteCount: Int
     let resetAction: () -> Void
     
     var body: some View {
@@ -276,6 +271,12 @@ struct WinnerView: View {
                     Text(winner)
                         .fontWeight(.bold)
                 }
+                if winners.count > 1 {
+                    Text("In a \(winners.count)-way tie!")
+                        .font(.headline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.blue)
+                }
             }
             .font(.title)
             .foregroundColor(.yellow)
@@ -286,21 +287,6 @@ struct WinnerView: View {
             .scaleEffect(scaleValue)
             .opacity(winnerOpacity)
             
-            if winners.count > 1 {
-                Text("In a \(winners.count)-way tie!")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.blue)
-                    .opacity(votesOpacity)
-                    .padding(.bottom, 3)
-            }
-            
-            Text(winners.count < 2 ? "With \(winningVoteCount) votes!" : "With \(winningVoteCount) votes each!")
-                .font(.headline)
-                .fontWeight(.semibold)
-                .foregroundColor(.orange)
-                .opacity(votesOpacity)
-            
             Divider()
             
             LabelButton(label: "Continue", bgColor: .green, action: resetAction)
@@ -310,11 +296,6 @@ struct WinnerView: View {
                 withAnimation(.easeInOut(duration: 2.0)) {
                     winnerOpacity += 1
                     scaleValue += 1
-                }
-            })
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                withAnimation(.easeInOut(duration: 2.0)) {
-                    votesOpacity += 1
                 }
             })
         }

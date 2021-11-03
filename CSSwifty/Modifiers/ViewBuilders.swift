@@ -182,7 +182,6 @@ struct DropDownMenu: View {
     func menuHeight() -> CGFloat {
         let maxHeight = 0.2 * screenHeight
         if collection.count > 5 {
-            print(maxHeight)
             return maxHeight
         } else {
             return CGFloat((collection.count % 6) + 1) * buttonHeight
@@ -191,8 +190,6 @@ struct DropDownMenu: View {
     
     func offsetAmount(location: CGFloat) -> CGFloat {
         let bottomSpace = screenHeight - (location + (2 * buttonHeight))
-        print("\(bottomSpace) = \(screenHeight) - \(location)")
-        print(menuHeight())
         if menuHeight() >= bottomSpace {
             return -(menuHeight() + 10)
         } else {

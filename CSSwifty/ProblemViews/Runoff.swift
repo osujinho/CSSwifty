@@ -1,5 +1,5 @@
 //
-//  Plurality.swift
+//  Runoff.swift
 //  CSSwifty
 //
 //  Created by Michael Osuji on 8/11/21.
@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct Plurality: View {
+struct Runoff: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @StateObject var model = PluralityViewModel()
+    @StateObject var model = RunoffViewModel()
     
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: getGradients(colors: model.problem.gradient)), startPoint: .top, endPoint: .trailing).edgesIgnoringSafeArea(.all)
             
             VStack {
-                IntroView(title: "Plurality Vote", summarys: model.intro)
+                IntroView(title: "Runoff Election", summarys: model.intro)
                 
                 ImageAndRuleView(imageName:  model.problem.image, rules: model.rules)
                 
@@ -25,7 +25,7 @@ struct Plurality: View {
                     case .addCandidate:
                         AddCandidate(
                             candidates: $model.candidates,
-                            candidateName: $model.nameOfCandidate,
+                            candidateName: $model.candidateName,
                             addStatus: $model.addStatus,
                             screen: $model.electionScreen,
                             addCandidate: model.addCandidates,
@@ -41,7 +41,7 @@ struct Plurality: View {
                     case .votingBooth:
                         VotingBooth(
                             voterCompleted: $model.voterCompleted,
-                            selectedCandidate: $model.candidateVotingFor,
+                            selectedCandidate: $model.voterPreference,
                             voterName: $model.voterName,
                             screen: $model.electionScreen,
                             doneVoting: $model.doneVoting,
@@ -49,28 +49,26 @@ struct Plurality: View {
                             currentVoter: model.currentVoterNumber,
                             totalVoters: model.numberOfVoters,
                             filterName: model.filterVoterName,
-                            dropMenuLabel: "Candidate Name:",
+                            dropMenuLabel: model.dropMenuLabel(),
                             candidateChoices: model.candidatesMenu,
                             candidateVotedFor: model.candidateVotedFor(),
-                            voteButtonLabel: "Vote",
-                            voteButtonColor: .green,
+                            voteButtonLabel: model.voteButtonLabel(),
+                            voteButtonColor: model.voterPreferences.count == model.candidates.keys.count - 1 ? .green : .blue,
                             voteButtonAction: model.voteButtonAction,
-                            declareWinner: model.declareWinner,
                             submitVote: model.submitVote,
                             actionSheetTitle: model.actionSheetTitle(),
-                            actionSheetMesage: model.candidateVotingFor,
+                            actionSheetMesage: model.actionSheetMessage(),
                             actionSheetReset: model.resetVoterChoice)
                     case .winner:
                         WinnerView(
                             winners: model.winners,
-                            winningVoteCount: model.winningVoteCount,
                             resetAction: model.resetElection)
                     }
                 }.containerViewModifier(fontColor: .white, borderColor: .black)
+                
                 Spacer()
             }
         }.navigationBarBackButtonHidden(true)
         .subViewNavigationBar(title: model.problem.name, titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)
-        .environmentObject(model)
     }
 }

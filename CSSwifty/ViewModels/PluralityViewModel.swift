@@ -23,7 +23,6 @@ class PluralityViewModel: ObservableObject {
     @Published var candidatesMenu = [String]()
     
     var winners = [String]()
-    var winningVoteCount = 0
     let week: Weeks = .week3
     let problem: Problems = .plurality
     let maximumVoters = 50
@@ -71,6 +70,8 @@ class PluralityViewModel: ObservableObject {
         } else {
             updateCandidateVote()
             clearSelections()
+            declareWinner()
+            
             self.doneVoting.toggle()
         }
     }
@@ -83,13 +84,12 @@ class PluralityViewModel: ObservableObject {
     
     // Function to declare the winner
     func declareWinner() {
-        winningVoteCount = candidates.reduce(0) { max($0, $1.1) }
+        let maxVotes = candidates.reduce(0) { max($0, $1.1) }
         for (key, value) in candidates {
-            if value == winningVoteCount {
+            if value == maxVotes {
                 winners.append(key)
             }
         }
-        electionScreen = .winner
     }
     
     // Function to reset the election at the end
