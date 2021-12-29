@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct FilterLess: View {
+struct Filter: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    var problem = Problems.filterless
+    var problem = Problems.filter
     
     var body: some View {
         ZStack {

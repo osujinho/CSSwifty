@@ -23,7 +23,6 @@ struct KeyPadbuttonModifier: ViewModifier {
             .background(bgColor.cornerRadius(40))
             .overlay(RoundedRectangle(cornerRadius: 40)
                         .stroke((borderColor), lineWidth: 1))
-            //.shadow(color: .black, radius: 2)
             .opacity(opacityValue)
     }
 }

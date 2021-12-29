@@ -95,32 +95,6 @@ extension View {
     }
 }
 
-// Single button with label no icon
-struct SingleButtonModifier: ViewModifier {
-    let fontSize: CGFloat
-    let bgColor: Color
-    let verticalPadding: CGFloat
-    let horrizontalPadding: CGFloat
-    let radius: CGFloat
-    
-    func body(content: Content) -> some View {
-        content
-            .font(Font.system(size: fontSize, weight: .semibold))
-            .foregroundColor(.white)
-            .padding(.vertical, verticalPadding)
-            .padding(.horizontal, horrizontalPadding)
-            .background(bgColor.cornerRadius(radius))
-            .overlay(RoundedRectangle(cornerRadius: radius)
-                        .stroke((Color.white), lineWidth: 1))
-    }
-}
-
-extension View {
-    func singleButtonModifier(fontSize: CGFloat, bgColor: Color, verticalPadding: CGFloat, horizontalPadding: CGFloat, radius: CGFloat) -> some View {
-        self.modifier(SingleButtonModifier(fontSize: fontSize, bgColor: bgColor, verticalPadding: verticalPadding, horrizontalPadding: horizontalPadding, radius: radius))
-    }
-}
-
 // -------------------------- Animations ---------------------------------
 
 // Shake Animation for wrong answer

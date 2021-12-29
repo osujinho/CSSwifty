@@ -84,7 +84,7 @@ enum Weeks: String, CaseIterable {
         case .week1: return [.marioless, .mariomore, .cash, .credit]
         case .week2: return [.readability, .caesar, .substitution]
         case .week3: return [.plurality, .runoff, .tideman]
-        case .week4: return [.filterless, .filtermore, .recover]
+        case .week4: return [.filter, .recover]
         case .week5: return [.speller]
         case .week6: return [.dna]
         case .week7: return [.movies, .fiftyville]
@@ -93,17 +93,8 @@ enum Weeks: String, CaseIterable {
     }
 }
 
-struct Problemz: Identifiable {
-    var id = UUID()
-    
-    let name: String
-    let gradient: [Colors]
-    let icon: String
-    let view: Any
-}
-
 enum Problems: String, CaseIterable {
-    case marioless, mariomore, cash, credit, readability, caesar, substitution, plurality, runoff, tideman, filterless, filtermore, recover, speller, dna, movies, fiftyville, none
+    case marioless, mariomore, cash, credit, readability, caesar, substitution, plurality, runoff, tideman, filter, recover, speller, dna, movies, fiftyville, none
 
     var name: String {
         switch self {
@@ -117,8 +108,7 @@ enum Problems: String, CaseIterable {
         case .plurality: return "Plurality"
         case .runoff: return "Runoff"
         case .tideman: return "Tideman"
-        case .filterless: return "Filter Less"
-        case .filtermore: return "Filter More"
+        case .filter: return "Filter"
         case .recover: return "Recover"
         case .speller: return "Speller"
         case .dna: return "DNA"
@@ -140,8 +130,7 @@ enum Problems: String, CaseIterable {
         case .plurality: return "person.fill.checkmark"
         case .runoff: return "person.3.fill"
         case .tideman: return "person.fill.questionmark"
-        case .filterless: return "circles.hexagongrid.fill"
-        case .filtermore: return "circles.hexagonpath.fill"
+        case .filter: return "circles.hexagongrid.fill"
         case .recover: return "puzzlepiece.fill"
         case .speller: return "pencil.circle.fill"
         case .dna: return "touchid"
@@ -167,8 +156,7 @@ enum Problems: String, CaseIterable {
         case .plurality: return [Colors(red: 35, green: 51, blue: 41), Colors(red: 99, green: 212, blue: 113)]
         case .runoff: return [Colors(red: 0, green: 0, blue: 0), Colors(red: 22, green: 109, blue: 59)]
         case .tideman: return [Colors(red: 0, green: 0, blue: 0), Colors(red: 85, green: 239, blue: 196)]
-        case .filterless: return [Colors(red: 248, green: 222, blue: 126), Colors(red: 217, green: 144, blue: 88)]
-        case .filtermore: return [Colors(red: 249, green: 217, blue: 118), Colors(red: 243, green: 159, blue: 134)]
+        case .filter: return [Colors(red: 248, green: 222, blue: 126), Colors(red: 217, green: 144, blue: 88)]
         case .recover: return [Colors(red: 255, green: 222, blue: 168), Colors(red: 254, green: 200, blue: 78)]
         case .speller: return [Colors(red: 95, green: 10, blue: 135), Colors(red: 164, green: 80, blue: 139)]
         case .dna: return [Colors(red: 210, green: 204, blue: 196), Colors(red: 47, green: 67, blue: 83)]
@@ -190,8 +178,7 @@ enum Problems: String, CaseIterable {
         case .plurality: return Plurality()
         case .runoff: return Runoff()
         case .tideman: return Tideman()
-        case .filterless: return FilterLess()
-        case .filtermore: return FilterMore()
+        case .filter: return Filter()
         case .recover: return Recover()
         case .speller: return Speller()
         case .dna: return Dna()

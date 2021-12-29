@@ -16,8 +16,7 @@
 		B333323126C457700090B410 /* Plurality.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333323026C457700090B410 /* Plurality.swift */; };
 		B333323326C457820090B410 /* Runoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333323226C457820090B410 /* Runoff.swift */; };
 		B333323526C457970090B410 /* Tideman.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333323426C457970090B410 /* Tideman.swift */; };
-		B333323726C457B80090B410 /* FilterLess.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333323626C457B80090B410 /* FilterLess.swift */; };
-		B333323926C457C50090B410 /* FilterMore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333323826C457C50090B410 /* FilterMore.swift */; };
+		B333323726C457B80090B410 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333323626C457B80090B410 /* Filter.swift */; };
 		B333323B26C457D50090B410 /* Recover.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333323A26C457D50090B410 /* Recover.swift */; };
 		B333323D26C457DF0090B410 /* Speller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333323C26C457DF0090B410 /* Speller.swift */; };
 		B333323F26C457F00090B410 /* Dna.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333323E26C457F00090B410 /* Dna.swift */; };
@@ -69,8 +68,7 @@
 		B333323026C457700090B410 /* Plurality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plurality.swift; sourceTree = "<group>"; };
 		B333323226C457820090B410 /* Runoff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runoff.swift; sourceTree = "<group>"; };
 		B333323426C457970090B410 /* Tideman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tideman.swift; sourceTree = "<group>"; };
-		B333323626C457B80090B410 /* FilterLess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterLess.swift; sourceTree = "<group>"; };
-		B333323826C457C50090B410 /* FilterMore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterMore.swift; sourceTree = "<group>"; };
+		B333323626C457B80090B410 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		B333323A26C457D50090B410 /* Recover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recover.swift; sourceTree = "<group>"; };
 		B333323C26C457DF0090B410 /* Speller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speller.swift; sourceTree = "<group>"; };
 		B333323E26C457F00090B410 /* Dna.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dna.swift; sourceTree = "<group>"; };
@@ -146,8 +144,7 @@
 				B333323026C457700090B410 /* Plurality.swift */,
 				B333323226C457820090B410 /* Runoff.swift */,
 				B333323426C457970090B410 /* Tideman.swift */,
-				B333323626C457B80090B410 /* FilterLess.swift */,
-				B333323826C457C50090B410 /* FilterMore.swift */,
+				B333323626C457B80090B410 /* Filter.swift */,
 				B333323A26C457D50090B410 /* Recover.swift */,
 				B333323C26C457DF0090B410 /* Speller.swift */,
 				B333323E26C457F00090B410 /* Dna.swift */,
@@ -342,12 +339,11 @@
 				B333324526C46D3B0090B410 /* WeekView.swift in Sources */,
 				B3A5A83126B470E700A59B25 /* KeypadViewModel.swift in Sources */,
 				B333324726C8B0810090B410 /* ReadabilityViewModel.swift in Sources */,
-				B333323726C457B80090B410 /* FilterLess.swift in Sources */,
+				B333323726C457B80090B410 /* Filter.swift in Sources */,
 				B3A5A83526B4719700A59B25 /* CashViewModel.swift in Sources */,
 				B333322D26C4573C0090B410 /* Caesar.swift in Sources */,
 				B333323B26C457D50090B410 /* Recover.swift in Sources */,
 				B3953F76268B651700946B55 /* CSSwiftyApp.swift in Sources */,
-				B333323926C457C50090B410 /* FilterMore.swift in Sources */,
 				B32FA6F526E0078900D755A3 /* PublicExtensions.swift in Sources */,
 				B32FA6F326DFF46B00D755A3 /* ViewBuilders.swift in Sources */,
 				B3A5A83326B4712200A59B25 /* KeypadView.swift in Sources */,
