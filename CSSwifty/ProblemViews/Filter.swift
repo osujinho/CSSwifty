@@ -9,23 +9,26 @@ import SwiftUI
 
 struct Filter: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    var problem = Problems.filter
+    @StateObject var model = FilterViewModel()
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: getGradients(colors: problem.gradient)), startPoint: .top, endPoint: .trailing).edgesIgnoringSafeArea(.all)
+            LinearGradient(gradient: Gradient(colors: getGradients(colors: model.problem.gradient)), startPoint: .top, endPoint: .trailing).edgesIgnoringSafeArea(.all)
             
-            ScrollView {
-                VStack(spacing: 20) {
-                    Text(problem.name)
-                        .font(.largeTitle)
-                    Text("Is under construction...")
-                        .font(.title3)
-                    Text("😎")
-                }
-                .foregroundColor(.white)
+            VStack {
+                IntroView(title: "Filter", summarys: model.intro)
+                
+                ImageOnlyView(imageName: model.problem.image)
+                
+                FilterImage(imageToFilter: $model.imageToFilter, filterChoiceSelected: $model.filterChoiceSelected, filteredImage: model.filters[model.modification] ?? model.filteredImage)
+                
+                GridView(filterOption: $model.modification, filterChoiceSelected: $model.filterChoiceSelected)
+                
+            }
+            .onAppear {
+                model.processImage()
             }
         }.navigationBarBackButtonHidden(true)
-        .subViewNavigationBar(title: problem.name, titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)
+        .subViewNavigationBar(title: model.problem.name, titleColor: .white, fontSize: 25, presentationMode: presentationMode, buttonColor: .white)
     }
 }

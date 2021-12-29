@@ -31,6 +31,11 @@
 		B371E961269CD6C2007E2302 /* MarioMore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B371E960269CD6C2007E2302 /* MarioMore.swift */; };
 		B371E963269CD6CE007E2302 /* Cash.swift in Sources */ = {isa = PBXBuildFile; fileRef = B371E962269CD6CE007E2302 /* Cash.swift */; };
 		B371E965269CD6DA007E2302 /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B371E964269CD6DA007E2302 /* Credit.swift */; };
+		B383CDE6277BF280003DD9F3 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B383CDE5277BF280003DD9F3 /* FilterViewModel.swift */; };
+		B383CDE8277BF2B7003DD9F3 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B383CDE7277BF2B7003DD9F3 /* Pixel.swift */; };
+		B383CDEA277BF459003DD9F3 /* ProblemsFourModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B383CDE9277BF459003DD9F3 /* ProblemsFourModifiers.swift */; };
+		B383CDEC277BF4EE003DD9F3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B383CDEB277BF4EE003DD9F3 /* ImagePicker.swift */; };
+		B383CDEE277BF522003DD9F3 /* AddImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B383CDED277BF522003DD9F3 /* AddImageView.swift */; };
 		B3953F76268B651700946B55 /* CSSwiftyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3953F75268B651700946B55 /* CSSwiftyApp.swift */; };
 		B3953F78268B651700946B55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3953F77268B651700946B55 /* ContentView.swift */; };
 		B3953F7A268B652300946B55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3953F79268B652300946B55 /* Assets.xcassets */; };
@@ -83,6 +88,11 @@
 		B371E960269CD6C2007E2302 /* MarioMore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarioMore.swift; sourceTree = "<group>"; };
 		B371E962269CD6CE007E2302 /* Cash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cash.swift; sourceTree = "<group>"; };
 		B371E964269CD6DA007E2302 /* Credit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
+		B383CDE5277BF280003DD9F3 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		B383CDE7277BF2B7003DD9F3 /* Pixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
+		B383CDE9277BF459003DD9F3 /* ProblemsFourModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemsFourModifiers.swift; sourceTree = "<group>"; };
+		B383CDEB277BF4EE003DD9F3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		B383CDED277BF522003DD9F3 /* AddImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageView.swift; sourceTree = "<group>"; };
 		B3953F72268B651700946B55 /* CSSwifty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CSSwifty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3953F75268B651700946B55 /* CSSwiftyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSSwiftyApp.swift; sourceTree = "<group>"; };
 		B3953F77268B651700946B55 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -210,6 +220,7 @@
 				B3B7127326D7FF950015012B /* PluralityViewModel.swift */,
 				B361427126F7CC36007338F7 /* RunoffViewModel.swift */,
 				B3A4AC5327332F790085C7D0 /* TidemanViewModel.swift */,
+				B383CDE5277BF280003DD9F3 /* FilterViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -220,6 +231,8 @@
 				B3953F77268B651700946B55 /* ContentView.swift */,
 				B333324426C46D3B0090B410 /* WeekView.swift */,
 				B3A5A83226B4712200A59B25 /* KeypadView.swift */,
+				B383CDEB277BF4EE003DD9F3 /* ImagePicker.swift */,
+				B383CDED277BF522003DD9F3 /* AddImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -236,6 +249,7 @@
 				B3B35DD726CB86FF000D56CB /* ProblemOnesModifiers.swift */,
 				B3B35DD526CB86A2000D56CB /* ProblemsTwoModifiers.swift */,
 				B3B7127526D8026D0015012B /* ProblemsThreeModifiers.swift */,
+				B383CDE9277BF459003DD9F3 /* ProblemsFourModifiers.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -247,6 +261,7 @@
 				B3E4258526C1D2A60047F925 /* CreditCardModel.swift */,
 				B3953F94268CE7F500946B55 /* CustomColors.swift */,
 				B333324826C8B1190090B410 /* GradesModel.swift */,
+				B383CDE7277BF2B7003DD9F3 /* Pixel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -329,8 +344,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B383CDE8277BF2B7003DD9F3 /* Pixel.swift in Sources */,
 				B3A5A83726B472D000A59B25 /* KeypadModifiers.swift in Sources */,
 				B3953F78268B651700946B55 /* ContentView.swift in Sources */,
+				B383CDEC277BF4EE003DD9F3 /* ImagePicker.swift in Sources */,
 				B3A55DA126A74D96008A988D /* MarioLessViewModel.swift in Sources */,
 				B3B35DD226CB842D000D56CB /* CaesarViewModel.swift in Sources */,
 				B333324126C457FA0090B410 /* Movies.swift in Sources */,
@@ -363,16 +380,19 @@
 				B333323326C457820090B410 /* Runoff.swift in Sources */,
 				B333322B26C457280090B410 /* Readability.swift in Sources */,
 				B333324926C8B1190090B410 /* GradesModel.swift in Sources */,
+				B383CDE6277BF280003DD9F3 /* FilterViewModel.swift in Sources */,
 				B361427226F7CC36007338F7 /* RunoffViewModel.swift in Sources */,
 				B371E951269CA7C8007E2302 /* WeekViewModifiers.swift in Sources */,
 				B3E4258826C1D3000047F925 /* CreditViewModel.swift in Sources */,
 				B3B35DDA26CB87B2000D56CB /* PublicModifiers.swift in Sources */,
 				B3A55DA726A8B164008A988D /* MarioMoreViewModel.swift in Sources */,
 				B3A4AC5427332F790085C7D0 /* TidemanViewModel.swift in Sources */,
+				B383CDEA277BF459003DD9F3 /* ProblemsFourModifiers.swift in Sources */,
 				B333323126C457700090B410 /* Plurality.swift in Sources */,
 				B333322F26C4575C0090B410 /* Substitution.swift in Sources */,
 				B3E4258626C1D2A60047F925 /* CreditCardModel.swift in Sources */,
 				B3A4AC57273330390085C7D0 /* AdjacencyList.swift in Sources */,
+				B383CDEE277BF522003DD9F3 /* AddImageView.swift in Sources */,
 				B371E965269CD6DA007E2302 /* Credit.swift in Sources */,
 				B333323526C457970090B410 /* Tideman.swift in Sources */,
 				B30A4C6D26CE2AC200C6D9C3 /* SubstitutionViewModel.swift in Sources */,
@@ -433,7 +453,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -488,7 +508,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
